@@ -1,0 +1,157 @@
+[
+    {
+        "fecha_apertura": "2017-09-03 19:28:11",
+        "codigo": "6",
+        "sisben_ficha": "1",
+        "sisben_puntaje": "1.000",
+        "sisben_nivel": "1",
+        "direccion": "1",
+        "id_zona": "2",
+        "telefono": "1",
+        "id_municipio": "430",
+        "id_corregimiento": "0",
+        "id_vereda": "-1",
+        "portabilidad": "no",
+        "cambio_domicilio": "no",
+        "proxima_visita": "2017-09-15",
+        "responsable": "camilo ruiz",
+        "documento_responsable": "1061716139",
+        "registro": {
+            "value": "[\n    {\n        \"id\": \"89\",\n        \"value\": \"1\",\n        \"id_tipo_data\": \"4\"\n    },\n    {\n        \"id\": \"90\",\n        \"value\": \"1\",\n        \"id_tipo_data\": \"4\"\n    },\n    {\n        \"id\": \"91\",\n        \"value\": \"[\\n    {\\n        \\\"data 1\\\": {\\n            \\\"option 1\\\": \\\"\\\",\\n            \\\"option 2\\\": \\\"\\\"\\n        }\\n    },\\n    {\\n        \\\"data 2\\\": {\\n            \\\"option 1\\\": \\\"\\\",\\n            \\\"option 2\\\": \\\"\\\"\\n        }\\n    },\\n    {\\n        \\\"data 3\\\": {\\n            \\\"option 1\\\": \\\"\\\",\\n            \\\"option 2\\\": \\\"\\\"\\n        }\\n    },\\n    {\\n        \\\"data 4\\\": {\\n            \\\"option 1\\\": \\\"\\\",\\n            \\\"option 2\\\": \\\"\\\"\\n        }\\n    }\\n]\",\n        \"id_tipo_data\": \"9\"\n    },\n    {\n        \"id\": \"92\",\n        \"value\": \"si\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"93\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"94\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"95\",\n        \"value\": \"si\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"96\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"97\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"98\",\n        \"value\": \"si\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"1\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"12\",\n        \"value\": \"si\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"11\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"10\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"9\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"8\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"6\",\n        \"value\": \"si\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"5\",\n        \"value\": \"si\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"3\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"2\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    }\n]"
+        },
+        "people": [
+            {
+                "id_documento_tipo": "5",
+                "documento": "1",
+                "nombre1": "1",
+                "nombre2": "1",
+                "apellido1": "1",
+                "apellido2": "1",
+                "id_tarjeta_familiar": "1",
+                "id_estado_civil": "7",
+                "id_nivel_educativo": "4",
+                "sexo": "Masculino",
+                "fecha_nacimiento": "2004-04-01",
+                "id_persona_familiaridad": "9",
+                "tipo_afiliado": "BENEFIACIARIO",
+                "id_asegurador": "14",
+                "id_rango": "1",
+                "id_regimen": null,
+                "es_cabeza_familia": "no",
+                "registro": {
+                    "value": "[{\"id\":\"14\",\"value\":\"\",\"id_tipo_data\":\"5\"},{\"id\":\"15\",\"value\":\"\",\"id_tipo_data\":\"5\"},{\"id\":\"16\",\"value\":\"\",\"id_tipo_data\":\"5\"},{\"id\":\"17\",\"value\":\"\",\"id_tipo_data\":\"5\"},{\"id\":\"18\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"19\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"20\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"21\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"22\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"23\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"24\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"25\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"26\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"27\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"28\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"29\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"30\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"31\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"32\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"33\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"34\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"35\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"36\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"37\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"38\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"39\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"40\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"41\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"42\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"43\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"44\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"45\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"46\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"47\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"48\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"49\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"50\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"51\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"52\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"53\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"54\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"55\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"56\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"57\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"58\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"59\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"60\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"61\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"62\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"63\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"64\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"65\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"66\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"67\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"68\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"69\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"70\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"99\",\"value\":\"\",\"id_tipo_data\":\"3\"}]"
+                }
+            },
+            {
+                "id_documento_tipo": "5",
+                "documento": "2",
+                "nombre1": "2",
+                "nombre2": "2",
+                "apellido1": "2",
+                "apellido2": "2",
+                "id_tarjeta_familiar": "1",
+                "id_estado_civil": "7",
+                "id_nivel_educativo": "4",
+                "sexo": "Masculino",
+                "fecha_nacimiento": "2007-04-05",
+                "id_persona_familiaridad": "9",
+                "tipo_afiliado": "BENEFIACIARIO",
+                "id_asegurador": "14",
+                "id_rango": "1",
+                "id_regimen": null,
+                "es_cabeza_familia": "no",
+                "registro": {
+                    "value": "[{\"id\":\"14\",\"value\":\"\",\"id_tipo_data\":\"5\"},{\"id\":\"15\",\"value\":\"\",\"id_tipo_data\":\"5\"},{\"id\":\"16\",\"value\":\"\",\"id_tipo_data\":\"5\"},{\"id\":\"17\",\"value\":\"\",\"id_tipo_data\":\"5\"},{\"id\":\"18\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"19\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"20\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"21\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"22\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"23\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"24\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"25\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"26\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"27\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"28\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"29\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"30\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"31\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"32\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"33\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"34\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"35\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"36\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"37\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"38\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"39\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"40\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"41\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"42\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"43\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"44\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"45\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"46\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"47\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"48\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"49\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"50\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"51\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"52\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"53\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"54\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"55\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"56\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"57\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"58\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"59\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"60\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"61\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"62\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"63\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"64\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"65\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"66\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"67\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"68\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"69\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"70\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"99\",\"value\":\"prueba de nota\",\"id_tipo_data\":\"3\"}]"
+                }
+            },
+            {
+                "id_documento_tipo": "5",
+                "documento": "123",
+                "nombre1": "123",
+                "nombre2": "123",
+                "apellido1": "123",
+                "apellido2": "123",
+                "id_tarjeta_familiar": "1",
+                "id_estado_civil": "7",
+                "id_nivel_educativo": "5",
+                "sexo": "Masculino",
+                "fecha_nacimiento": "2012-09-01",
+                "id_persona_familiaridad": "9",
+                "tipo_afiliado": "BENEFIACIARIO",
+                "id_asegurador": "14",
+                "id_rango": "1",
+                "id_regimen": null,
+                "es_cabeza_familia": "no",
+                "registro": {
+                    "value": "[{\"id\":\"14\",\"value\":\"\",\"id_tipo_data\":\"5\"},{\"id\":\"15\",\"value\":\"\",\"id_tipo_data\":\"5\"},{\"id\":\"16\",\"value\":\"\",\"id_tipo_data\":\"5\"},{\"id\":\"17\",\"value\":\"\",\"id_tipo_data\":\"5\"},{\"id\":\"18\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"19\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"20\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"21\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"22\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"23\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"24\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"25\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"26\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"27\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"28\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"29\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"30\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"31\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"32\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"33\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"34\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"35\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"36\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"37\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"38\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"39\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"40\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"41\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"42\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"43\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"44\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"45\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"46\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"47\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"48\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"49\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"50\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"51\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"52\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"53\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"54\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"55\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"56\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"57\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"58\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"59\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"60\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"61\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"62\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"63\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"64\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"65\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"66\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"67\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"68\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"69\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"70\",\"value\":\"\",\"id_tipo_data\":\"1\"},{\"id\":\"99\",\"value\":\"\",\"id_tipo_data\":\"3\"}]"
+                }
+            }
+        ]
+    },
+    {
+        "fecha_apertura": "2017-09-03 20:59:13",
+        "codigo": "7",
+        "sisben_ficha": "1",
+        "sisben_puntaje": "1.000",
+        "sisben_nivel": "1",
+        "direccion": "1",
+        "id_zona": "2",
+        "telefono": "1",
+        "id_municipio": "430",
+        "id_corregimiento": "-1",
+        "id_vereda": "-1",
+        "portabilidad": "no",
+        "cambio_domicilio": "no",
+        "proxima_visita": "2017-09-03",
+        "responsable": "Camilo Ernesto Ruiz Vidal",
+        "documento_responsable": "1061716139",
+        "registro": {
+            "value": "[\n    {\n        \"id\": \"89\",\n        \"value\": \"1\",\n        \"id_tipo_data\": \"4\"\n    },\n    {\n        \"id\": \"90\",\n        \"value\": \"1\",\n        \"id_tipo_data\": \"4\"\n    },\n    {\n        \"id\": \"91\",\n        \"value\": \"[\\n    {\\n        \\\"data 1\\\": {\\n            \\\"option 1\\\": \\\"\\\",\\n            \\\"option 2\\\": \\\"\\\"\\n        }\\n    },\\n    {\\n        \\\"data 2\\\": {\\n            \\\"option 1\\\": \\\"\\\",\\n            \\\"option 2\\\": \\\"\\\"\\n        }\\n    },\\n    {\\n        \\\"data 3\\\": {\\n            \\\"option 1\\\": \\\"\\\",\\n            \\\"option 2\\\": \\\"\\\"\\n        }\\n    },\\n    {\\n        \\\"data 4\\\": {\\n            \\\"option 1\\\": \\\"\\\",\\n            \\\"option 2\\\": \\\"\\\"\\n        }\\n    }\\n]\",\n        \"id_tipo_data\": \"9\"\n    },\n    {\n        \"id\": \"92\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"93\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"94\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"95\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"96\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"97\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"98\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"1\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"12\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"11\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"10\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"9\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"8\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"6\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"5\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"3\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"2\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    }\n]"
+        },
+        "people": []
+    },
+    {
+        "fecha_apertura": "2017-09-04 04:23:27",
+        "codigo": "999",
+        "sisben_ficha": "9",
+        "sisben_puntaje": "9.000",
+        "sisben_nivel": "9",
+        "direccion": "direccion",
+        "id_zona": "1",
+        "telefono": "",
+        "id_municipio": "430",
+        "id_corregimiento": "-1",
+        "id_vereda": "-1",
+        "portabilidad": "no",
+        "cambio_domicilio": "no",
+        "proxima_visita": "2017-09-08",
+        "responsable": "Camilo Ernesto Ruiz Vidal",
+        "documento_responsable": "1061716139",
+        "registro": {
+            "value": "[\n    {\n        \"id\": \"89\",\n        \"value\": \"1\",\n        \"id_tipo_data\": \"4\"\n    },\n    {\n        \"id\": \"90\",\n        \"value\": \"1\",\n        \"id_tipo_data\": \"4\"\n    },\n    {\n        \"id\": \"91\",\n        \"value\": \"[\\n    {\\n        \\\"data 1\\\": {\\n            \\\"option 1\\\": \\\"\\\",\\n            \\\"option 2\\\": \\\"\\\"\\n        }\\n    },\\n    {\\n        \\\"data 2\\\": {\\n            \\\"option 1\\\": \\\"\\\",\\n            \\\"option 2\\\": \\\"\\\"\\n        }\\n    },\\n    {\\n        \\\"data 3\\\": {\\n            \\\"option 1\\\": \\\"\\\",\\n            \\\"option 2\\\": \\\"\\\"\\n        }\\n    },\\n    {\\n        \\\"data 4\\\": {\\n            \\\"option 1\\\": \\\"\\\",\\n            \\\"option 2\\\": \\\"\\\"\\n        }\\n    }\\n]\",\n        \"id_tipo_data\": \"9\"\n    },\n    {\n        \"id\": \"92\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"93\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"94\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"95\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"96\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"97\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"98\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"1\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"12\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"11\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"10\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"9\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"8\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"6\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"5\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"3\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"2\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    }\n]"
+        },
+        "people": []
+    },
+    {
+        "fecha_apertura": "2017-09-04 04:33:12",
+        "codigo": "1000",
+        "sisben_ficha": "2121",
+        "sisben_puntaje": "0.000",
+        "sisben_nivel": "12131231",
+        "direccion": "1",
+        "id_zona": "1",
+        "telefono": "",
+        "id_municipio": "430",
+        "id_corregimiento": "-1",
+        "id_vereda": "-1",
+        "portabilidad": "no",
+        "cambio_domicilio": "no",
+        "proxima_visita": "2017-09-03",
+        "responsable": "Camilo Ernesto Ruiz Vidal",
+        "documento_responsable": "1061716139",
+        "registro": {
+            "value": "[\n    {\n        \"id\": \"89\",\n        \"value\": \"1\",\n        \"id_tipo_data\": \"4\"\n    },\n    {\n        \"id\": \"90\",\n        \"value\": \"1\",\n        \"id_tipo_data\": \"4\"\n    },\n    {\n        \"id\": \"91\",\n        \"value\": \"[\\n    {\\n        \\\"data 1\\\": {\\n            \\\"option 1\\\": \\\"\\\",\\n            \\\"option 2\\\": \\\"\\\"\\n        }\\n    },\\n    {\\n        \\\"data 2\\\": {\\n            \\\"option 1\\\": \\\"\\\",\\n            \\\"option 2\\\": \\\"\\\"\\n        }\\n    },\\n    {\\n        \\\"data 3\\\": {\\n            \\\"option 1\\\": \\\"\\\",\\n            \\\"option 2\\\": \\\"\\\"\\n        }\\n    },\\n    {\\n        \\\"data 4\\\": {\\n            \\\"option 1\\\": \\\"\\\",\\n            \\\"option 2\\\": \\\"\\\"\\n        }\\n    }\\n]\",\n        \"id_tipo_data\": \"9\"\n    },\n    {\n        \"id\": \"92\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"93\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"94\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"95\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"96\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"97\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"98\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"1\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"12\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"11\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"10\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"9\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"8\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"6\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"5\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"3\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"2\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    }\n]"
+        },
+        "people": []
+    }
+]

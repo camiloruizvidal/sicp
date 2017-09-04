@@ -1,0 +1,13 @@
+#pre-load-web {
+    width:100%;
+    position:absolute;
+    background:rgba(0,0,0,0.5);
+    left:0px;
+    top:0px;
+    z-index:100000
+}
+#pre-load-web #imagen-load{
+    left:50%;
+    margin-left:-30px;
+    position:absolute
+}
