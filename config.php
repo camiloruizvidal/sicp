@@ -22,6 +22,7 @@ class Config
 
 }
 
+date_default_timezone_set('America/Bogota');
 $pageURL = 'http';
 if (isset($_SERVER["HTTPS"]) && strtolower($_SERVER["HTTPS"]) == "on")
 {

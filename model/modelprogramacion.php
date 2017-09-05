@@ -19,29 +19,29 @@ class modelprogramacion
     public function VariablesPrograma($id_programa, $sexo, $edad)
     {
         $sql  = 'SELECT 
-                    `tbl_car_programas_actividades`.`descripcion`,
-                    `tbl_car_programas_actividades_valores`.`rango_inicio`,
-                    `tbl_car_programas_actividades_valores`.`rango_fin`,
-                    `tbl_car_programas_actividades_valores`.`rango_tipo`,
-                    `tbl_car_programas_actividades_valores`.`dosis`,
-                    `tbl_car_programas_actividades_valores`.`intervalo_tipo`,
-                    `tbl_car_programas_actividades_valores`.`intervalo`,
-                    `tbl_car_programas_actividades_valores`.`sexo`
-                  FROM
-                    `tbl_car_programas_actividades_valores`
-                    INNER JOIN `tbl_car_programas_actividades` ON (`tbl_car_programas_actividades_valores`.`id_car_actividades` = `tbl_car_programas_actividades`.`id_car_programas_actividades`)
-                  WHERE
-                    `tbl_car_programas_actividades`.`id_car_programa` = ? AND 
-                    (`tbl_car_programas_actividades_valores`.`sexo` = ?) 
-                    AND
-                    (  
-                        ? BETWEEN `tbl_car_programas_actividades_valores`.`rango_inicio` 
-                        AND 
-                          `tbl_car_programas_actividades_valores`.`rango_fin`
-                        AND
-                          `tbl_car_programas_actividades_valores`.`rango_tipo`=?
-                    )';
-        $Data = model::Records($sql, array($id_programa, $sexo, $edad['year'],'años'));
+                `view_car_programas_actividades_valores`.`descripcion`,
+                `view_car_programas_actividades_valores`.`rango_inicio`,
+                `view_car_programas_actividades_valores`.`rango_fin`,
+                `view_car_programas_actividades_valores`.`rango_inicio_dias`,
+                `view_car_programas_actividades_valores`.`rango_fin_dias`,
+                `view_car_programas_actividades_valores`.`rango_tipo`,
+                `view_car_programas_actividades_valores`.`dosis`,
+                `view_car_programas_actividades_valores`.`intervalo_tipo`,
+                `view_car_programas_actividades_valores`.`intervalo`,
+                `view_car_programas_actividades_valores`.`sexo`
+              FROM
+                `view_car_programas_actividades_valores`
+                WHERE
+                  (`view_car_programas_actividades_valores`.`sexo`=?
+                  AND
+                `view_car_programas_actividades_valores`.`id_car_programa`=?)
+                AND
+                (? BETWEEN  
+                `view_car_programas_actividades_valores`.`rango_inicio_dias`
+                      AND
+                `view_car_programas_actividades_valores`.`rango_fin_dias`
+                )';
+        $Data = model::Records($sql, array($sexo, (int)$id_programa, $edad));
         return $Data;
     }
 

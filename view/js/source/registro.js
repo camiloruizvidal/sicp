@@ -122,6 +122,9 @@ function guardar_caracteristicas()
                     mostrar();
                     programacion();
                 }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                programacion();
             }
         });
     });

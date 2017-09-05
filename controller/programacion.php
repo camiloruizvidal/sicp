@@ -77,12 +77,20 @@ class programacion
         echo '</table>';
     }
 
+    private function Dias($fecha_nacimiento)
+    {
+        $date1 = new DateTime($fecha_nacimiento);
+        $date2 = new DateTime(date('Y-m-d'));
+        $diff  = $date1->diff($date2);
+        return ($diff->days);
+    }
+
     public function Postverdetalles()
     {
         $Pro       = new modelprogramacion();
         $cal       = new other();
         $persona   = modelpersona::verpersona_id($_POST['id_persona']);
-        $Edad      = $cal->calcularedad_fecha($persona['fecha_nacimiento']);
+        $Edad      = $this->Dias($persona['fecha_nacimiento']);
         $Programas = $Pro->VerProgramas();
         $data      = array();
         foreach ($Programas as $key => $temp)
