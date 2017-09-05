@@ -10,8 +10,8 @@
         <link href="../css/bootstrap/light-bootstrap-dashboard.css" rel="stylesheet"/>
         <link href="../css/bootstrap/bootstrap.min.css" rel="stylesheet" />
         <link href="../css/sources/animate.min.css" rel="stylesheet"/>
-        <link href="../css/jquery/jquery-ui.css?v=<?php echo date(); ?>" rel="stylesheet"/>
-        <link href="../css/jquery/jquery-ui.theme.css?v=<?php echo date(); ?>"" rel="stylesheet"/>
+        <link href="../css/jquery/jquery-ui.css?v=<?php echo date('YmdHis'); ?>" rel="stylesheet"/>
+        <link href="../css/jquery/jquery-ui.theme.css?v=<?php echo date('YmdHis'); ?>" rel="stylesheet"/>
         <link href="../css/sources/demo.css" rel="stylesheet" />
         <link href="../css/sources/pe-icon-7-stroke.css" rel="stylesheet" />
         <link href="../css/sources/loading.css" rel="stylesheet" />
@@ -79,8 +79,6 @@
 
         <!-- Fixed navbar -->
         <?php
-        @session_start();
-        var_dump();
         switch ($_SESSION['tipo_perfil'])
         {
             case 'Administrador':
