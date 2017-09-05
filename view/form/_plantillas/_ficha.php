@@ -9,6 +9,7 @@
         <meta name="viewport" content="width=device-width" />
         <link href="../css/bootstrap/light-bootstrap-dashboard.css" rel="stylesheet"/>
         <link href="../css/bootstrap/bootstrap.min.css" rel="stylesheet" />
+        <link href="../css/bootstrap/sticky-footer-navbar.css" rel="stylesheet" />
         <link href="../css/sources/animate.min.css" rel="stylesheet"/>
         <link href="../css/jquery/jquery-ui.css?v=<?php echo date('YmdHis'); ?>" rel="stylesheet"/>
         <link href="../css/jquery/jquery-ui.theme.css?v=<?php echo date('YmdHis'); ?>" rel="stylesheet"/>
@@ -16,10 +17,9 @@
         <link href="../css/sources/pe-icon-7-stroke.css" rel="stylesheet" />
         <link href="../css/sources/loading.css" rel="stylesheet" />
         <link href="../css/sources/switch.css?v=<?php echo date('YmdHis'); ?>" rel="stylesheet">
-        <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-        <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
-        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
-        <link href="http://getbootstrap.com/docs/3.3/examples/sticky-footer-navbar/sticky-footer-navbar.css" rel="stylesheet" />
+        <link href="../css/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css"/>
+        <!--         <link href="http://getbootstrap.com/docs/3.3/examples/sticky-footer-navbar/sticky-footer-navbar.css" rel="stylesheet" /> -->
+
         <#--css--#>
         <script src="../js/jquery/jquery-1.10.2.js" type="text/javascript"></script>
         <script src="../js/bootstrap/bootstrap.min.js" type="text/javascript"></script>
@@ -98,7 +98,7 @@
         </div>
         <footer class="footer">
             <div class="container">
-                <p class="text-muted">Place sticky footer content here.</p>
+                <p class="text-muted">SICP.</p>
             </div>
         </footer>
     </body>
