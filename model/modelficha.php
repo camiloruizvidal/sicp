@@ -87,6 +87,19 @@ class modelficha
 
     #EXPORTAR
 
+    public function savemortalidad($nombres, $apellidos, $fecha_nacimientod, $fecha_fallecimiento, $causa, $id_tarjeta)
+    {
+        $mortalidad                      = model::Make('tbl_morbilidad');
+        $mortalidad->nombres             = $nombres;
+        $mortalidad->apellidos           = $apellidos;
+        $mortalidad->fecha_nacimientod   = $fecha_nacimientod;
+        $mortalidad->causa               = $causa;
+        $mortalidad->fecha_fallecimiento = $fecha_fallecimiento;
+        $mortalidad->id_tarjeta_familiar = $id_tarjeta;
+        $mortalidad->Save();
+        return $mortalidad->id_morbilidad;
+    }
+
     public function tarjeta_familiar($codigo)
     {
         $TF   = model::Make('tbl_tarjeta_familiar');

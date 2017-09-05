@@ -188,6 +188,15 @@ class ficha
         return $Cat->SaveRegistro(NULL, $SaveArray, $id_tarjeta_familiar);
     }
 
+    private function savemortalidad($nombres, $apellidos, $fecha_nacimientod, $fecha_fallecimiento, $causa, $id_tarjeta)
+    {
+        $tarjeta_familiar = new modelficha();
+        for ($i = 0; $i < count($nombres); $i++)
+        {
+            $tarjeta_familiar->savemortalidad($nombres[$i], $apellidos[$i], $fecha_nacimientod[$i], $fecha_fallecimiento[$i], $causa[$i], $id_tarjeta);
+        }
+    }
+
     public function Postsavetarjetafamiliar()
     {
         $Res = array();
@@ -199,12 +208,13 @@ class ficha
             {
                 $id_usuario = $_SESSION['id_usuario'];
             }
-            $_POST['responsable'] = $_SESSION["encuestador"];
+            $_POST['responsable']           = $_SESSION["encuestador"];
             $_POST['documento_responsable'] = $_SESSION["documento_responsable"];
-            $tarjeta_familiar     = new modelficha();
-            $id_tarjeta           = $tarjeta_familiar->savetarjetafamiliar($_POST);
+            $tarjeta_familiar               = new modelficha();
+            $id_tarjeta                     = $tarjeta_familiar->savetarjetafamiliar($_POST);
             $this->saveCaracteristicas($_POST, $id_tarjeta);
-            $id                   = $tarjeta_familiar->codigonextvalue($id_usuario);
+            $id                             = $tarjeta_familiar->codigonextvalue($id_usuario);
+            $this->savemortalidad($_POST['nombres'], $_POST['apellidos'], $_POST['fecha_nacimientod'], $_POST['fecha_fallecimiento'], $_POST['causa'], $id_tarjeta);
             if (!is_null($id))
             {
 

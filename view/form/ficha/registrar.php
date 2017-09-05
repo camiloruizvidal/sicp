@@ -198,6 +198,45 @@ $form->create(__FILE__);
         </div>
         <div class="panel panel-other">
             <div class="panel-heading">
+                <script>
+                    $(function ()
+                    {
+                        $('#agregar').click(function ()
+                        {
+                            var html = '<div class="col-md-2">\n\
+                                        <label>Nombres</label>\n\
+                                        <input name="nombres[]" class="form form-control">\n\
+                                    </div>\n\
+                                    <div class="col-md-2">\n\
+                                        <label>Apellidos</label>\n\
+                                        <input name="apellidos[]" class="form form-control">\n\
+                                    </div>\n\
+                                    <div class="col-md-2">\n\
+                                        <label>fecha de nacimiento</label>\n\
+                                        <input name="fecha_nacimientod[]" class="fecha form form-control">\n\
+                                    </div>\n\
+                                    <div class="col-md-2">\n\
+                                        <label>Fecha de fallecimiento</label>\n\
+                                        <input name="fecha_fallecimiento[]" class="fecha form form-control">\n\
+                                    </div>\n\
+                                    <div class="col-md-4">\n\
+                                        <label>Causa</label>\n\
+                                        <input name="causa[]" class="form form-control">\n\
+                                    </div>';
+                            $('#form_mortalidad').append(html);
+                            $('.fecha').datepicker({dateFormat: 'yy-mm-dd', changeMonth: true, changeYear: true, yearRange: "-150:+0"});
+                        });
+                    });
+                </script>
+                Mortalidad <button type="button" id="agregar" class="btn btn-success"><i class="glyphicon glyphicon-user"></i> Agregar</button>
+            </div>
+            <div class="panel-body">
+                <div id="form_mortalidad">
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-other">
+            <div class="panel-heading">
                 Riesgos del ambiente
             </div>
             <div class="panel-body">
