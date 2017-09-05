@@ -67,7 +67,7 @@
                 background-color: #099BDD;
                 border-color: #27A9E3;
             }
-            body{padding-top: 10px; background-color: #C3C3C3;}
+            body{padding-top: 70px; background-color: #C3C3C3;}
             .panel-other{border: 1px solid #27A9E3;}
             #codigo{
                 color: #3c763d;
