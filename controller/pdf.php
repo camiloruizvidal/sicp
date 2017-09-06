@@ -224,7 +224,7 @@ class ficha_familiar extends PDFReport
                 $this->SetFont('Arial', 'B', '12');
                 $this->Cell(50, 4, "Programa", 1, 0, 'L');
                 $this->Cell(147, 4, "Descripcion", 1, 0, 'L');
-                foreach ($data_programas as $temp)
+              /*  foreach ($data_programas as $temp)
                 {
                     $this->Ln();
                     $this->SetFont('Arial', '', '12');
@@ -256,7 +256,40 @@ class ficha_familiar extends PDFReport
                         $this->Cell(13, 4, "{$temp2['dosis']}", 1, 0, 'L');
                         $this->Cell(19, 4, "{$intervalo}", 1, 0, 'L');
                     }
+                }*/
+
+                foreach ($data_programas as $temp)
+                {
+                $cantidadActividades=count($temp['value']);
+                $tamaño=($cantidadActividades*4)+4;
+                $this->Ln();
+                $this->SetFont('Arial','','12');
+                $name=utf8_decode($temp['name']);
+                $this->Cell(50,$tamaño,"{$name}",1,0,'L');
+                $this->SetFont('Arial','B','12');
+                $this->Cell(92,4,"Actividad",1,0,'L');$this->Cell(23,4,"Edad",1,0,'L');$this->Cell(13,4,"Dosis",1,0,'L');$this->Cell(19,4,"Intervalo",1,0,'L');           
+                            
+            
+                foreach ($temp['value'] as $temp2)
+                {
+
+                $this->Ln();
+                $this->SetFont('Arial','','10');
+                $rango_tipo=utf8_decode($temp2['rango_tipo']);
+                $intervalo_tipo=utf8_decode($temp2['intervalo_tipo']);
+                if ($temp2['rango_inicio'] == $temp2['rango_fin'])
+                {
+                    $rango=$temp2['rango_inicio'].$rango_tipo;
                 }
+                else
+                {
+                    $rango=$temp2['rango_inicio'] . ' a ' . $temp2['rango_fin'].$rango_tipo;
+                }
+                $intervalo=$temp2['intervalo'] . ' al '.$intervalo_tipo;  
+                $this->Cell(50,8," ",0,0,'L');$this->CellFitSpace(92,4,"{$temp2['descripcion']}",1,0,'L');$this->CellFitSpace(23,4,"{$rango}",1,0,'L');$this->Cell(13,4,"{$temp2['dosis']}",1,0,'L');$this->Cell(19,4,"{$intervalo}",1,0,'L');                
+                }
+           
+             }
                 $this->Ln();
                 $this->Ln();
             }
