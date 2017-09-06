@@ -18,6 +18,7 @@ class modelpersona
                 `tbl_persona`.`apellido2`,
                 `tbl_persona`.`documento`,
                 `tbl_persona`.`sexo`,
+                `tbl_persona`.`ocupacion`,
                 `tbl_persona`.`fecha_nacimiento`,
                 `tbl_persona_familiaridad`.`descripcion` AS `familiaridad`,
                 `tbl_persona`.`id_persona_familiaridad`,

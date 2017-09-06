@@ -188,9 +188,9 @@ class export
         $datos_variables_tarjeta_familiar = $this->datos_variables_tarjeta_familiar($id_tarjeta_familiar);
         if (!is_null($datos_variables_tarjeta_familiar))
         {
-            $datos_persona = $this->datos_caracteristicas_persona($id_tarjeta_familiar);
-            $pdf           = new ficha_familiar('P', 'mm', 'Letter');
-            $pdf->fallecidos=  modelpersona::Morbilidad($id_tarjeta_familiar);
+            $datos_persona   = $this->datos_caracteristicas_persona($id_tarjeta_familiar);
+            $pdf             = new ficha_familiar('P', 'mm', 'Letter');
+            $pdf->fallecidos = modelpersona::Morbilidad($id_tarjeta_familiar);
             $pdf->render_datos_generales($datos_tarjeta_familiar);
             $pdf->render_datos_variables($datos_variables_tarjeta_familiar);
             $pdf->render_miembros_asociados($datos_persona); //ahora se le debe pasar un segundo parametro, el cual es $data_programas

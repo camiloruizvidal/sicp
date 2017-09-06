@@ -11,7 +11,7 @@ class other
 
     public function calcularEdad($fecha, $fecha_actual = '')
     {
-        if ($fecha_actual != '')
+        if ($fecha_actual == '')
         {
             $fecha_actual = date("Y-m-d");
         }
