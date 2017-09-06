@@ -9,10 +9,13 @@ class other
         return (json_last_error() == JSON_ERROR_NONE);
     }
 
-    public function calcularEdad($fecha)
+    public function calcularEdad($fecha, $fecha_actual = '')
     {
+        if ($fecha_actual != '')
+        {
+            $fecha_actual = date("Y-m-d");
+        }
         $fecha_de_nacimiento = $fecha;
-        $fecha_actual        = date("Y-m-d");
         $array_nacimiento    = explode("-", $fecha_de_nacimiento);
         $array_actual        = explode("-", $fecha_actual);
         $anos                = $array_actual[0] - $array_nacimiento[0]; // calculamos años 

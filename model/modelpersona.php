@@ -36,6 +36,24 @@ class modelpersona
         return $data;
     }
 
+    public static function Morbilidad($id_tarjeta)
+    {
+        $sql = 'SELECT 
+            `tbl_morbilidad`.`id_morbilidad`,
+            CONCAT_WS(\' \',
+            `tbl_morbilidad`.`nombres`,
+            `tbl_morbilidad`.`apellidos`) as nombre,
+            `tbl_morbilidad`.`fecha_nacimientod`,
+              `tbl_morbilidad`.`fecha_fallecimiento`,
+            `tbl_morbilidad`.`causa`
+          FROM
+            `tbl_morbilidad`
+            WHERE
+              `tbl_morbilidad`.`id_tarjeta_familiar`=?';
+        $Res = model::Records($sql, array($id_tarjeta));
+        return $Res;
+    }
+
     public static function verpersona_id($id_persona)
     {
         $sql  = 'SELECT 

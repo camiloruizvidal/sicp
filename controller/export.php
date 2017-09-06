@@ -3,6 +3,7 @@
 include_once dirname(__FILE__) . '/../base.php';
 include_once Config::$model . 'modelcategorias.php';
 include_once Config::$model . 'modelexport.php';
+include_once Config::$Controller . 'programacion.php';
 include_once Config::$Controller . 'other.php';
 include_once Config::$Controller . 'pdf.php';
 require Config::$Controller . 'PHPExcel.php';
@@ -175,6 +176,7 @@ class export
         foreach ($data_personas as $key => $temp)
         {
             $data_personas[$key]['caracteristicas_ficha'] = $this->data_caracteristica_persona($temp['id_persona']);
+            $data_personas[$key]['programacion']          = programacion::programas($temp['id_persona']);
         }
         return $data_personas;
     }
@@ -186,11 +188,11 @@ class export
         $datos_variables_tarjeta_familiar = $this->datos_variables_tarjeta_familiar($id_tarjeta_familiar);
         if (!is_null($datos_variables_tarjeta_familiar))
         {
-            $datos_persona    = $this->datos_caracteristicas_persona($id_tarjeta_familiar);
-            $pdf              = new ficha_familiar('P', 'mm', 'Letter');
+            $datos_persona = $this->datos_caracteristicas_persona($id_tarjeta_familiar);
+            $pdf           = new ficha_familiar('P', 'mm', 'Letter');
+            $pdf->fallecidos=  modelpersona::Morbilidad($id_tarjeta_familiar);
             $pdf->render_datos_generales($datos_tarjeta_familiar);
             $pdf->render_datos_variables($datos_variables_tarjeta_familiar);
-            $data_programas[] = (array("name" => "HOla4", "value" => array($data[] = array("descripcion" => "desc", "rango_inicio" => "2", "rango_fin" => "19", "rango_tipo" => "años", "dosis" => "1", "intervalo" => "2", "intervalo_tipo" => "años"))));
             $pdf->render_miembros_asociados($datos_persona); //ahora se le debe pasar un segundo parametro, el cual es $data_programas
             $pdf->Output();
             //$pdf->Output('Ficha Familiar.pdf', 'D');

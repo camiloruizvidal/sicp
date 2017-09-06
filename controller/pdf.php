@@ -10,6 +10,8 @@ include_once 'utiles/ayudante.php';
 class ficha_familiar extends PDFReport
 {
 
+    public $fallecidos;
+
     public function render_datos_generales($datos_tarjeta_familiar)
     {
         $this->Image("fondoblanco.png", 0, 0, 216);
@@ -191,40 +193,6 @@ class ficha_familiar extends PDFReport
                 $this->SetFont('Arial', 'B', '12');
                 $this->Cell(50, 4, "Programa", 1, 0, 'L');
                 $this->Cell(147, 4, "Descripcion", 1, 0, 'L');
-                /*  foreach ($data_programas as $temp)
-                  {
-                  $this->Ln();
-                  $this->SetFont('Arial', '', '12');
-                  $name = utf8_decode($temp['name']);
-                  $this->Cell(50, 8, "{$name}", 1, 0, 'L');
-                  $this->SetFont('Arial', 'B', '12');
-                  $this->Cell(92, 4, "Actividad", 1, 0, 'L');
-                  $this->Cell(23, 4, "Edad", 1, 0, 'L');
-                  $this->Cell(13, 4, "Dosis", 1, 0, 'L');
-                  $this->Cell(19, 4, "Intervalo", 1, 0, 'L');
-                  foreach ($temp['value'] as $temp2)
-                  {
-                  $this->Ln();
-                  $this->SetFont('Arial', '', '10');
-                  $rango_tipo     = utf8_decode($temp2['rango_tipo']);
-                  $intervalo_tipo = utf8_decode($temp2['intervalo_tipo']);
-                  if ($temp2['rango_inicio'] == $temp2['rango_fin'])
-                  {
-                  $rango = $temp2['rango_inicio'] . $rango_tipo;
-                  }
-                  else
-                  {
-                  $rango = $temp2['rango_inicio'] . ' a ' . $temp2['rango_fin'] . $rango_tipo;
-                  }
-                  $intervalo = $temp2['intervalo'] . ' al ' . $intervalo_tipo;
-                  $this->Cell(50, 8, " ", 0, 0, 'L');
-                  $this->CellFitSpace(92, 4, "{$temp2['descripcion']}", 1, 0, 'L');
-                  $this->CellFitSpace(23, 4, "{$rango}", 1, 0, 'L');
-                  $this->Cell(13, 4, "{$temp2['dosis']}", 1, 0, 'L');
-                  $this->Cell(19, 4, "{$intervalo}", 1, 0, 'L');
-                  }
-                  } */
-
                 foreach ($data_programas as $temp)
                 {
                     $cantidadActividades = count($temp['value']);
@@ -242,7 +210,6 @@ class ficha_familiar extends PDFReport
 
                     foreach ($temp['value'] as $temp2)
                     {
-
                         $temp2['descripcion'] = utf8_decode($temp2['descripcion']);
                         $this->Ln();
                         $this->SetFont('Arial', '', '10');
@@ -267,6 +234,42 @@ class ficha_familiar extends PDFReport
                 $this->Ln();
                 $this->Ln();
             }
+        }
+        $this->fallecidos();
+        if (is_null($this->fallecidos))
+        {
+            
+        }
+    }
+
+    public function fallecidos()
+    {
+        $this->Ln();
+        $this->Ln();
+        $this->SetFont('Arial', 'B', '12');
+        $this->Cell(70, 5, "", 0, 0, 'L');
+        $this->Cell(53, 5, "Miembros fallecidos", 0, 0, 'C');
+        $edad = new other();
+        $this->Ln();
+        $this->Ln();
+        $this->SetFont('Arial', 'B', '12');
+        $this->Cell(40, 4, "Nombre", 1, 0, 'L');
+        $this->Cell(30, 4, "Nacimiento", 1, 0, 'L');
+        $this->Cell(30, 4, "Fallecimiento", 1, 0, 'L');
+        $this->Cell(40, 4, "Edad", 1, 0, 'L');
+        $this->Cell(45, 4, "Causa", 1, 0, 'L');
+        $this->SetFont('Arial', '', '8');
+        foreach ($this->fallecidos as $temp)
+        {
+            $edad_muerte = $edad->calcularEdad($temp['fecha_nacimientod'], $temp['fecha_fallecimiento']);
+            $edad_muerte = utf8_decode($edad_muerte['year'] . ' años, ' . $edad_muerte['months'] . ' meses, ' . $edad_muerte['days'] . ' dias');
+
+            $this->Ln();
+            $this->Cell(40, 4, $temp['nombre'], 1, 0, 'L');
+            $this->Cell(30, 4, $temp['fecha_nacimientod'], 1, 0, 'L');
+            $this->Cell(30, 4, $temp['fecha_fallecimiento'], 1, 0, 'L');
+            $this->Cell(40, 4, $edad_muerte, 1, 0, 'L');
+            $this->Cell(45, 4, $temp['causa'], 1, 0, 'L');
         }
     }
 
