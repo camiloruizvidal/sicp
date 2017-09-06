@@ -192,9 +192,31 @@ class ficha_familiar extends PDFReport
                     array("descripcion" => "desc", "rango_inicio" => "2", "rango_fin" => "19", "rango_tipo" => "años", "dosis" => "1", "intervalo" => "2", "intervalo_tipo" => "años"),
                     array("descripcion" => "desc", "rango_inicio" => "2", "rango_fin" => "19", "rango_tipo" => "años", "dosis" => "1", "intervalo" => "2", "intervalo_tipo" => "años"),
                     array("descripcion" => "desc", "rango_inicio" => "2", "rango_fin" => "19", "rango_tipo" => "años", "dosis" => "1", "intervalo" => "2", "intervalo_tipo" => "años"),
+                    array("descripcion" => "desc", "rango_inicio" => "2", "rango_fin" => "19", "rango_tipo" => "años", "dosis" => "1", "intervalo" => "2", "intervalo_tipo" => "años"),
+                    array("descripcion" => "desc", "rango_inicio" => "2", "rango_fin" => "19", "rango_tipo" => "años", "dosis" => "1", "intervalo" => "2", "intervalo_tipo" => "años"),
+                    array("descripcion" => "desc", "rango_inicio" => "2", "rango_fin" => "19", "rango_tipo" => "años", "dosis" => "1", "intervalo" => "2", "intervalo_tipo" => "años"),
                 )
             );
             $data_programas[] = array("name" => "HOla2", "value" => array($data[] = array("descripcion" => "desc", "rango_inicio" => "2", "rango_fin" => "19", "rango_tipo" => "años", "dosis" => "1", "intervalo" => "2", "intervalo_tipo" => "años")));
+            $data_programas[] = array(
+                "name"  => "HOla3",
+                "value" =>
+                array(
+                    array("descripcion" => "desc", "rango_inicio" => "2", "rango_fin" => "19", "rango_tipo" => "años", "dosis" => "1", "intervalo" => "2", "intervalo_tipo" => "años"),
+                    array("descripcion" => "desc", "rango_inicio" => "2", "rango_fin" => "19", "rango_tipo" => "años", "dosis" => "1", "intervalo" => "2", "intervalo_tipo" => "años"),
+                )
+            );
+            $data_programas[] = array(
+                "name"  => "HOla3",
+                "value" =>
+                array(
+                    array("descripcion" => "desc", "rango_inicio" => "2", "rango_fin" => "19", "rango_tipo" => "años", "dosis" => "1", "intervalo" => "2", "intervalo_tipo" => "años"),
+                    array("descripcion" => "desc", "rango_inicio" => "2", "rango_fin" => "19", "rango_tipo" => "años", "dosis" => "1", "intervalo" => "2", "intervalo_tipo" => "años"),
+                    array("descripcion" => "desc", "rango_inicio" => "2", "rango_fin" => "19", "rango_tipo" => "años", "dosis" => "1", "intervalo" => "2", "intervalo_tipo" => "años"),
+                    array("descripcion" => "desc", "rango_inicio" => "2", "rango_fin" => "19", "rango_tipo" => "años", "dosis" => "1", "intervalo" => "2", "intervalo_tipo" => "años"),
+                    array("descripcion" => "desc", "rango_inicio" => "2", "rango_fin" => "19", "rango_tipo" => "años", "dosis" => "1", "intervalo" => "2", "intervalo_tipo" => "años"),
+                )
+            );
             if (count($data_programas) > 0)
             {
                 $this->Ln();
