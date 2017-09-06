@@ -146,7 +146,7 @@ class ficha_familiar extends PDFReport
         }
     }
 
-    public function render_miembros_asociados($datos_persona, $data_programas)//ahora recibe dos parametros
+    public function render_miembros_asociados($datos_persona, $data_programas = array())//ahora recibe dos parametros
     {
         $this->Ln();
         $this->Ln();
@@ -155,17 +155,14 @@ class ficha_familiar extends PDFReport
         $this->Cell(53, 5, "Miembros Asociados", 0, 0, 'C');
         $this->Ln();
         $this->Ln();
-
-
         for ($i = 0; $i < count($datos_persona); $i++)
         {
-            $mi = $i + 1;
+            $mi      = $i + 1;
             $this->SetFont('Arial', 'B', '12');
             $this->Cell(53, 5, "Miembro #{$mi}", 0, 0, 'L');
             $this->Ln();
             $this->SetFont('Arial', '', '10');
             $this->Ln();
-
             $this->Cell(53, 4, "{$datos_persona[$i]['descripcion']}", 0, 0, 'L');
             $this->Ln();
             $nombres = $datos_persona[$i]['nombre1'] . " " . $datos_persona[$i]['nombre2'];
@@ -181,81 +178,60 @@ class ficha_familiar extends PDFReport
             $this->Cell(40, 4, "Fecha nacimiento:", 0, 0, 'L');
             $this->Cell(40, 4, "{$datos_persona[$i]['fecha_nacimiento']}", 0, 0, 'L');
             $this->Ln();
-
-
             $this->Ln();
-
-
             for ($j = 0; $j < count($datos_persona[$i]['caracteristicas_ficha']); $j++)
             {
-
-
                 $descripcion = utf8_decode($datos_persona[$i]['caracteristicas_ficha'][$j]['descripcion']);
                 $this->CellFitSpace(90, 5, "{$descripcion}", 0, 0, 'L');
                 $this->Cell(10, 5, "{$datos_persona[$i]['caracteristicas_ficha'][$j]['valor']}", 0, 0, 'L');
                 $this->Ln();
-            }//fin for j
-
-            /* $this->SetFont('Arial','B','12');
-              $this->Cell(53,5,"Miembros # {$i}",0,0,'L');
-              $this->Ln();
-              $this->SetFont('Arial','','10'); */
-
-//inicio programas por miembro
-            $this->Ln();
-            $this->Ln();
-            $this->SetFont('Arial', 'B', '12');
-            $this->Cell(50, 4, "Programa", 1, 0, 'L');
-            $this->Cell(147, 4, "Descripcion", 1, 0, 'L');
-
-
-            foreach ($data_programas as $temp)
+            }
+            if (count($data_programas) > 0)
             {
                 $this->Ln();
-                $this->SetFont('Arial', '', '12');
-                $name = utf8_decode($temp['name']);
-                $this->Cell(50, 8, "{$name}", 1, 0, 'L');
+                $this->Ln();
                 $this->SetFont('Arial', 'B', '12');
-                $this->Cell(92, 4, "Actividad", 1, 0, 'L');
-                $this->Cell(23, 4, "Edad", 1, 0, 'L');
-                $this->Cell(13, 4, "Dosis", 1, 0, 'L');
-                $this->Cell(19, 4, "Intervalo", 1, 0, 'L');
-
-
-
-
-                foreach ($temp['value'] as $temp2)
+                $this->Cell(50, 4, "Programa", 1, 0, 'L');
+                $this->Cell(147, 4, "Descripcion", 1, 0, 'L');
+                foreach ($data_programas as $temp)
                 {
-
                     $this->Ln();
-                    $this->SetFont('Arial', '', '10');
-                    $rango_tipo     = utf8_decode($temp2['rango_tipo']);
-                    $intervalo_tipo = utf8_decode($temp2['intervalo_tipo']);
-                    if ($temp2['rango_inicio'] == $temp2['rango_fin'])
+                    $this->SetFont('Arial', '', '12');
+                    $name = utf8_decode($temp['name']);
+                    $this->Cell(50, 8, "{$name}", 1, 0, 'L');
+                    $this->SetFont('Arial', 'B', '12');
+                    $this->Cell(92, 4, "Actividad", 1, 0, 'L');
+                    $this->Cell(23, 4, "Edad", 1, 0, 'L');
+                    $this->Cell(13, 4, "Dosis", 1, 0, 'L');
+                    $this->Cell(19, 4, "Intervalo", 1, 0, 'L');
+                    foreach ($temp['value'] as $temp2)
                     {
-                        $rango = $temp2['rango_inicio'] . $rango_tipo;
+                        $this->Ln();
+                        $this->SetFont('Arial', '', '10');
+                        $rango_tipo     = utf8_decode($temp2['rango_tipo']);
+                        $intervalo_tipo = utf8_decode($temp2['intervalo_tipo']);
+                        if ($temp2['rango_inicio'] == $temp2['rango_fin'])
+                        {
+                            $rango = $temp2['rango_inicio'] . $rango_tipo;
+                        }
+                        else
+                        {
+                            $rango = $temp2['rango_inicio'] . ' a ' . $temp2['rango_fin'] . $rango_tipo;
+                        }
+                        $intervalo = $temp2['intervalo'] . ' al ' . $intervalo_tipo;
+                        $this->Cell(50, 8, " ", 0, 0, 'L');
+                        $this->CellFitSpace(92, 4, "{$temp2['descripcion']}", 1, 0, 'L');
+                        $this->CellFitSpace(23, 4, "{$rango}", 1, 0, 'L');
+                        $this->Cell(13, 4, "{$temp2['dosis']}", 1, 0, 'L');
+                        $this->Cell(19, 4, "{$intervalo}", 1, 0, 'L');
                     }
-                    else
-                    {
-                        $rango = $temp2['rango_inicio'] . ' a ' . $temp2['rango_fin'] . $rango_tipo;
-                    }
-                    $intervalo = $temp2['intervalo'] . ' al ' . $intervalo_tipo;
-//$this->Cell(50,8," ",0,0,'L');$this->CellFitSpace(92,4,"{$temp2['descripcion']}",1,0,'L');$this->CellFitSpace(23,4,"{$rango}",1,0,'L');$this->CellFitSpace(13,4,"{$temp2['dosis']}",1,0,'L');$this->CellFitSpace(19,4,"{$intervalo}",1,0,'L');   
-                    $this->Cell(50, 8, " ", 0, 0, 'L');
-                    $this->CellFitSpace(92, 4, "{$temp2['descripcion']}", 1, 0, 'L');
-                    $this->CellFitSpace(23, 4, "{$rango}", 1, 0, 'L');
-                    $this->Cell(13, 4, "{$temp2['dosis']}", 1, 0, 'L');
-                    $this->Cell(19, 4, "{$intervalo}", 1, 0, 'L');
                 }
+                $this->Ln();
+                $this->Ln();
             }
-
-            $this->Ln();
-            $this->Ln();
-//fin programas por miembro
-        }//fin for i
+        }
     }
 
-//fin render miembros
 }
 
 ///
