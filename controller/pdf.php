@@ -12,7 +12,6 @@ class ficha_familiar extends PDFReport
 
     public function render_datos_generales($datos_tarjeta_familiar)
     {
-        //var_dump($datos_tarjeta_familiar);
         $this->Image("fondoblanco.png", 0, 0, 216);
         $this->SetFont('Arial', '', 6);
         $this->Cell(8, 5, "Fecha:", 0, 0, 'L');
@@ -75,18 +74,16 @@ class ficha_familiar extends PDFReport
     }
 
     public function render_datos_variables($datos_variables_tarjeta_familiar)
-    {   //var_dump($datos_variables_tarjeta_familiar);
+    {
         $ayudante = new ayudante();
         $z        = 0;
         $this->SetFont('Arial', '', '10');
         $limiteI  = $ayudante->identificar_limite_i($datos_variables_tarjeta_familiar);
         $limiteII = $ayudante->identificar_limite_ii($datos_variables_tarjeta_familiar);
-        //var_dump($limiteII);
         $this->Ln();
         $this->Ln();
         $this->Ln();
 
-//nuevos datos
         $this->Ln();
         $this->Ln();
 
@@ -146,7 +143,7 @@ class ficha_familiar extends PDFReport
         }
     }
 
-    public function render_miembros_asociados($datos_persona, $data_programas = array())//ahora recibe dos parametros
+    public function render_miembros_asociados($datos_persona)//ahora recibe dos parametros
     {
         $this->Ln();
         $this->Ln();
@@ -186,6 +183,18 @@ class ficha_familiar extends PDFReport
                 $this->Cell(10, 5, "{$datos_persona[$i]['caracteristicas_ficha'][$j]['valor']}", 0, 0, 'L');
                 $this->Ln();
             }
+            $data_programas   = array(); //Aqui deben venir los datos pero de $datos_persona[$i]['programacion']
+            $data_programas[] = array("name" => "HOla", "value" => array($data[] = array("descripcion" => "desc", "rango_inicio" => "2", "rango_fin" => "19", "rango_tipo" => "años", "dosis" => "1", "intervalo" => "2", "intervalo_tipo" => "años")));
+            $data_programas[] = array(
+                "name"  => "HOla3",
+                "value" =>
+                array(
+                    array("descripcion" => "desc", "rango_inicio" => "2", "rango_fin" => "19", "rango_tipo" => "años", "dosis" => "1", "intervalo" => "2", "intervalo_tipo" => "años"),
+                    array("descripcion" => "desc", "rango_inicio" => "2", "rango_fin" => "19", "rango_tipo" => "años", "dosis" => "1", "intervalo" => "2", "intervalo_tipo" => "años"),
+                    array("descripcion" => "desc", "rango_inicio" => "2", "rango_fin" => "19", "rango_tipo" => "años", "dosis" => "1", "intervalo" => "2", "intervalo_tipo" => "años"),
+                )
+            );
+            $data_programas[] = array("name" => "HOla2", "value" => array($data[] = array("descripcion" => "desc", "rango_inicio" => "2", "rango_fin" => "19", "rango_tipo" => "años", "dosis" => "1", "intervalo" => "2", "intervalo_tipo" => "años")));
             if (count($data_programas) > 0)
             {
                 $this->Ln();
@@ -234,233 +243,4 @@ class ficha_familiar extends PDFReport
 
 }
 
-///
-#INICIO SQL
-function caracteristica_persona($id_persona)
-{
-    $sql       = 'SELECT 
-		  `tbl_car_registro`.`value`
-		FROM
-		  `tbl_car_registro`
-		WHERE
-		  `tbl_car_registro`.`id_persona` = ?';
-    $Resultado = model::Record($sql, array($id_persona));
-    return $Resultado['value'];
-}
-
-function variable($id_variable)
-{
-    $sql       = 'SELECT 
-		  `tbl_car_variables`.`id_car_variables`,
-		  `tbl_car_variables`.`descripcion`,
-		  `tbl_car_variables`.`id_car_tipo_dato`,
-		  `tbl_car_variables`.`list_values`
-		FROM
-		  `tbl_car_variables`
-		  WHERE
-		  `tbl_car_variables`.`id_car_variables`=?';
-    $Resultado = model::Record($sql, array($id_variable));
-    return $Resultado;
-}
-
-function datos_tarjeta_familiar($id_tarjeta_familiar)
-{
-    $sql       = 'SELECT 
-			  `tbl_tarjeta_familiar`.`id_tarjeta_familiar`,
-			  `tbl_tarjeta_familiar`.`fecha_apertura`,
-			  `tbl_tarjeta_familiar`.`codigo`,
-			  `tbl_tarjeta_familiar`.`sisben_ficha`,
-			  `tbl_tarjeta_familiar`.`sisben_puntaje`,
-			  `tbl_tarjeta_familiar`.`sisben_nivel`,
-			  `tbl_tarjeta_familiar`.`direccion`,
-			  `tbl_tarjeta_familiar`.`id_zona`,
-			  `tbl_tarjeta_familiar`.`telefono`,
-			  `tbl_tarjeta_familiar`.`id_municipio`
-
-			FROM
-			  `tbl_tarjeta_familiar`
-			  
-			WHERE
-			  `tbl_tarjeta_familiar`.`id_tarjeta_familiar`=?';
-    $Resultado = model::Record($sql, array($id_tarjeta_familiar));
-    return $Resultado;
-}
-
-function registros($id_tarjeta_familiar)
-{
-    $sql       = 'SELECT 
-			  `tbl_car_registro`.`value`
-			FROM
-			  `tbl_car_registro`
-			WHERE
-			  `tbl_car_registro`.`id_tarjeta_familiar`=?';
-    $Resultado = model::Record($sql, array($id_tarjeta_familiar));
-    return $Resultado;
-}
-
-function datos_persona($id_tarjeta_familiar)
-{
-    $sql       = 'SELECT 
-  `tbl_persona`.`id_tarjeta_familiar`,
-  `tbl_persona`.`documento`,
-  `tbl_persona`.`nombre1`,
-  `tbl_persona`.`nombre2`,
-  `tbl_persona`.`apellido1`,
-  `tbl_persona`.`apellido2`,
-  `tbl_documento_tipo`.`descripcion`,
-  `tbl_estado_civil`.`descripcion`,
-  `tbl_asegurador`.`descripcion`,
-  `tbl_persona`.`sexo`,
-  `tbl_persona`.`fecha_nacimiento`,
-  `tbl_persona_familiaridad`.`descripcion`,
-  `tbl_car_registro`.`id_persona`
-FROM
-  `tbl_persona`
-  INNER JOIN `tbl_documento_tipo` ON (`tbl_persona`.`id_documento_tipo` = `tbl_documento_tipo`.`id_documento_tipo`)
-  INNER JOIN `tbl_estado_civil` ON (`tbl_persona`.`id_estado_civil` = `tbl_estado_civil`.`id_estado_civil`)
-  INNER JOIN `tbl_asegurador` ON (`tbl_persona`.`id_asegurador` = `tbl_asegurador`.`id_asegurador`)
-  INNER JOIN `tbl_nivel_educativo` ON (`tbl_persona`.`id_nivel_educativo` = `tbl_nivel_educativo`.`id_nivel_educativo`)
-  INNER JOIN `tbl_persona_familiaridad` ON (`tbl_persona`.`id_persona_familiaridad` = `tbl_persona_familiaridad`.`id_persona_familiaridad`)
-  INNER JOIN `tbl_car_registro` ON (`tbl_persona`.`id_persona` = `tbl_car_registro`.`id_persona`)
-WHERE
-  `tbl_persona`.`id_tarjeta_familiar` = ?';
-    $Resultado = model::Records($sql, array($id_tarjeta_familiar));
-//  var_dump($Resultado);
-    return $Resultado;
-}
-
-#FIN SQL
-#INICIO LOGICA
-
-function tipe_4($Dato, $list_values)
-{
-    $list_values = json_decode($list_values, true);
-    $found_key   = array_search($Dato['value'], array_column($list_values, 'id'));
-    return $list_values[$found_key]['value'];
-}
-
-function tipe_9($Dato, $list_values)
-{
-    $Resultado_List = array();
-    $list_values    = json_decode($list_values, true);
-    $Dato           = json_decode($Dato['value'], true);
-    foreach ($Dato as $key => $temp)
-    {
-        $Dato[key($temp)] = $temp[key($temp)];
-        unset($Dato[$key]);
-    }
-    foreach ($list_values['data'] as $key1 => $temp1)
-    {
-        $Res_temp = array();
-        foreach ($list_values['option'] as $key2 => $temp2)
-        {
-            $name_data               = 'data ' . $temp1['id'];
-            $name_opti               = 'option ' . $temp2['id'];
-            $Res_temp['descripcion'] = $temp1['name'] . ', ' . $temp2['name'];
-            $Res_temp['valor']       = $Dato[$name_data][$name_opti];
-            $Resultado_List[]        = $Res_temp;
-        }
-    }
-    return $Resultado_List;
-}
-
-function OrganizarDato($Dato, $variable)
-{
-    $value = null;
-    switch ($Dato['id_tipo_data'])
-    {
-        case '1':$value = array('descripcion' => $variable['descripcion'], 'valor' => $Dato["value"]);
-            break;
-        case '4':$value = array('descripcion' => $variable['descripcion'], 'valor' => tipe_4($Dato, $variable["list_values"]));
-            break;
-        case '9':
-            $Res   = tipe_9($Dato, $variable["list_values"]);
-            foreach ($Res as $temp)
-            {
-                if (trim($temp["valor"]) !== '')
-                    $value[] = $temp;
-            }
-            break;
-        default : $value = array('descripcion' => $variable['descripcion'], 'valor' => $Dato);
-            break;
-    }
-    return $value;
-}
-
-function datos_variables_tarjeta_familiar($id_tarjeta_familiar)
-{
-    $Resultado = registros($id_tarjeta_familiar);
-    $data      = array();
-    $Resultado = json_decode($Resultado['value'], true);
-    foreach ($Resultado as $temp)
-    {
-        $temp1   = variable($temp['id']);
-        $tempres = OrganizarDato($temp, $temp1);
-        if (isset($tempres[0]))
-        {
-            foreach ($tempres as $temp2)
-            {
-                $data[] = $temp2;
-            }
-        }
-        else
-        {
-            $data[] = $tempres;
-        }
-    }
-    return $data;
-}
-
-function data_caracteristica_persona($id_persona)
-{
-    $value = array();
-    $valor = caracteristica_persona($id_persona);
-    $valor = json_decode($valor, true);
-    foreach ($valor as $temp)
-    {
-        $descripcion = variable($temp['id']);
-        $descripcion = $descripcion['descripcion'];
-        $value[]     = array('descripcion' => $descripcion, 'valor' => $temp['value']);
-    }
-    return $value;
-}
-
-function datos_caracteristicas_persona($id_tarjeta_familiar)
-{
-    $data_personas = datos_persona($id_tarjeta_familiar);
-    foreach ($data_personas as $key => $temp)
-    {
-
-        $data_personas[$key]['caracteristicas_ficha'] = data_caracteristica_persona($data_personas[$key]['id_persona']);
-    }
-    return $data_personas;
-}
-
-function Iniciar($id_tarjeta_familiar)
-{
-    $datos_tarjeta_familiar           = datos_tarjeta_familiar($id_tarjeta_familiar);
-    $datos_variables_tarjeta_familiar = datos_variables_tarjeta_familiar($id_tarjeta_familiar);
-    $datos_persona                    = datos_caracteristicas_persona($id_tarjeta_familiar);
-    //var_dump($datos_tarjeta_familiar,$datos_variables_tarjeta_familiar,$datos_persona);
-    //var_dump($datos_variables_tarjeta_familiar);
-    //var_dump($datos_persona[0]['caracteristicas_ficha'][0]['descripcion']);
-    //var_dump($datos_persona[0]);
-    $pdf                              = new ficha_familiar('P', 'mm', 'Letter');
-    $pdf->render_datos_generales($datos_tarjeta_familiar);
-    $pdf->render_datos_variables($datos_variables_tarjeta_familiar);
-
-//programas
-    $data_programas[] = array("name"  => "HOla",
-        "value" => array($data[] = array("descripcion" => "desc", "rango_inicio" => "2", "rango_fin" => "19", "rango_tipo" => "años", "dosis" => "1", "intervalo" => "2", "intervalo_tipo" => "años")));
-
-    $pdf->render_miembros_asociados($datos_persona, $data_programas); //ahora se le debe pasar un segundo parametro, el cual es $data_programas
-//fin programas
-
-    $pdf->Output();
-}
-
-if (isset($_GET['id_tarjeta_familiar']))
-{
-    Iniciar($_GET['id_tarjeta_familiar']);
-}
 ?>

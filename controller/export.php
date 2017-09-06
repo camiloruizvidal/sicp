@@ -186,13 +186,14 @@ class export
         $datos_variables_tarjeta_familiar = $this->datos_variables_tarjeta_familiar($id_tarjeta_familiar);
         if (!is_null($datos_variables_tarjeta_familiar))
         {
-            $datos_persona = $this->datos_caracteristicas_persona($id_tarjeta_familiar);
-            $pdf           = new ficha_familiar('P', 'mm', 'Letter');
+            $datos_persona    = $this->datos_caracteristicas_persona($id_tarjeta_familiar);
+            $pdf              = new ficha_familiar('P', 'mm', 'Letter');
             $pdf->render_datos_generales($datos_tarjeta_familiar);
             $pdf->render_datos_variables($datos_variables_tarjeta_familiar);
-            $pdf->render_miembros_asociados($datos_persona);
-            //$pdf->Output();
-            $pdf->Output('Ficha Familiar.pdf', 'D');
+            $data_programas[] = (array("name" => "HOla4", "value" => array($data[] = array("descripcion" => "desc", "rango_inicio" => "2", "rango_fin" => "19", "rango_tipo" => "años", "dosis" => "1", "intervalo" => "2", "intervalo_tipo" => "años"))));
+            $pdf->render_miembros_asociados($datos_persona); //ahora se le debe pasar un segundo parametro, el cual es $data_programas
+            $pdf->Output();
+            //$pdf->Output('Ficha Familiar.pdf', 'D');
         }
     }
 
