@@ -183,40 +183,7 @@ class ficha_familiar extends PDFReport
                 $this->Cell(10, 5, "{$datos_persona[$i]['caracteristicas_ficha'][$j]['valor']}", 0, 0, 'L');
                 $this->Ln();
             }
-            $data_programas   = array(); //Aqui deben venir los datos pero de $datos_persona[$i]['programacion']
-            $data_programas[] = array("name" => "HOla", "value" => array($data[] = array("descripcion" => "desc", "rango_inicio" => "2", "rango_fin" => "19", "rango_tipo" => "años", "dosis" => "1", "intervalo" => "2", "intervalo_tipo" => "años")));
-            $data_programas[] = array(
-                "name"  => "HOla3",
-                "value" =>
-                array(
-                    array("descripcion" => "desc", "rango_inicio" => "2", "rango_fin" => "19", "rango_tipo" => "años", "dosis" => "1", "intervalo" => "2", "intervalo_tipo" => "años"),
-                    array("descripcion" => "desc", "rango_inicio" => "2", "rango_fin" => "19", "rango_tipo" => "años", "dosis" => "1", "intervalo" => "2", "intervalo_tipo" => "años"),
-                    array("descripcion" => "desc", "rango_inicio" => "2", "rango_fin" => "19", "rango_tipo" => "años", "dosis" => "1", "intervalo" => "2", "intervalo_tipo" => "años"),
-                    array("descripcion" => "desc", "rango_inicio" => "2", "rango_fin" => "19", "rango_tipo" => "años", "dosis" => "1", "intervalo" => "2", "intervalo_tipo" => "años"),
-                    array("descripcion" => "desc", "rango_inicio" => "2", "rango_fin" => "19", "rango_tipo" => "años", "dosis" => "1", "intervalo" => "2", "intervalo_tipo" => "años"),
-                    array("descripcion" => "desc", "rango_inicio" => "2", "rango_fin" => "19", "rango_tipo" => "años", "dosis" => "1", "intervalo" => "2", "intervalo_tipo" => "años"),
-                )
-            );
-            $data_programas[] = array("name" => "HOla2", "value" => array($data[] = array("descripcion" => "desc", "rango_inicio" => "2", "rango_fin" => "19", "rango_tipo" => "años", "dosis" => "1", "intervalo" => "2", "intervalo_tipo" => "años")));
-            $data_programas[] = array(
-                "name"  => "HOla3",
-                "value" =>
-                array(
-                    array("descripcion" => "desc", "rango_inicio" => "2", "rango_fin" => "19", "rango_tipo" => "años", "dosis" => "1", "intervalo" => "2", "intervalo_tipo" => "años"),
-                    array("descripcion" => "desc", "rango_inicio" => "2", "rango_fin" => "19", "rango_tipo" => "años", "dosis" => "1", "intervalo" => "2", "intervalo_tipo" => "años"),
-                )
-            );
-            $data_programas[] = array(
-                "name"  => "HOla3",
-                "value" =>
-                array(
-                    array("descripcion" => "desc", "rango_inicio" => "2", "rango_fin" => "19", "rango_tipo" => "años", "dosis" => "1", "intervalo" => "2", "intervalo_tipo" => "años"),
-                    array("descripcion" => "desc", "rango_inicio" => "2", "rango_fin" => "19", "rango_tipo" => "años", "dosis" => "1", "intervalo" => "2", "intervalo_tipo" => "años"),
-                    array("descripcion" => "desc", "rango_inicio" => "2", "rango_fin" => "19", "rango_tipo" => "años", "dosis" => "1", "intervalo" => "2", "intervalo_tipo" => "años"),
-                    array("descripcion" => "desc", "rango_inicio" => "2", "rango_fin" => "19", "rango_tipo" => "años", "dosis" => "1", "intervalo" => "2", "intervalo_tipo" => "años"),
-                    array("descripcion" => "desc", "rango_inicio" => "2", "rango_fin" => "19", "rango_tipo" => "años", "dosis" => "1", "intervalo" => "2", "intervalo_tipo" => "años"),
-                )
-            );
+            $data_programas = $datos_persona[$i]['programacion'];
             if (count($data_programas) > 0)
             {
                 $this->Ln();
@@ -224,23 +191,63 @@ class ficha_familiar extends PDFReport
                 $this->SetFont('Arial', 'B', '12');
                 $this->Cell(50, 4, "Programa", 1, 0, 'L');
                 $this->Cell(147, 4, "Descripcion", 1, 0, 'L');
-              /*  foreach ($data_programas as $temp)
+                /*  foreach ($data_programas as $temp)
+                  {
+                  $this->Ln();
+                  $this->SetFont('Arial', '', '12');
+                  $name = utf8_decode($temp['name']);
+                  $this->Cell(50, 8, "{$name}", 1, 0, 'L');
+                  $this->SetFont('Arial', 'B', '12');
+                  $this->Cell(92, 4, "Actividad", 1, 0, 'L');
+                  $this->Cell(23, 4, "Edad", 1, 0, 'L');
+                  $this->Cell(13, 4, "Dosis", 1, 0, 'L');
+                  $this->Cell(19, 4, "Intervalo", 1, 0, 'L');
+                  foreach ($temp['value'] as $temp2)
+                  {
+                  $this->Ln();
+                  $this->SetFont('Arial', '', '10');
+                  $rango_tipo     = utf8_decode($temp2['rango_tipo']);
+                  $intervalo_tipo = utf8_decode($temp2['intervalo_tipo']);
+                  if ($temp2['rango_inicio'] == $temp2['rango_fin'])
+                  {
+                  $rango = $temp2['rango_inicio'] . $rango_tipo;
+                  }
+                  else
+                  {
+                  $rango = $temp2['rango_inicio'] . ' a ' . $temp2['rango_fin'] . $rango_tipo;
+                  }
+                  $intervalo = $temp2['intervalo'] . ' al ' . $intervalo_tipo;
+                  $this->Cell(50, 8, " ", 0, 0, 'L');
+                  $this->CellFitSpace(92, 4, "{$temp2['descripcion']}", 1, 0, 'L');
+                  $this->CellFitSpace(23, 4, "{$rango}", 1, 0, 'L');
+                  $this->Cell(13, 4, "{$temp2['dosis']}", 1, 0, 'L');
+                  $this->Cell(19, 4, "{$intervalo}", 1, 0, 'L');
+                  }
+                  } */
+
+                foreach ($data_programas as $temp)
                 {
+                    $cantidadActividades = count($temp['value']);
+                    $tamaño              = ($cantidadActividades * 4) + 4;
                     $this->Ln();
-                    $this->SetFont('Arial', '', '12');
-                    $name = utf8_decode($temp['name']);
-                    $this->Cell(50, 8, "{$name}", 1, 0, 'L');
+                    $this->SetFont('Arial', '', '8');
+                    $name                = utf8_decode($temp['name']);
+                    $this->Cell(50, $tamaño, "{$name}", 1, 0, 'L');
                     $this->SetFont('Arial', 'B', '12');
                     $this->Cell(92, 4, "Actividad", 1, 0, 'L');
                     $this->Cell(23, 4, "Edad", 1, 0, 'L');
                     $this->Cell(13, 4, "Dosis", 1, 0, 'L');
                     $this->Cell(19, 4, "Intervalo", 1, 0, 'L');
+
+
                     foreach ($temp['value'] as $temp2)
                     {
+
+                        $temp2['descripcion'] = utf8_decode($temp2['descripcion']);
                         $this->Ln();
                         $this->SetFont('Arial', '', '10');
-                        $rango_tipo     = utf8_decode($temp2['rango_tipo']);
-                        $intervalo_tipo = utf8_decode($temp2['intervalo_tipo']);
+                        $rango_tipo           = utf8_decode($temp2['rango_tipo']);
+                        $intervalo_tipo       = utf8_decode($temp2['intervalo_tipo']);
                         if ($temp2['rango_inicio'] == $temp2['rango_fin'])
                         {
                             $rango = $temp2['rango_inicio'] . $rango_tipo;
@@ -256,40 +263,7 @@ class ficha_familiar extends PDFReport
                         $this->Cell(13, 4, "{$temp2['dosis']}", 1, 0, 'L');
                         $this->Cell(19, 4, "{$intervalo}", 1, 0, 'L');
                     }
-                }*/
-
-                foreach ($data_programas as $temp)
-                {
-                $cantidadActividades=count($temp['value']);
-                $tamaño=($cantidadActividades*4)+4;
-                $this->Ln();
-                $this->SetFont('Arial','','12');
-                $name=utf8_decode($temp['name']);
-                $this->Cell(50,$tamaño,"{$name}",1,0,'L');
-                $this->SetFont('Arial','B','12');
-                $this->Cell(92,4,"Actividad",1,0,'L');$this->Cell(23,4,"Edad",1,0,'L');$this->Cell(13,4,"Dosis",1,0,'L');$this->Cell(19,4,"Intervalo",1,0,'L');           
-                            
-            
-                foreach ($temp['value'] as $temp2)
-                {
-
-                $this->Ln();
-                $this->SetFont('Arial','','10');
-                $rango_tipo=utf8_decode($temp2['rango_tipo']);
-                $intervalo_tipo=utf8_decode($temp2['intervalo_tipo']);
-                if ($temp2['rango_inicio'] == $temp2['rango_fin'])
-                {
-                    $rango=$temp2['rango_inicio'].$rango_tipo;
                 }
-                else
-                {
-                    $rango=$temp2['rango_inicio'] . ' a ' . $temp2['rango_fin'].$rango_tipo;
-                }
-                $intervalo=$temp2['intervalo'] . ' al '.$intervalo_tipo;  
-                $this->Cell(50,8," ",0,0,'L');$this->CellFitSpace(92,4,"{$temp2['descripcion']}",1,0,'L');$this->CellFitSpace(23,4,"{$rango}",1,0,'L');$this->Cell(13,4,"{$temp2['dosis']}",1,0,'L');$this->Cell(19,4,"{$intervalo}",1,0,'L');                
-                }
-           
-             }
                 $this->Ln();
                 $this->Ln();
             }
