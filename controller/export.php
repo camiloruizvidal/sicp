@@ -58,10 +58,63 @@ class export
 
     public function Getxls()
     {
-        $model    = new modelexport();
-        $data     = $model->exportarData($_GET['fecha_ini'], $_GET['fecha_fin'], $_GET['edad_min'], $_GET['edad_max']);
-        $cabecera = array('CODIGO', 'PERSONA', 'DOCUMENTO', 'EDAD', 'GENERO', 'FECHA NACIMIENTO', 'RANGO', 'CABEZA FAMILIA', 'ESTADO CIVIL', 'NIVEL EDUCATIVO', 'FECHA APERTURA', 'SISBEN FICHA', 'SISBEN PUNTAJE', 'SISBEN NIVEL', 'DIRECCION', 'TELEFONO', 'PORTABILIDAD', 'CAMBIO DOMICILIO', 'PROXIMA VISITA', 'DOCUMENTO ENCARGADO', 'ENCARGADO', 'ZONA', 'VEREDA', 'CORREGIMIENTO', 'MUNICIPIO', 'DEPARTAMENTO', 'FAMILIARIDAD', 'ASEGURADOR', 'REGIMEN');
-        $this->generarexcel($data, $cabecera);
+        echo '<pre>';
+        $model      = new modelexport();
+        $data       = $model->exportarData($_GET['fecha_ini'], $_GET['fecha_fin'], $_GET['edad_min'], $_GET['edad_max']);
+        $cabecera   = array('CODIGO', 'PERSONA', 'DOCUMENTO', 'EDAD', 'GENERO', 'FECHA NACIMIENTO', 'RANGO', 'CABEZA FAMILIA', 'ESTADO CIVIL', 'NIVEL EDUCATIVO', 'FECHA APERTURA', 'SISBEN FICHA', 'SISBEN PUNTAJE', 'SISBEN NIVEL', 'DIRECCION', 'TELEFONO', 'PORTABILIDAD', 'CAMBIO DOMICILIO', 'PROXIMA VISITA', 'DOCUMENTO ENCARGADO', 'ENCARGADO', 'ZONA', 'VEREDA', 'CORREGIMIENTO', 'MUNICIPIO', 'DEPARTAMENTO', 'FAMILIARIDAD', 'ASEGURADOR', 'REGIMEN');
+        $cab        = null;
+        var_dump(count($data));
+        $arraytemp1 = array();
+        $arraytemp2 = array();
+        foreach ($data as $key => $temp)
+        {
+            $id_tarjeta_familiar              = modelexport::id_tarjeta_familiar_codigo($temp[0]);
+            $datos_variables_tarjeta_familiar = $this->datos_variables_tarjeta_familiar($id_tarjeta_familiar);
+            foreach ($datos_variables_tarjeta_familiar as $key => $temp2)
+            {
+                if (!is_null($temp2))
+                {
+                    $arraytemp2[] = $temp2['valor'];
+                    $cab[$key][]  = $temp2['descripcion'];
+                }
+            }
+            foreach ($temp as $temp1)
+            {
+                $arraytemp1[] = $temp1;
+            }
+            //foreach($)
+        }
+        var_dump(count($data));
+        exit;
+        $temp = $cab[0];
+        foreach ($temp as $temp2)
+        {
+            if (!is_null($temp2))
+            {
+                $cabecera[] = ($temp2);
+            }
+        }
+        $datos_persona = $this->datos_caracteristicas_persona($id_tarjeta_familiar);
+        $temp          = $datos_persona[0]['caracteristicas_ficha'];
+        foreach ($temp as $temp2)
+        {
+            $cabecera[] = ($temp2["descripcion"]);
+        }
+        foreach ($data as $key => $temp)
+        {
+            $found_key  = array_search($temp[2], array_column($datos_persona, 'documento'));
+            $Res_person = $datos_persona[$found_key]['caracteristicas_ficha'];
+            foreach ($Res_person as $temp2)
+            {
+                if (trim($temp2['valor']) == '')
+                {
+                    $temp2['valor'] = 'NN';
+                }
+                $data[$key][] = ($temp2['valor']);
+            }
+        }
+        var_dump($data);
+        //$this->generarexcel($data, $cabecera);
     }
 
     public function Getpdf()

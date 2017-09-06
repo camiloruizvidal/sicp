@@ -34,12 +34,12 @@ class modelexport
                     `tbl_tarjeta_familiar`.`codigo`,
                     CONCAT_WS(\' \',  `tbl_persona`.`nombre1`,  `tbl_persona`.`nombre2`,  `tbl_persona`.`apellido1`,  `tbl_persona`.`apellido2`) as persona,
                     `tbl_persona`.`documento`,
-                    (SELECT 
-                      CONCAT(CONCAT(YEAR(CURDATE()) - YEAR(`cal_edad_persona`.`fecha_nacimiento`)) - IF(MONTH(CURDATE()) < MONTH(`cal_edad_persona`.`fecha_nacimiento`), 1, IF(MONTH(CURDATE()) = MONTH(`cal_edad_persona`.`fecha_nacimiento`), IF(DAY(CURDATE()) < DAY(`cal_edad_persona`.`fecha_nacimiento`), 1, 0), 0)), \' años, \', MONTH(CURDATE()) - MONTH(`cal_edad_persona`.`fecha_nacimiento`) + 12 * IF(MONTH(CURDATE()) < MONTH(`cal_edad_persona`.`fecha_nacimiento`), 1, IF(MONTH(CURDATE()) = MONTH(`cal_edad_persona`.`fecha_nacimiento`), IF(DAY(CURDATE()) < DAY(`cal_edad_persona`.`fecha_nacimiento`), 1, 0), 0)) - IF(MONTH(CURDATE()) <> MONTH(`cal_edad_persona`.`fecha_nacimiento`),(DAY(CURDATE()) < DAY(`cal_edad_persona`.`fecha_nacimiento`)), IF(DAY(CURDATE()) < DAY(`cal_edad_persona`.`fecha_nacimiento`), 1, 0)), \' meses y \',(DAY(CURDATE()) - DAY(`cal_edad_persona`.`fecha_nacimiento`) + 30 * (DAY(CURDATE()) < DAY(`cal_edad_persona`.`fecha_nacimiento`))), \' dias\') AS `edad`
-                    FROM
-                      `tbl_persona` `cal_edad_persona`
-                    WHERE
-                      `cal_edad_persona`.`id_persona`=`tbl_persona`.`id_persona`) AS `edad`,
+                                (SELECT 
+                                  CONCAT(CONCAT(YEAR(CURDATE()) - YEAR(`cal_edad_persona`.`fecha_nacimiento`)) - IF(MONTH(CURDATE()) < MONTH(`cal_edad_persona`.`fecha_nacimiento`), 1, IF(MONTH(CURDATE()) = MONTH(`cal_edad_persona`.`fecha_nacimiento`), IF(DAY(CURDATE()) < DAY(`cal_edad_persona`.`fecha_nacimiento`), 1, 0), 0)), \' años, \', MONTH(CURDATE()) - MONTH(`cal_edad_persona`.`fecha_nacimiento`) + 12 * IF(MONTH(CURDATE()) < MONTH(`cal_edad_persona`.`fecha_nacimiento`), 1, IF(MONTH(CURDATE()) = MONTH(`cal_edad_persona`.`fecha_nacimiento`), IF(DAY(CURDATE()) < DAY(`cal_edad_persona`.`fecha_nacimiento`), 1, 0), 0)) - IF(MONTH(CURDATE()) <> MONTH(`cal_edad_persona`.`fecha_nacimiento`),(DAY(CURDATE()) < DAY(`cal_edad_persona`.`fecha_nacimiento`)), IF(DAY(CURDATE()) < DAY(`cal_edad_persona`.`fecha_nacimiento`), 1, 0)), \' meses y \',(DAY(CURDATE()) - DAY(`cal_edad_persona`.`fecha_nacimiento`) + 30 * (DAY(CURDATE()) < DAY(`cal_edad_persona`.`fecha_nacimiento`))), \' dias\') AS `edad`
+                                FROM
+                                  `tbl_persona` `cal_edad_persona`
+                                WHERE
+                                  `cal_edad_persona`.`id_persona`=`tbl_persona`.`id_persona`) AS `edad`,
                     `tbl_persona`.`sexo` as genero,
                     `tbl_persona`.`fecha_nacimiento`,
                     `tbl_persona`.`id_rango` as rango,
@@ -108,6 +108,18 @@ class modelexport
 		  `tbl_car_variables`.`id_car_variables`=?';
         $Resultado = model::Record($sql, array($id_variable));
         return $Resultado;
+    }
+
+    public static function id_tarjeta_familiar_codigo($codigo)
+    {
+        $sql       = 'SELECT 
+                        `tbl_tarjeta_familiar`.`id_tarjeta_familiar`
+                      FROM
+                        `tbl_tarjeta_familiar`
+                      WHERE
+                        `tbl_tarjeta_familiar`.`codigo` = ?';
+        $Resultado = model::Record($sql, array("$codigo"));
+        return $Resultado["id_tarjeta_familiar"];
     }
 
     public function datos_tarjeta_familiar($id_tarjeta_familiar)
