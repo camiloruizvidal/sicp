@@ -7,10 +7,10 @@ include_once Config::$model . 'modelpersona.php';
 class programacion
 {
 
-    private function VerProgramas($temp, $Edad)
+    private function VerProgramas($temp, $Edad, $sexo)
     {
         $Pro  = new modelprogramacion();
-        $Data = $Pro->VariablesPrograma($temp['id_car_programas'], $_POST['sexo'], $Edad);
+        $Data = $Pro->VariablesPrograma($temp['id_car_programas'], $sexo, $Edad);
         $Res  = NULL;
         if (count($Data) > 0)
         {
@@ -88,20 +88,37 @@ class programacion
     public function Postverdetalles()
     {
         $Pro       = new modelprogramacion();
-        $cal       = new other();
         $persona   = modelpersona::verpersona_id($_POST['id_persona']);
         $Edad      = $this->Dias($persona['fecha_nacimiento']);
         $Programas = $Pro->VerProgramas();
         $data      = array();
         foreach ($Programas as $key => $temp)
         {
-            $temp1 = $this->VerProgramas($temp, $Edad);
+            $temp1 = $this->VerProgramas($temp, $Edad,$_POST['sexo']);
             if (!is_null($temp1))
             {
                 $data[] = $temp1;
             }
         }
         echo $this->RenderProgramas($data);
+    }
+
+    public static function programas($id_persona)
+    {
+        $Pro       = new modelprogramacion();
+        $persona   = modelpersona::verpersona_id($id_persona);
+        $Edad      = self::Dias($persona['fecha_nacimiento']);
+        $Programas = $Pro->VerProgramas();
+        $data      = array();
+        foreach ($Programas as $key => $temp)
+        {
+            $temp1 = self::VerProgramas($temp, $Edad,$persona['sexo']);
+            if (!is_null($temp1))
+            {
+                $data[] = $temp1;
+            }
+        }
+        return $data;
     }
 
 }
