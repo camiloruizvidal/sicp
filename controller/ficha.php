@@ -17,6 +17,15 @@ class ficha
         $mCategorias->SaveRegistro(null, $registro["value"], $id_tarjeta_familiar);
     }
 
+    private function crearregistromortalidad($id_tarjeta_familiar, $data)
+    {
+        $mCategorias = new modelcategorias();
+        foreach ($data as $temp)
+        {
+            $mCategorias->Savemortalidad($temp, $id_tarjeta_familiar);
+        }
+    }
+
     private function CrearTarjetaFamiliar($Data)
     {
         $mFicha              = new modelficha();
@@ -46,12 +55,22 @@ class ficha
 
     public function importardata()
     {
-        $Data = other::echo_json_decode(file_get_contents($_FILES ["archivo1"]['tmp_name']));
-        foreach ($Data as $temp)
+        try
         {
-            $id_tarjeta_familiar = $this->CrearTarjetaFamiliar($temp);
-            $this->CrearRegistroTarjetaFamiliar($id_tarjeta_familiar, $temp['registro']);
-            $this->Personas($temp["people"], $id_tarjeta_familiar);
+            $Data = other::echo_json_decode(file_get_contents($_FILES ["archivo1"]['tmp_name']));
+            foreach ($Data as $temp)
+            {
+                $id_tarjeta_familiar = $this->CrearTarjetaFamiliar($temp);
+                $this->CrearRegistroTarjetaFamiliar($id_tarjeta_familiar, $temp['registro']);
+                $this->Personas($temp["people"], $id_tarjeta_familiar);
+                $this->crearregistromortalidad($id_tarjeta_familiar, $temp["fallecidos"]);
+                echo '<h1>Se ha subido con éxito</h1>';
+            }
+        }
+        catch (Exception $ex)
+        {
+            echo '<h1>Se ha presentado un error</h1>';
+            echo '<h3>' . $ex->getMessage() . '</h3>';
         }
     }
 
@@ -79,15 +98,20 @@ class ficha
         return $data;
     }
 
+    private function fallecidos($id_tarjeta_familiar)
+    {
+        $data = modelficha::fallecidos($id_tarjeta_familiar);
+        return $data;
+    }
+
     private function generate_data_expot()
     {
         $Res = modelficha::generate_data_ficha();
         foreach ($Res as $key => $temp)
         {
-            $Res[$key]['registro'] = $this->generate_data_registro_ficha($temp['id_tarjeta_familiar']);
-            $Res[$key]['people']   = $this->generate_data_person($temp['id_tarjeta_familiar']);
-
-
+            $Res[$key]['registro']   = $this->generate_data_registro_ficha($temp['id_tarjeta_familiar']);
+            $Res[$key]['people']     = $this->generate_data_person($temp['id_tarjeta_familiar']);
+            $Res[$key]['fallecidos'] = $this->fallecidos($temp['id_tarjeta_familiar']);
             unset($Res[$key]['id_tarjeta_familiar']);
         }
         $Res = other::echo_json($Res);
@@ -214,11 +238,11 @@ class ficha
             $id_tarjeta                     = $tarjeta_familiar->savetarjetafamiliar($_POST);
             $this->saveCaracteristicas($_POST, $id_tarjeta);
             $id                             = $tarjeta_familiar->codigonextvalue($id_usuario);
-			if(isset($_POST['fecha_fallecimiento']))
-			{
-				$this->savemortalidad($_POST['nombres'], $_POST['apellidos'], $_POST['fecha_nacimientod'], $_POST['fecha_fallecimiento'], $_POST['causa'], $id_tarjeta);
+            if (isset($_POST['fecha_fallecimiento']))
+            {
+                $this->savemortalidad($_POST['nombres'], $_POST['apellidos'], $_POST['fecha_nacimientod'], $_POST['fecha_fallecimiento'], $_POST['causa'], $id_tarjeta);
             }
-			if (!is_null($id))
+            if (!is_null($id))
             {
 
                 $_SESSION['codigo_next_value'] = $id;

@@ -3,6 +3,29 @@
 class modelcategorias
 {
 
+    public function Savemortalidad($data, $id_tarjeta_familiar)
+    {
+        $Reg                      = model::Make('tbl_morbilidad');
+        $Reg->Load('nombres=? '
+                . 'AND apellidos=? '
+                . 'AND fecha_nacimientod=? '
+                . 'AND causa=? '
+                . 'AND fecha_fallecimiento=?', array(
+            $data['nombres'],
+            $data['apellidos'],
+            $data['fecha_nacimientod'],
+            $data['causa'],
+            $data['fecha_fallecimiento']));
+        $Reg->nombres             = $data['nombres'];
+        $Reg->apellidos           = $data['apellidos'];
+        $Reg->fecha_nacimientod   = $data['fecha_nacimientod'];
+        $Reg->causa               = $data['causa'];
+        $Reg->fecha_fallecimiento = $data['fecha_fallecimiento'];
+        $Reg->id_tarjeta_familiar = $id_tarjeta_familiar;
+        $Reg->Save();
+        return $Reg->id_morbilidad;
+    }
+
     public function SaveRegistro($id_persona, $value, $id_tarjeta_familiar = NULL)
     {
         $Reg = model::Make('tbl_car_registro');

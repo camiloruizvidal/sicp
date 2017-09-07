@@ -3,6 +3,22 @@
 class modelficha
 {
 
+    public static function fallecidos($id_tarjeta_familiar)
+    {
+        $sql  = 'SELECT 
+                    `tbl_morbilidad`.`nombres`,
+                    `tbl_morbilidad`.`apellidos`,
+                    `tbl_morbilidad`.`fecha_nacimientod`,
+                    `tbl_morbilidad`.`causa`,
+                    `tbl_morbilidad`.`fecha_fallecimiento`
+                  FROM
+                    `tbl_morbilidad` 
+                  WHERE
+                    `tbl_morbilidad`.`id_tarjeta_familiar` = ?';
+        $Data = model::Records($sql, array($id_tarjeta_familiar));
+        return $Data;
+    }
+
     public static function generate_data_registro_ficha($id_ficha)
     {
         $sql  = 'SELECT 
@@ -47,7 +63,8 @@ class modelficha
                     `tbl_persona`.`id_asegurador`,
                     `tbl_persona`.`id_rango`,
                     `tbl_persona`.`id_regimen`,
-                    `tbl_persona`.`es_cabeza_familia`
+                    `tbl_persona`.`es_cabeza_familia`,
+                    `tbl_persona`.`ocupacion`
                   FROM
                     `tbl_persona`
                 WHERE

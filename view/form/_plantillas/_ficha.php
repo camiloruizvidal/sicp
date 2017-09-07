@@ -45,7 +45,7 @@
                     url: '../../../controller/anico_ajax.php?control=ficha&function=exportar_data',
                     success: function (data, textStatus, jqXHR)
                     {
-                        var url = '../files/' + data;
+                        var url = '../../files/' + data;
                         $('#downaload').attr('href', url);
                         console.log(data);
                         downloadFile(url);
