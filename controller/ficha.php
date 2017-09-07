@@ -114,7 +114,7 @@ class ficha
             $Res[$key]['fallecidos'] = $this->fallecidos($temp['id_tarjeta_familiar']);
             unset($Res[$key]['id_tarjeta_familiar']);
         }
-        $Res = other::echo_json($Res);
+        $Res = json_encode($Res);
         return $Res;
     }
 
