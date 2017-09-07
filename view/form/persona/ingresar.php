@@ -14,7 +14,7 @@ $form->parametros = array('titulo' => 'Ficha familiar'//, 'js'     => '../js/sou
 $form->create(__FILE__);
 ?>
 <#--content_ini--#>
-<script src="../js/source/registro.js"></script>
+<script src="../../js/source/registro.js?v=<?php echo date('YmdHis'); ?>"></script>
 <div class="container-fluid">
     <ul class="nav nav-tabs" role="tablist" id="tabs_person">
         <li role="presentation" id="li_persona" class="active"><a href="#tab_persona" aria-controls="home" role="tab" data-toggle="tab">Persona</a></li>
@@ -23,7 +23,7 @@ $form->create(__FILE__);
     </ul>
     <div class="tab-content">
         <div role="tabpanel" class="tab-pane active" id="tab_persona">
-            <form id="form_persona" method="post" action="../ajaxpersona/guardarpersona">
+            <form id="form_persona" method="post" action="../../../controller/anico_ajax.php?control=persona&function=guardarpersona">
                 <div class="panel panel-other">
                     <div class="panel-heading">
                         Datos de la persona
@@ -130,7 +130,8 @@ $form->create(__FILE__);
             </form>
         </div>
         <div role="tabpanel" class="tab-pane" id="tab_caracteristicas">
-            <form id="form_caracteristicas" method="post" action="../ajaxcaracteristicas/guardarregistro">
+            <form id="form_caracteristicas" method="post" action="
+                  ../../../controller/anico_ajax.php?control=caracteristicas&function=guardarregistro">
                 <input type="hidden" id="id_persona" name="id_persona" value="">
                 <div class="panel panel-other">
                     <div class="panel-heading">

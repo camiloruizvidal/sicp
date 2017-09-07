@@ -15,13 +15,15 @@ function validate_vars()
         $control  = strtolower($_GET['control']);
         $function = strtolower($_GET['function']);
         config_variables();
-        if (count($_POST) > 0){
+        if (count($_POST) > 0)
+        {
             $function = 'Post' . $function;
         }
-        if(count($_GET)>0){
+        if (count($_GET) > 2)
+        {
             $function = 'Get' . $function;
         }
-		
+
         return (object) array('control' => $control, 'function' => $function);
     }
     else
@@ -53,7 +55,8 @@ function init_control()//Validamos que existan las funciones y la clase que el b
 {
     $variables   = validate_vars();
     $url_control = dirname(__FILE__) . DIRECTORY_SEPARATOR . $variables->control . '.php';
-    if (file_exists($url_control)){
+    if (file_exists($url_control))
+    {
         include_once $url_control;
         if (method_exists($variables->control, $variables->function))
         {
@@ -62,7 +65,7 @@ function init_control()//Validamos que existan las funciones y la clase que el b
         }
         else
         {
-           header('HTTP/1.1 500 Fatal error: Call to undefined method ' . $variables->control . '::' . $variables->function . '()');
+            header('HTTP/1.1 500 Fatal error: Call to undefined method ' . $variables->control . '::' . $variables->function . '()');
         }
     }
     else
@@ -70,4 +73,5 @@ function init_control()//Validamos que existan las funciones y la clase que el b
         header('HTTP/1.1 500 Internal Server Error');
     }
 }
+
 init_control();

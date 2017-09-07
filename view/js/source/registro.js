@@ -23,7 +23,7 @@ function tipe_data(id_tipo_data, value)
 function cargar_caracteristicas()
 {
     $.ajax({
-        url: '../ajaxcaracteristicas/cargarvalores',
+        url: '../../../controller/anico_ajax.php?control=caracteristicas&function=cargarvalores',
         dataType: 'json',
         type: 'POST',
         data: {id_persona: $('#id_persona').val()},
@@ -39,7 +39,7 @@ function cargar_caracteristicas()
 function calcularedad()
 {
     $.ajax({
-        url: '../ajaxother/calcularedad',
+        url: '../../../controller/anico_ajax.php?control=other&function=calcularedad',
         type: 'POST',
         data: {edad: $('#fecha_nacimiento').val()},
         dataType: 'json',
@@ -59,7 +59,7 @@ function cargar_persona()
     {
         loadingstart();
         $.ajax({
-            url: '../ajaxpersona/verrpersona',
+            url: '../../../controller/anico_ajax.php?control=persona&function=verrpersona',
             dataType: 'json',
             type: 'POST',
             data: {documento: $('#documento').val()},
@@ -132,7 +132,7 @@ function guardar_caracteristicas()
 function programacion()
 {
     $.ajax({
-        url: '../ajaxprogramacion/verdetalles',
+        url: '../../../controller/anico_ajax.php?control=programacion&function=verdetalles',
         type: 'POST',
         data: {
             id_persona: $('#id_persona').val(),
@@ -211,7 +211,7 @@ function save_eps()
     if ($.trim($('#new_eps').val()) != '')
     {
         $.ajax({
-            url: '../ajaxdatos/saveeps',
+            url: '../../../controller/anico_ajax.php?control=datos&function=saveeps',
             type: 'POST',
             data: {name: $('#new_eps').val()},
             success: function (datares)
@@ -219,7 +219,7 @@ function save_eps()
                 $('#new_eps').val('');
                 $('#myModal').modal('hide');
                 $.ajax({
-                    url: '../ajaxdatos/aseguradores',
+                    url: '../../../controller/anico_ajax.php?control=datos&function=aseguradores',
                     success: function (data, textStatus, jqXHR)
                     {
                         $('#id_asegurador').html(data);

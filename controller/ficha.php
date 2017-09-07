@@ -214,8 +214,11 @@ class ficha
             $id_tarjeta                     = $tarjeta_familiar->savetarjetafamiliar($_POST);
             $this->saveCaracteristicas($_POST, $id_tarjeta);
             $id                             = $tarjeta_familiar->codigonextvalue($id_usuario);
-            $this->savemortalidad($_POST['nombres'], $_POST['apellidos'], $_POST['fecha_nacimientod'], $_POST['fecha_fallecimiento'], $_POST['causa'], $id_tarjeta);
-            if (!is_null($id))
+			if(isset($_POST['fecha_fallecimiento']))
+			{
+				$this->savemortalidad($_POST['nombres'], $_POST['apellidos'], $_POST['fecha_nacimientod'], $_POST['fecha_fallecimiento'], $_POST['causa'], $id_tarjeta);
+            }
+			if (!is_null($id))
             {
 
                 $_SESSION['codigo_next_value'] = $id;

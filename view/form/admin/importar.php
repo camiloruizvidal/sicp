@@ -21,7 +21,7 @@ $form->create(__FILE__);
             var formData = new FormData(document.getElementById("formuploadajax"));
             e.preventDefault();
             $.ajax({
-                url: '../ajaxficha/importardata',
+                url: '../../../controller/anico_ajax.php?control=ficha&function=importardata',
                 type: "post",
                 dataType: "html",
                 data: formData,

@@ -7,28 +7,27 @@
         <title><#--titulo--#></title>
         <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
         <meta name="viewport" content="width=device-width" />
-        <link href="../css/bootstrap/light-bootstrap-dashboard.css" rel="stylesheet"/>
-        <link href="../css/bootstrap/bootstrap.min.css" rel="stylesheet" />
-        <link href="../css/bootstrap/sticky-footer-navbar.css" rel="stylesheet" />
-        <link href="../css/sources/animate.min.css" rel="stylesheet"/>
-        <link href="../css/jquery/jquery-ui.css?v=<?php echo date('YmdHis'); ?>" rel="stylesheet"/>
-        <link href="../css/jquery/jquery-ui.theme.css?v=<?php echo date('YmdHis'); ?>" rel="stylesheet"/>
-        <link href="../css/sources/demo.css" rel="stylesheet" />
-        <link href="../css/sources/pe-icon-7-stroke.css" rel="stylesheet" />
-        <link href="../css/sources/loading.css" rel="stylesheet" />
-        <link href="../css/sources/switch.css?v=<?php echo date('YmdHis'); ?>" rel="stylesheet">
-        <link href="../css/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css"/>
+        <link href="../../css/bootstrap/light-bootstrap-dashboard.css" rel="stylesheet"/>
+        <link href="../../css/bootstrap/bootstrap.min.css" rel="stylesheet" />
+        <link href="../../css/bootstrap/sticky-footer-navbar.css" rel="stylesheet" />
+        <link href="../../css/sources/animate.min.css" rel="stylesheet"/>
+        <link href="../../css/jquery/jquery-ui.css?v=<?php echo date('YmdHis'); ?>" rel="stylesheet"/>
+        <link href="../../css/jquery/jquery-ui.theme.css?v=<?php echo date('YmdHis'); ?>" rel="stylesheet"/>
+        <link href="../../css/sources/demo.css" rel="stylesheet" />
+        <link href="../../css/sources/pe-icon-7-stroke.css" rel="stylesheet" />
+        <link href="../../css/sources/loading.css" rel="stylesheet" />
+        <link href="../../css/sources/switch.css?v=<?php echo date('YmdHis'); ?>" rel="stylesheet">
+        <link href="../../css/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css"/>
         <!--         <link href="http://getbootstrap.com/docs/3.3/examples/sticky-footer-navbar/sticky-footer-navbar.css" rel="stylesheet" /> -->
 
         <#--css--#>
-        <script src="../js/jquery/jquery-1.10.2.js" type="text/javascript"></script>
-        <script src="../js/bootstrap/bootstrap.min.js" type="text/javascript"></script>
-        <script src="../js/bootstrap/bootstrap-checkbox-radio-switch.js"></script>
-        <script src="../js/bootstrap/bootstrap-notify.js"></script>
-        <script src="../js/jquery/light-bootstrap-dashboard.js"></script>
-        <script src="../js/jquery/jquery-ui.min.js"></script>
-        <script src="../js/source/Function.js?v=<?php echo date('YmdHis'); ?>"></script>
-        <script src="../js/source/loading.js" type="text/javascript"></script>
+        <script src="../../js/jquery/jquery-1.10.2.js" type="text/javascript"></script>
+        <script src="../../js/bootstrap/bootstrap.min.js" type="text/javascript"></script>
+        <script src="../../js/bootstrap/bootstrap-checkbox-radio-switch.js"></script>
+        <script src="../../js/bootstrap/bootstrap-notify.js"></script>
+        <script src="../../js/jquery/jquery-ui.min.js"></script>
+        <script src="../../js/source/Function.js?v=<?php echo date('YmdHis'); ?>"></script>
+        <script src="../../js/source/loading.js" type="text/javascript"></script>
 
         <#--js--#>
     </head>
@@ -43,7 +42,7 @@
             function exportar()
             {
                 $.ajax({
-                    url: '../ajaxficha/exportar_data',
+                    url: '../../../controller/anico_ajax.php?control=ficha&function=exportar_data',
                     success: function (data, textStatus, jqXHR)
                     {
                         var url = '../files/' + data;

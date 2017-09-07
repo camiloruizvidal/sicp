@@ -63,57 +63,52 @@ class export
         $data       = $model->exportarData($_GET['fecha_ini'], $_GET['fecha_fin'], $_GET['edad_min'], $_GET['edad_max']);
         $cabecera   = array('CODIGO', 'PERSONA', 'DOCUMENTO', 'EDAD', 'GENERO', 'FECHA NACIMIENTO', 'RANGO', 'CABEZA FAMILIA', 'ESTADO CIVIL', 'NIVEL EDUCATIVO', 'FECHA APERTURA', 'SISBEN FICHA', 'SISBEN PUNTAJE', 'SISBEN NIVEL', 'DIRECCION', 'TELEFONO', 'PORTABILIDAD', 'CAMBIO DOMICILIO', 'PROXIMA VISITA', 'DOCUMENTO ENCARGADO', 'ENCARGADO', 'ZONA', 'VEREDA', 'CORREGIMIENTO', 'MUNICIPIO', 'DEPARTAMENTO', 'FAMILIARIDAD', 'ASEGURADOR', 'REGIMEN');
         $cab        = null;
-        var_dump(count($data));
         $arraytemp1 = array();
         $arraytemp2 = array();
+        $arraytemp3 = array();
         foreach ($data as $key => $temp)
         {
             $id_tarjeta_familiar              = modelexport::id_tarjeta_familiar_codigo($temp[0]);
             $datos_variables_tarjeta_familiar = $this->datos_variables_tarjeta_familiar($id_tarjeta_familiar);
+            foreach ($temp as $temp3)
+            {
+                $arraytemp1[] = $temp3;
+            }
             foreach ($datos_variables_tarjeta_familiar as $key => $temp2)
             {
                 if (!is_null($temp2))
                 {
-                    $arraytemp2[] = $temp2['valor'];
+                    $arraytemp3[] = $temp2['valor'];
                     $cab[$key][]  = $temp2['descripcion'];
                 }
             }
-            foreach ($temp as $temp1)
+            foreach ($arraytemp3 as $temp4)
             {
-                $arraytemp1[] = $temp1;
+                $arraytemp1[] = $temp4;
             }
-            //foreach($)
-        }
-        var_dump(count($data));
-        exit;
-        $temp = $cab[0];
-        foreach ($temp as $temp2)
-        {
-            if (!is_null($temp2))
+            $datos_persona = $this->datos_caracteristicas_persona($id_tarjeta_familiar);
+            foreach ($data as $key => $temp)
             {
-                $cabecera[] = ($temp2);
+                $found_key  = array_search($temp[2], array_column($datos_persona, 'documento'));
+                $Res_person = $datos_persona[$found_key]['caracteristicas_ficha'];
+                foreach ($Res_person as $temp2)
+                {
+                    if (trim($temp2['valor']) == '')
+                    {
+                        $temp2['valor'] = 'NN';
+                    }
+                    $arraytemp1[] = $temp2;
+                }
+                $arraytemp2[] = $arraytemp1;
             }
+            $arraytemp1 = array();
         }
-        $datos_persona = $this->datos_caracteristicas_persona($id_tarjeta_familiar);
-        $temp          = $datos_persona[0]['caracteristicas_ficha'];
+        $temp = $datos_persona[0]['caracteristicas_ficha'];
         foreach ($temp as $temp2)
         {
             $cabecera[] = ($temp2["descripcion"]);
         }
-        foreach ($data as $key => $temp)
-        {
-            $found_key  = array_search($temp[2], array_column($datos_persona, 'documento'));
-            $Res_person = $datos_persona[$found_key]['caracteristicas_ficha'];
-            foreach ($Res_person as $temp2)
-            {
-                if (trim($temp2['valor']) == '')
-                {
-                    $temp2['valor'] = 'NN';
-                }
-                $data[$key][] = ($temp2['valor']);
-            }
-        }
-        var_dump($data);
+        var_dump($arraytemp2);
         //$this->generarexcel($data, $cabecera);
     }
 

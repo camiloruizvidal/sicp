@@ -34,7 +34,7 @@ $form->create(__FILE__);
         function corregimiento(id_municipio)
         {
             $.ajax({
-                url: '../ajaxdatos/corregimientos',
+                url: '../../../controller/anico_ajax.php?control=datos&function=corregimientos',
                 type: 'POST',
                 data: {id: id_municipio},
                 success: function (data, textStatus, jqXHR)
@@ -46,7 +46,7 @@ $form->create(__FILE__);
         function veredas(id_municipio)
         {
             $.ajax({
-                url: '../ajaxdatos/veredas',
+                url: '../../../controller/anico_ajax.php?control=datos&function=veredas',
                 type: 'POST',
                 data: {id: id_municipio},
                 success: function (data, textStatus, jqXHR)
@@ -58,7 +58,7 @@ $form->create(__FILE__);
         function municipios(id_departamento)
         {
             $.ajax({
-                url: '../ajaxdatos/municipios',
+                url: '../../../controller/anico_ajax.php?control=datos&function=municipios',
                 type: 'POST',
                 data: {id: id_departamento},
                 success: function (data, textStatus, jqXHR)
@@ -110,10 +110,10 @@ $form->create(__FILE__);
     });
 </script>
 <div>
-    <form id="form_new_persona" target="_blank" method="post" action="persona_ingresar">
+    <form id="form_new_persona" target="_blank" method="post" action="../persona/ingresar.php">
         <input type="hidden" name="form_new_persona_codigo" id="id_tarjeta_familiar" value="<?php echo ficha::codigotarjetaFamiliar(); ?>"/>
     </form>
-    <form id="form_ficha_familiar" method="post" action="../ajaxficha/savetarjetafamiliar">
+    <form id="form_ficha_familiar" method="post" action="../../../controller/anico_ajax.php?control=ficha&function=savetarjetafamiliar">
         <div class="panel panel-other">
             <div class="panel-heading">
                 <span id="nueva_persona">

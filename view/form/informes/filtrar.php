@@ -8,7 +8,7 @@ $Validar->UsuarioCorrecto(array('Encuestador', 'Administrador'));
 
 $form->ruta       = '../_plantillas';
 $form->plantilla  = '_ficha.php';
-$form->parametros = array('titulo' => 'Ficha familiar', 'css' => '../css/jquery/jquery.dataTables.min.css', 'js' => '../js/jquery/jquery.dataTables.min.js');
+$form->parametros = array('titulo' => 'Ficha familiar', 'css' => '../../css/jquery/jquery.dataTables.min.css', 'js' => '../../js/jquery/jquery.dataTables.min.js');
 $form->create(__FILE__);
 ?>
 <#--content_ini--#>
@@ -39,7 +39,7 @@ $form->create(__FILE__);
 <div class="panel panel-other">
     <div class="panel-body">
         <div class="container-alt">
-            <form id="form_fichas" action="../ajaxinformes/registros" method="post">
+            <form id="form_fichas" action="../../../controller/anico_ajax.php?control=informes&function=registros" method="post">
                 <div class="col-md-3">
                     <label>Fecha inicio</label>
                     <div class="input-group">
@@ -83,7 +83,7 @@ $form->create(__FILE__);
     {
         $('#exportar').click(function ()
         {
-            var url = '../ajaxexport/xls?' + $('#form_fichas').serialize();
+            var url = '../../../controller/anico_ajax.php?control=export&function=xls&' + $('#form_fichas').serialize();
             location.href = url;
         });
     });

@@ -1,3 +1,3 @@
 <?php
-header ("Location: sicp/login_ini");
+header ("Location: view/form/login/ini.php");
 ?>

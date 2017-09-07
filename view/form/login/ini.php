@@ -8,7 +8,7 @@ $_SESSION = array();
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Snippet - Bootsnipp.com</title>
-        <link href="../css/bootstrap/bootstrap.min.css" rel="stylesheet" />
+        <link href="../../css/bootstrap/bootstrap.min.css" rel="stylesheet" />
 
         <style>
             body, html {
@@ -127,21 +127,21 @@ $_SESSION = array();
             .forgot-password:focus{
                 color: rgb(12, 97, 33);
             }</style>
-        <script src="../js/jquery/jquery-1.10.2.js" type="text/javascript"></script>
-        <script src="../js/bootstrap/bootstrap.min.js" type="text/javascript"></script>
+        <script src="../../js/jquery/jquery-1.10.2.js" type="text/javascript"></script>
+        <script src="../../js/bootstrap/bootstrap.min.js" type="text/javascript"></script>
         <script type="text/javascript">
             $(function ()
             {
                 $('input').change(function ()
                 {
                     $('#error').hide();
-                })
+                });
                 $('#error').hide();
                 $('#login').submit(function (e)
                 {
                     e.preventDefault();
                     $.ajax({
-                        url: '../ajaxlogin/validate',
+                        url: '../../../controller/anico_ajax.php?control=login&function=validate',
                         data: $('#login').serialize(),
                         type: 'POST',
                         dataType: 'json',
@@ -178,10 +178,10 @@ $_SESSION = array();
         </style>
         <div class="row">
             <div class="col-md-6">
-                <img src="../img/heart.png" width="156px">
+                <img src="../../img/heart.png" width="156px">
             </div>
             <div class="col-md-6">
-                <img src="../img/old.png" width="300px">
+                <img src="../../img/old.png" width="300px">
             </div>
         </div>
         <div id="bar_sup">
@@ -190,7 +190,7 @@ $_SESSION = array();
         </div>
         <div class="row">
             <div class="col-md-6">
-                <img src="../img/famili.png" >
+                <img src="../../img/famili.png" >
             </div>  
             <div class="col-md-6">
                 <div class="card card-container">

@@ -26,7 +26,8 @@ $form->create(__FILE__);
                 data: $(this).serialize(),
                 success: function (data)
                 {
-                    $.ajax({url: '../ajaxlogin/vercodigosuser', async: false, success: function (data) {
+                    $.ajax({
+                        url: '../../../controller/anico_ajax.php?control=login&function=vercodigosuser', async: false, success: function (data) {
                             $('#datos').html(data);
                         }});
                     loadingstop();
@@ -36,7 +37,7 @@ $form->create(__FILE__);
     });
 </script>
 <div class="col-md-6">
-    <form method="post" action="../ajaxlogin/guardarcodigo">
+    <form method="post" action="../../../controller/anico_ajax.php?control=login&function=guardarcodigo">
         <div class="panel panel-other">
             <div class="panel-heading">
                 Codigos

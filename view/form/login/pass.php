@@ -36,7 +36,7 @@ $data             = $login->detalle_usuario($Data['id_usuario']);
                     if (data.valido)
                     {
                         console.log(data);
-                        location.href = 'login_pass';
+                        location.href = '../login/pass.php';
                     }
                     else
                     {
@@ -48,7 +48,7 @@ $data             = $login->detalle_usuario($Data['id_usuario']);
     });
 </script>
 <div class="col-md-6">
-    <form method="post" action="../ajaxlogin/guardarlogin">
+    <form method="post" action="../../../controller/anico_ajax.php?control=login&function=guardarlogin">
         <div class="panel panel-other">
             <div class="panel-heading">
                 Datos

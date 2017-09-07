@@ -30,8 +30,7 @@ class informes
             <i class="fa fa-cloud-download"></i> Descargar<span class = "caret"></span>
             </button>
             <ul class = "dropdown-menu" role = "menu">
-            <li><a href="../ajaxexport/pdf?c=' . $id . '">Ficha familiar</a></li>
-            
+            <li><a href="../../../controller/anico_ajax.php?control=export&function=pdf&c=' . $id .'">Ficha familiar</a></li>            
             </ul>
             </div>';
 

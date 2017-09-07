@@ -157,9 +157,9 @@ class login
         @session_start();
         switch ($_SESSION['id_perfil_tipo'])
         {
-            case '1': $url = 'ficha_registrar';
+            case '1': $url = '../ficha/registrar.php';
                 break;
-            case '2': $url = 'admin_importar';
+            case '2': $url = '../admin/importar.php';
                 break;
         }
         return $url;
