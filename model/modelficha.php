@@ -2,9 +2,6 @@
 
 class modelficha
 {
-    #IMPORTAR
-    #IMPORTAR
-    #EXPORTAR
 
     public static function generate_data_registro_ficha($id_ficha)
     {
