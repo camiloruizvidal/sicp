@@ -13,7 +13,7 @@ class Config
     public static $home       = '';
     public static $model      = '';
     public static $debug      = FALSE;   //depurar base
-    public static $driver     = 'mysql';
+    public static $driver     = 'mysqli';
     public static $home_lib   = '';
     public static $home_bin   = '';
     public static $Controller = '';
