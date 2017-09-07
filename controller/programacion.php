@@ -94,7 +94,7 @@ class programacion
         $data      = array();
         foreach ($Programas as $key => $temp)
         {
-            $temp1 = $this->VerProgramas($temp, $Edad,$_POST['sexo']);
+            $temp1 = $this->VerProgramas($temp, $Edad, $_POST['sexo']);
             if (!is_null($temp1))
             {
                 $data[] = $temp1;
@@ -105,14 +105,15 @@ class programacion
 
     public static function programas($id_persona)
     {
+        $pro       = new programacion();
         $Pro       = new modelprogramacion();
         $persona   = modelpersona::verpersona_id($id_persona);
-        $Edad      = self::Dias($persona['fecha_nacimiento']);
+        $Edad      = $pro->Dias($persona['fecha_nacimiento']);
         $Programas = $Pro->VerProgramas();
         $data      = array();
         foreach ($Programas as $key => $temp)
         {
-            $temp1 = self::VerProgramas($temp, $Edad,$persona['sexo']);
+            $temp1 = $pro->VerProgramas($temp, $Edad, $persona['sexo']);
             if (!is_null($temp1))
             {
                 $data[] = $temp1;
