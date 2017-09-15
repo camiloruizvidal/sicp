@@ -18,7 +18,7 @@
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a  class="active" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Opciones <span class="caret"></span></a>
+                    <a  class="active" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Informacion <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="../admin/importar.php"><p>Cargar</p></a></li>
                     </ul>
