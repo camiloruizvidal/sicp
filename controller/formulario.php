@@ -32,9 +32,9 @@ class formulario
     private function Texto_Largo_Enriquecido($data)
     {
         //$this->col_md = 'col-md-12';
-        $name         = 'input_' . $data['id_car_variables'];
-        $html         = '';
-        $html         = '<label>' . $data['descripcion'] . '</label><textarea id = "' . $name . '" name = "' . $name . '" class = "form form-control"></textarea>';
+        $name = 'input_' . $data['id_car_variables'];
+        $html = '';
+        $html = '<label>' . $data['descripcion'] . '</label><textarea id = "' . $name . '" name = "' . $name . '" class = "form form-control"></textarea>';
         return $html;
     }
 
@@ -99,6 +99,7 @@ class formulario
         $html.='</tr>' . "\n";
         foreach ($values as $temp)
         {
+            var_dump($temp);
             $html.='<tr>' . "\n";
             $html.='<td>' . "\n";
             $html.='<label>' . "\n";
@@ -109,12 +110,21 @@ class formulario
             $html.='<input type = "hidden" value = "no" name = "' . $name1 . '">' . "\n";
             $html.='</td>' . "\n";
             foreach ($option as $temp1)
+                echo '<pre>';
             {
                 $html.='<td>' . "\n";
-                $inputname2 = $name1 . '[data_' . $temp['id'] . '][option_' . $temp1['id'] . ']';
-                $html.='<input data-id = "' . $temp['id'] . '" data-option = "' . $temp1['id'] . '" class = "form form-control" type = "text" id = "data' . $temp['id'] . '_option' . $temp1['id'] . '" placeholder = "' . $temp1['name'] . '" name = "' . $inputname2 . '">' . "\n";
+                if ($temp1["name"] == '¿vacunas?')
+                {
+                    
+                }
+                else
+                {
+                    $inputname2 = $name1 . '[data_' . $temp['id'] . '][option_' . $temp1['id'] . ']';
+                    $html.='<input data-id = "' . $temp['id'] . '" data-option = "' . $temp1['id'] . '" class = "form form-control" type = "text" id = "data' . $temp['id'] . '_option' . $temp1['id'] . '" placeholder = "' . $temp1['name'] . '" name = "' . $inputname2 . '">' . "\n";
+                }
                 $html.='</td>' . "\n";
             }
+            echo '</pre>';
             $html.='</tr>' . "\n";
         }
         $html.='</table>' . "\n";

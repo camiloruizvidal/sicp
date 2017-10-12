@@ -767,15 +767,6 @@ class ADODB_mysqli extends ADOConnection {
 			return $ret;
 		}
 
-		/*
-		if (!$mysql_res =  mysqli_query($this->_connectionID, $sql, ($ADODB_COUNTRECS) ? MYSQLI_STORE_RESULT : MYSQLI_USE_RESULT)) {
-			if ($this->debug) ADOConnection::outp("Query: " . $sql . " failed. " . $this->ErrorMsg());
-			return false;
-		}
-
-		return $mysql_res;
-		*/
-
 		if ($this->multiQuery) {
 			$rs = mysqli_multi_query($this->_connectionID, $sql.';');
 			if ($rs) {
