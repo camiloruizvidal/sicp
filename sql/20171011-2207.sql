@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-10-2017 a las 03:14:41
+-- Tiempo de generación: 12-10-2017 a las 05:07:22
 -- Versión del servidor: 5.6.24
 -- Versión de PHP: 5.6.30
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `sicp`
 --
-CREATE DATABASE IF NOT EXISTS `sicp` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+CREATE DATABASE IF NOT EXISTS `sicp` DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish_ci;
 USE `sicp`;
 
 -- --------------------------------------------------------
@@ -383,7 +383,8 @@ CREATE TABLE `tbl_car_registro` (
 --
 
 INSERT INTO `tbl_car_registro` (`id_car_registro`, `value`, `id_persona`, `id_tarjeta_familiar`) VALUES
-(1, '[\n    {\n        \"id\": \"89\",\n        \"value\": \"1\",\n        \"id_tipo_data\": \"4\"\n    },\n    {\n        \"id\": \"90\",\n        \"value\": \"1\",\n        \"id_tipo_data\": \"4\"\n    },\n    {\n        \"id\": \"91\",\n        \"value\": \"[\\n    {\\n        \\\"data 1\\\": {\\n            \\\"option 1\\\": \\\"\\\",\\n            \\\"option 2\\\": \\\"\\\"\\n        }\\n    },\\n    {\\n        \\\"data 2\\\": {\\n            \\\"option 1\\\": \\\"\\\",\\n            \\\"option 2\\\": \\\"\\\"\\n        }\\n    },\\n    {\\n        \\\"data 3\\\": {\\n            \\\"option 1\\\": \\\"\\\",\\n            \\\"option 2\\\": \\\"\\\"\\n        }\\n    },\\n    {\\n        \\\"data 4\\\": {\\n            \\\"option 1\\\": \\\"\\\",\\n            \\\"option 2\\\": \\\"\\\"\\n        }\\n    }\\n]\",\n        \"id_tipo_data\": \"9\"\n    },\n    {\n        \"id\": \"92\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"93\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"94\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"95\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"96\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"97\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"98\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"1\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"12\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"11\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"10\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"9\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"8\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"6\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"5\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"3\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"2\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    }\n]', NULL, 1);
+(1, '[\n    {\n        \"id\": \"89\",\n        \"value\": \"1\",\n        \"id_tipo_data\": \"4\"\n    },\n    {\n        \"id\": \"90\",\n        \"value\": \"1\",\n        \"id_tipo_data\": \"4\"\n    },\n    {\n        \"id\": \"91\",\n        \"value\": \"[\\n    {\\n        \\\"data 1\\\": {\\n            \\\"option 1\\\": \\\"\\\",\\n            \\\"option 2\\\": \\\"\\\"\\n        }\\n    },\\n    {\\n        \\\"data 2\\\": {\\n            \\\"option 1\\\": \\\"\\\",\\n            \\\"option 2\\\": \\\"\\\"\\n        }\\n    },\\n    {\\n        \\\"data 3\\\": {\\n            \\\"option 1\\\": \\\"\\\",\\n            \\\"option 2\\\": \\\"\\\"\\n        }\\n    },\\n    {\\n        \\\"data 4\\\": {\\n            \\\"option 1\\\": \\\"\\\",\\n            \\\"option 2\\\": \\\"\\\"\\n        }\\n    }\\n]\",\n        \"id_tipo_data\": \"9\"\n    },\n    {\n        \"id\": \"92\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"93\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"94\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"95\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"96\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"97\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"98\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"1\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"12\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"11\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"10\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"9\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"8\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"6\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"5\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"3\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"2\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    }\n]', NULL, 1),
+(2, '[\n    {\n        \"id\": \"89\",\n        \"value\": \"1\",\n        \"id_tipo_data\": \"4\"\n    },\n    {\n        \"id\": \"90\",\n        \"value\": \"1\",\n        \"id_tipo_data\": \"4\"\n    },\n    {\n        \"id\": \"91\",\n        \"value\": \"[\\n    {\\n        \\\"data 1\\\": {\\n            \\\"option 1\\\": \\\"2\\\",\\n            \\\"option 2\\\": \\\"1\\\",\\n            \\\"option 3\\\": \\\"on\\\"\\n        }\\n    },\\n    {\\n        \\\"data 2\\\": {\\n            \\\"option 1\\\": \\\"\\\",\\n            \\\"option 2\\\": \\\"\\\"\\n        }\\n    },\\n    {\\n        \\\"data 3\\\": {\\n            \\\"option 1\\\": \\\"\\\",\\n            \\\"option 2\\\": \\\"\\\"\\n        }\\n    },\\n    {\\n        \\\"data 4\\\": {\\n            \\\"option 1\\\": \\\"\\\",\\n            \\\"option 2\\\": \\\"\\\",\\n            \\\"option 3\\\": \\\"\\\"\\n        }\\n    }\\n]\",\n        \"id_tipo_data\": \"9\"\n    },\n    {\n        \"id\": \"92\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"93\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"94\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"95\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"96\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"97\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"98\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"1\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"12\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"11\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"10\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"9\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"8\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"6\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"5\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"3\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"2\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"100\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"101\",\n        \"value\": \"si\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"102\",\n        \"value\": \"si\",\n        \"id_tipo_data\": \"1\"\n    },\n    {\n        \"id\": \"103\",\n        \"value\": \"no\",\n        \"id_tipo_data\": \"1\"\n    }\n]', NULL, 2);
 
 -- --------------------------------------------------------
 
@@ -518,7 +519,7 @@ INSERT INTO `tbl_car_variables` (`id_car_variables`, `descripcion`, `id_car_tipo
 (88, 'Tienen cepillos dentales pero no los usan', 1, NULL),
 (89, 'De donde se toma el agua', 4, '[{\"id\":\"1\",\"value\":\"ACUEDUCTO\"},{\"id\":\"2\",\"value\":\"POZO\"},{\"id\":\"3\",\"value\":\"LLUVIA\"},{\"id\":\"4\",\"value\":\"RIO\"},{\"id\":\"5\",\"value\":\"PILA\"},{\"id\":\"6\",\"value\":\"LAGUNA\"},{\"id\":\"7\",\"value\":\"MANANTIAL\"},{\"id\":\"8\",\"value\":\"TANQUES\"},{\"id\":\"9\",\"value\":\"OTRA\"}]'),
 (90, 'La basura es', 4, '[{\"id\":\"1\",\"value\":\"RECOGIDA\"},{\"id\":\"2\",\"value\":\"CONTENEDOR\"},{\"id\":\"3\",\"value\":\"QUEMADA\"},{\"id\":\"4\",\"value\":\"TIRADA\"},{\"id\":\"5\",\"value\":\"ENTERRADA\"},{\"id\":\"6\",\"value\":\"OTROS\"}]'),
-(91, 'Tiene animales', 9, '{\"option\":[{\"id\":\"1\",\"name\":\"\\u00bfCuantos?\"},{\"id\":\"2\",\"name\":\"\\u00bfvacunados?\"},{\"id\":\"3\",\"name\":\"\\u00bfvacunas?\"}],\"data\":[{\"id\":\"1\",\"name\":\"Gatos\",\"list\":\"Gatos\"},{\"id\":\"2\",\"name\":\"Perros\",\"list\":\"Gatos\"},{\"id\":\"3\",\"name\":\"Equinos\",\"list\":\"Gatos\"},{\"id\":\"4\",\"name\":\"Otros\",\"list\":\"Gatos\"}]}'),
+(91, 'Tiene animales', 9, '{\"option\":\r\n[{\"id\":\"1\",\"name\":\"¿Cuantos?\"},{\"id\":\"2\",\"name\":\"¿vacunados?\"},{\"id\":\"3\",\"name\":\"¿vacunas?\"}],\r\n\"data\":[{\"id\":\"1\",\"name\":\"Gatos\",\"list\":[\"TRIVALLENTE\",\"REFUERZO TRIVALENTE\",\"RABIA\",\"Presenta Carnet\"]},\r\n{\"id\":\"2\",\"name\":\"Perros\",\"list\":[\"PARVO Y MOQUILLO\",\"POLIVALENTE\",\"RABIA\",\"Presenta Carnet\"]},\r\n{\"id\":\"3\",\"name\":\"Equinos\",\"list\":[\"encefalomielitis equina\",\"influenza equina\",\"Presenta Carnet\"]},\r\n{\"id\":\"4\",\"name\":\"Otros\",\"list\":null}]}'),
 (92, 'Iluminación adecuada', 1, NULL),
 (93, 'Ventilación adecuada', 1, NULL),
 (94, 'Roedores', 1, NULL),
@@ -526,7 +527,11 @@ INSERT INTO `tbl_car_variables` (`id_car_variables`, `descripcion`, `id_car_tipo
 (96, 'Anjeos puertas y ventanas', 1, NULL),
 (97, 'Uso de toldillos', 1, NULL),
 (98, 'Material predominante en piso, techo, paredes', 1, NULL),
-(99, 'Notas', 3, NULL);
+(99, 'Notas', 3, NULL),
+(100, 'PIOJOS', 1, NULL),
+(101, 'PARASITOS', 1, NULL),
+(102, 'ACAROS', 1, NULL),
+(103, 'ZANCUDOS', 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -641,7 +646,11 @@ INSERT INTO `tbl_car_variablexcategoria` (`id_car_variablexcategoria`, `id_car_v
 (95, 96, 10, 8),
 (96, 97, 10, 9),
 (97, 98, 10, 10),
-(98, 99, 11, 1);
+(98, 99, 11, 1),
+(99, 100, 8, 100),
+(100, 101, 8, 101),
+(101, 102, 8, 102),
+(102, 103, 8, 103);
 
 -- --------------------------------------------------------
 
@@ -663,7 +672,7 @@ CREATE TABLE `tbl_codigos` (
 --
 
 INSERT INTO `tbl_codigos` (`id_codigos`, `codigo_inicio`, `codigo_fin`, `codigo_next_value`, `id_usuario`, `activo`) VALUES
-(1, 1, 100, 2, 1, 'si');
+(1, 1, 100, 3, 1, 'si');
 
 -- --------------------------------------------------------
 
@@ -2108,7 +2117,8 @@ CREATE TABLE `tbl_tarjeta_familiar` (
 --
 
 INSERT INTO `tbl_tarjeta_familiar` (`id_tarjeta_familiar`, `fecha_apertura`, `codigo`, `sisben_ficha`, `sisben_puntaje`, `sisben_nivel`, `direccion`, `id_zona`, `telefono`, `id_municipio`, `id_corregimiento`, `id_vereda`, `portabilidad`, `cambio_domicilio`, `proxima_visita`, `responsable`, `documento_responsable`) VALUES
-(1, '2017-09-26 18:51:19', '1', 1, 1.000, 1, '1', 1, '1', 1, -1, -1, 'no', 'no', '2017-09-30', 'usuario prueba', '1');
+(1, '2017-09-26 18:51:19', '1', 1, 1.000, 1, '1', 1, '1', 1, -1, -1, 'no', 'no', '2017-09-30', 'usuario prueba', '1'),
+(2, '2017-10-11 22:02:32', '2', 1, 1.000, 1, '2342342', 1, '4324342', 389, -1, -1, 'no', 'no', '2017-10-12', 'usuario prueba', '1');
 
 -- --------------------------------------------------------
 
@@ -2631,7 +2641,7 @@ ALTER TABLE `tbl_car_programas_actividades_valores`
 -- AUTO_INCREMENT de la tabla `tbl_car_registro`
 --
 ALTER TABLE `tbl_car_registro`
-  MODIFY `id_car_registro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_car_registro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `tbl_car_tipo_dato`
 --
@@ -2641,12 +2651,12 @@ ALTER TABLE `tbl_car_tipo_dato`
 -- AUTO_INCREMENT de la tabla `tbl_car_variables`
 --
 ALTER TABLE `tbl_car_variables`
-  MODIFY `id_car_variables` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
+  MODIFY `id_car_variables` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
 --
 -- AUTO_INCREMENT de la tabla `tbl_car_variablexcategoria`
 --
 ALTER TABLE `tbl_car_variablexcategoria`
-  MODIFY `id_car_variablexcategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=99;
+  MODIFY `id_car_variablexcategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
 --
 -- AUTO_INCREMENT de la tabla `tbl_codigos`
 --
@@ -2716,7 +2726,7 @@ ALTER TABLE `tbl_regimen`
 -- AUTO_INCREMENT de la tabla `tbl_tarjeta_familiar`
 --
 ALTER TABLE `tbl_tarjeta_familiar`
-  MODIFY `id_tarjeta_familiar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_tarjeta_familiar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `tbl_usuario`
 --

@@ -80,12 +80,11 @@ class formulario
 
     private function Si_multiple($data)
     {
-        $this->col_md = 'col-md-4';
-        $Res          = json_decode($data['list_values'], true);
-        $option       = ($Res['option']);
-        $values       = ($Res['data']);
-        $inputname    = 'input_' . $data['id_car_variables'];
-        $html         = '<div class="container-alt">' . "\n"
+        $Res       = json_decode($data['list_values'], true);
+        $option    = ($Res['option']);
+        $values    = ($Res['data']);
+        $inputname = 'input_' . $data['id_car_variables'];
+        $html      = '<div class="container-alt">' . "\n"
                 . '<table border="1" width="100%">' . "\n";
         $html.='<tr>' . "\n";
         $html.='<td>' . "\n";
@@ -99,7 +98,6 @@ class formulario
         $html.='</tr>' . "\n";
         foreach ($values as $temp)
         {
-            var_dump($temp);
             $html.='<tr>' . "\n";
             $html.='<td>' . "\n";
             $html.='<label>' . "\n";
@@ -110,12 +108,27 @@ class formulario
             $html.='<input type = "hidden" value = "no" name = "' . $name1 . '">' . "\n";
             $html.='</td>' . "\n";
             foreach ($option as $temp1)
-                echo '<pre>';
             {
                 $html.='<td>' . "\n";
                 if ($temp1["name"] == '¿vacunas?')
                 {
-                    
+                    if (is_null($temp['list']))
+                    {
+                        $inputname2 = $name1 . '[data_' . $temp['id'] . '][option_' . $temp1['id'] . ']';
+                        $html.='<div class="checkbox"><input data-id = "' . $temp['id'] . '" data-option = "' . $temp1['id'] . '" class="form form-control" type="text" id="data' . $temp['id'] . '_option' . $temp1['id'] . '" name="' . $inputname2 . '">' . "\n</div>";
+                    }
+                    else
+                    {
+                        if (isset($temp['list']) && is_array($temp['list']))
+                        {
+
+                            foreach ($temp['list'] as $temp2)
+                            {
+                                $inputname2 = $name1 . '[data_' . $temp['id'] . '][option_' . $temp1['id'] . ']';
+                                $html.='<label><input type="checkbox" data-id = "' . $temp['id'] . '" data-option = "' . $temp1['id'] . '"  id="data' . $temp['id'] . '_option' . $temp1['id'] . '" name="' . $inputname2 . '">' . $temp2 . '</label><br/>' . "\n";
+                            }
+                        }
+                    }
                 }
                 else
                 {
@@ -124,12 +137,11 @@ class formulario
                 }
                 $html.='</td>' . "\n";
             }
-            echo '</pre>';
             $html.='</tr>' . "\n";
         }
         $html.='</table>' . "\n";
         $html.='</div>' . "\n";
-
+        $this->col_md = 'col-md-4';
         return $html;
     }
 
@@ -140,6 +152,10 @@ class formulario
 
     private function TipoDatohtml($data)
     {
+        if ($data['id_car_variables'] == '90')
+        {
+            $this->col_md = 'col-md-12';
+        }
         $html = '';
         switch ($data['id_car_tipo_dato'])
         {

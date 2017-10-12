@@ -156,7 +156,7 @@ class ficha
             );
             $Res[$temp['id_car_categoria']] = $temp1;
         }
-        $form->col_md = 'col-md-4';
+        $form->col_md = 'col-md-6';
         $Resultado    = $form->CrearCampos($Res, $panel);
         return $Resultado;
     }
