@@ -28,45 +28,47 @@ $form->create(__FILE__);
 </style>
 <script>
 
+    function corregimiento(id_municipio)
+    {
+        $.ajax({
+            url: '../../../controller/anico_ajax.php?control=datos&function=corregimientos',
+            type: 'POST',
+            data: {id: id_municipio},
+            async: false,
+            success: function (data, textStatus, jqXHR)
+            {
+                $('#id_corregimientos').html(data);
+            }
+        });
+    }
+    function veredas(id_municipio)
+    {
+        $.ajax({
+            url: '../../../controller/anico_ajax.php?control=datos&function=veredas',
+            type: 'POST',
+            data: {id: id_municipio},
+            async: false,
+            success: function (data, textStatus, jqXHR)
+            {
+                $('#id_veredas').html(data);
+            }
+        });
+    }
+    function municipios(id_departamento)
+    {
+        $.ajax({
+            url: '../../../controller/anico_ajax.php?control=datos&function=municipios',
+            type: 'POST',
+            data: {id: id_departamento},
+            async: false,
+            success: function (data, textStatus, jqXHR)
+            {
+                $('#id_municipios').html(data);
+            }
+        });
+    }
     $(function ()
     {
-
-        function corregimiento(id_municipio)
-        {
-            $.ajax({
-                url: '../../../controller/anico_ajax.php?control=datos&function=corregimientos',
-                type: 'POST',
-                data: {id: id_municipio},
-                success: function (data, textStatus, jqXHR)
-                {
-                    $('#id_corregimientos').html(data);
-                }
-            });
-        }
-        function veredas(id_municipio)
-        {
-            $.ajax({
-                url: '../../../controller/anico_ajax.php?control=datos&function=veredas',
-                type: 'POST',
-                data: {id: id_municipio},
-                success: function (data, textStatus, jqXHR)
-                {
-                    $('#id_veredas').html(data);
-                }
-            });
-        }
-        function municipios(id_departamento)
-        {
-            $.ajax({
-                url: '../../../controller/anico_ajax.php?control=datos&function=municipios',
-                type: 'POST',
-                data: {id: id_departamento},
-                success: function (data, textStatus, jqXHR)
-                {
-                    $('#id_municipios').html(data);
-                }
-            });
-        }
         $('#id_municipios').change(function ()
         {
             veredas($(this).val());
@@ -108,7 +110,21 @@ $form->create(__FILE__);
             loadingstop();
         });
     });
+    function start(departamento, municipio, vereda, id_corregimiento)
+    {
+        $('#id_departamento').val(departamento);
+        municipios(departamento);
+        $('#id_municipios').val(municipio);
+        veredas(municipio);
+        $('#id_veredas').val(vereda);
+        corregimiento(municipio);
+        $('#id_corregimientos').val(id_corregimiento);
+    }
+    $(window).load(function () {
+        start(10, 398, 220, 18);
+    });
 </script>
+
 <div>
     <form id="form_new_persona" target="_blank" method="post" action="../persona/ingresar.php">
         <input type="hidden" name="form_new_persona_codigo" id="id_tarjeta_familiar" value="<?php echo ficha::codigotarjetaFamiliar(); ?>"/>

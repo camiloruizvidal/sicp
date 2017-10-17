@@ -61,7 +61,7 @@ class datos
         $data = modeldatos::veredas($id);
         foreach ($data as $temp)
         {
-            $html .= '<option value="' . $temp['id_persona_familiaridad'] . '" data-sexo="' . $temp['sexo'] . '">' . $temp['descripcion'] . '</option>' . "\n";
+            $html .= '<option value="' . $temp['id_vereda'] . '" >' . $temp['descripcion'] . '</option>' . "\n";
         }
         echo $html;
     }
@@ -72,7 +72,7 @@ class datos
         $html = '<option value="-1">Vacio</option>';
         foreach ($data as $temp)
         {
-            $html .= '<option value="' . $temp['id_vereda'] . '" ">' . $temp['descripcion'] . '</option>' . "\n";
+            $html .= '<option value="' . $temp['id_corregimiento'] . '" ">' . $temp['descripcion'] . '</option>' . "\n";
         }
         echo $html;
     }

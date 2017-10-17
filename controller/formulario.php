@@ -125,7 +125,7 @@ class formulario
                             foreach ($temp['list'] as $temp2)
                             {
                                 $inputname2 = $name1 . '[data_' . $temp['id'] . '][option_' . $temp1['id'] . ']';
-                                $html.='<label><input type="checkbox" data-id = "' . $temp['id'] . '" data-option = "' . $temp1['id'] . '"  id="data' . $temp['id'] . '_option' . $temp1['id'] . '" name="' . $inputname2 . '">' . $temp2 . '</label><br/>' . "\n";
+                                $html.='<label><input type="checkbox" data-id = "' . $temp['id'] . '" data-option = "' . $temp1['id'] . '"  id="data' . $temp['id'] . '_option' . $temp1['id'] . '" name="input[' . $data['id_car_variables']  . '][list]['.$temp['id'].']" value="' . $temp2 . '">' . $temp2 . '</label><br/>' . "\n";
                             }
                         }
                     }
@@ -175,7 +175,9 @@ class formulario
                 break;
             case '8': $html = $this->Hora($data);
                 break;
-            case '9': $html = $this->Si_multiple($data);
+            case '9':
+                $html = $this->Si_multiple($data);
+
                 break;
             case '10': $html = $this->Si_No_otro($data);
                 break;
