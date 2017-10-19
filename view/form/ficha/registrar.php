@@ -13,6 +13,7 @@ $form->parametros = array('titulo' => 'Ficha familiar');
 $form->create(__FILE__);
 ?>
 <#--content_ini--#>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD1Jc53ZYuZgWMNoYHTBbXVQQdc8V0F6Eo"></script>
 <style>
     #nueva_persona{
         display: none;
@@ -27,7 +28,62 @@ $form->create(__FILE__);
     }
 </style>
 <script>
-
+    function mostrarUbicacion(position)
+    {
+        var latitud = position.coords.latitude;
+        var longitud = position.coords.longitude;
+        var exactitud = position.coords.accuracy;
+        $('#latitud').val(latitud);
+        $('#longitud').val(longitud);
+        $('#exactitud').val(exactitud);
+        function refrescarUbicacion()
+        {
+            navigator.geolocation.watchPosition(mostrarUbicacion);
+        }
+    }
+    function generate_maps(locations, ini_long, ini_lati, zoom)
+    {
+        var map = new google.maps.Map(document.getElementById('map'),
+                {
+                    zoom: zoom,
+                    center: new google.maps.LatLng(ini_long, ini_lati),
+                    mapTypeId: google.maps.MapTypeId.HYBRID
+                });
+        var infowindow = new google.maps.InfoWindow();
+        var marker, i;
+        for (i = 0; i < locations.length; i++)
+        {
+            marker = new google.maps.Marker(
+                    {
+                        position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+                        map: map
+                    });
+            google.maps.event.addListener(marker, 'click', (function (marker, i)
+            {
+                return function ()
+                {
+                    infowindow.setContent(locations[i][0]);
+                    infowindow.open(map, marker);
+                }
+            })(marker, i));
+        }
+    }
+    function cargar_mapa()
+    {
+        var latitud = $('#latitud').val();
+        var longitud = $('#longitud').val();
+        var map = new google.maps.Map(document.getElementById('mapholder'), {
+            zoom: 100,
+            center: new google.maps.LatLng(latitud, longitud),
+            mapTypeId: google.maps.MapTypeId.HYBRID
+        });
+        var marker = new google.maps.Marker({
+            position: new google.maps.LatLng(latitud, longitud),
+            map: map
+        });
+        var infowindow = new google.maps.InfoWindow();
+        $('#ModalMapa').modal('show');
+    }
     function corregimiento(id_municipio)
     {
         $.ajax({
@@ -119,9 +175,21 @@ $form->create(__FILE__);
         $('#id_veredas').val(vereda);
         corregimiento(municipio);
         $('#id_corregimientos').val(id_corregimiento);
+        $('#id_departamento').attr('disabled', true);
+        $('#id_municipios').attr('disabled', true);
+        $('#id_corregimientos').attr('disabled', true);
+        $('#id_veredas').attr('disabled', true);
     }
     $(window).load(function () {
         start(10, 398, 220, 18);
+        if (navigator.geolocation)
+        {
+            navigator.geolocation.getCurrentPosition(mostrarUbicacion);
+        }
+        else
+        {
+            alert("¡Error! Este navegador no soporta la Geolocalización.");
+        }
     });
 </script>
 
@@ -210,6 +278,33 @@ $form->create(__FILE__);
                     <label>Fecha de la proxima visita</label>
                     <input name="proxima_visita" id="proxima_visita" class="form form-control fechaadelante" required="true" />
                 </div>
+                <div class="col-md-4">
+                    <label>Latitud</label>
+                    <div class="input-group">
+                        <span class="input-group-btn">
+                            <button style="padding-bottom: 3px;" class="btn btn-warning" type="button" onclick="cargar_mapa()"><i class="glyphicon glyphicon-globe"></i></button>
+                        </span>
+                        <input type="" name="latitud" id="latitud" class="form form-control" required="true" />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label>Longitud</label>
+                    <div class="input-group">
+                        <span class="input-group-btn">
+                            <button style="padding-bottom: 3px;" class="btn btn-warning" type="button" onclick="cargar_mapa()"><i class="glyphicon glyphicon-globe"></i></button>
+                        </span>
+                        <input type="" name="longitud" id="longitud" class="form form-control" required="true" />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label>Exactitud</label>
+                    <div class="input-group">
+                        <span class="input-group-btn">
+                            <button style="padding-bottom: 3px;" class="btn btn-warning" type="button" onclick="cargar_mapa()"><i class="glyphicon glyphicon-globe"></i></button>
+                        </span>
+                        <input type="" id="exactitud" class="form form-control" required="true" />
+                    </div>
+                </div>
             </div>
         </div>
         <div class="panel panel-other">
@@ -266,6 +361,24 @@ $form->create(__FILE__);
         </div>
     </form>
 
+</div>
+
+
+<div class="modal fade" id="ModalMapa" tabindex="-1" role="dialog" aria-labelledby="ModalMapa">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Ubicacion geografica</h4>
+            </div>
+            <div class="modal-body">
+                <div id="mapholder" style="width: 500px; height: 400px;"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
 </div>
 </div>
 <#--content_fin--#>
