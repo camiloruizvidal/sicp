@@ -244,7 +244,6 @@ class ficha
             }
             if (!is_null($id))
             {
-
                 $_SESSION['codigo_next_value'] = $id;
                 $Res                           = array('success' => true, 'id' => $id_tarjeta, 'mesage' => 'Se ha guardado la tarjeta familiar', 'next_id' => $_SESSION['codigo_next_value']);
             }

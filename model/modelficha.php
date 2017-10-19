@@ -159,6 +159,8 @@ class modelficha
             $TF->proxima_visita        = $data['proxima_visita'];
             $TF->responsable           = $data['responsable'];
             $TF->documento_responsable = $data['documento_responsable'];
+            $TF->posicion_latitud      = $data['latitud'];
+            $TF->posicion_longitud     = $data['longitud'];
             $TF->Save();
         }
         return $TF->id_tarjeta_familiar;

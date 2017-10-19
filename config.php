@@ -12,7 +12,7 @@ class Config
     public static $pass       = '';
     public static $home       = '';
     public static $model      = '';
-    public static $debug      = FALSE;   //depurar base
+    public static $debug      = 1;   //depurar base
     public static $driver     = 'mysqli';
     public static $home_lib   = '';
     public static $home_bin   = '';
