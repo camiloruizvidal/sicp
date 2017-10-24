@@ -14,73 +14,75 @@ $form->create(__FILE__);
 ?>
 <#--content_ini--#>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD1Jc53ZYuZgWMNoYHTBbXVQQdc8V0F6Eo"></script>
+<div id="log"></div>
 <div class="panel panel-primary">
     <div class="panel-heading">Geo referenciacion</div>
-    <div class="panel-body">
-        <div class="container-alt">
-            <div class="row">
-                <div class="col-md-6">
-                    <span>Edad inicio</span>
-                    <input type="text" class="form form-control"/>
+    <form id="search">
+        <div class="panel-body">
+            <div class="container-alt">
+                <div class="row">
+                    <div class="col-md-3 col-xs-6">
+                        <span>Edad inicio</span>
+                        <input name="edadini" id="edadini" type="number" class="form form-control"/>
+                    </div>
+                    <div class="col-md-3 col-xs-6">
+                        <span>Edad fin</span>
+                        <input name="edadfon" id="edadfon" type="text" class="form form-control"/>
+                    </div>
+                    <div class="col-md-3 col-xs-6">
+                        <span>Genero</span>
+                        <select name="genero" id="genero" class="form form-control">
+                            <option value="-1">Todos</option>
+                            <option value="Masculino">Masculino</option>
+                            <option value="Femenino">Femenino</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3 col-xs-6" id="genero_hiden">
+                        <span><br/>
+                            <input name="embarazo" id="embarazo" type="checkbox" value="si"> Mujer en embarazo
+                        </span>
+                    </div>
                 </div>
-                <div class="col-md-6">
-                    <span>Edad fin</span>
-                    <input type="text" class="form form-control"/>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-6">
-                    <span>Genero</span>
-                    <select name="genero" id="genero" class="form form-control">
-                        <option value="masculino">Masculino</option>
-                        <option value="femenino">Femenino</option>
-                    </select>
-                </div>
-                <div class="col-md-6" id="genero_hiden">
-                    <span><br/>
-                        <input type="checkbox" value="si"> Mujer en embarazo
-                    </span>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-3">
-                    <label>Departamento</label>
-                    <select name="id_departamento" id="id_departamento" class="form form-control">
-                        <?php echo datos::departamento(); ?>
-                    </select>
-                </div>
-                <div class="col-md-3">
-                    <label>Municipio</label>
-                    <select name="id_municipio" id="id_municipio" class="form form-control">
-                        <?php echo datos::Postmunicipios(); ?>
-                    </select>
-                </div>
-                <div class="col-md-3">
-                    <label>Corregimiento</label>
-                    <select name="id_corregimiento" id="id_corregimientos" class="form form-control">
-                        <?php echo datos::Postcorregimientos(); ?>
-                    </select>
-                </div>
-                <div class="col-md-3">
-                    <label>Veredas</label>
-                    <select name="id_vereda" id="id_veredas" class="form form-control">
-                        <?php echo datos::Postveredas(); ?>
-                    </select>
+                <div class="row">
+                    <div class="col-md-3 col-xs-6">
+                        <label>Departamento</label>
+                        <select name="id_departamento" id="id_departamento" class="form form-control">
+                            <?php echo datos::departamento(); ?>
+                        </select>
+                    </div>
+                    <div class="col-md-3 col-xs-6">
+                        <label>Municipio</label>
+                        <select name="id_municipio" id="id_municipio" class="form form-control">
+                            <?php echo datos::Postmunicipios(); ?>
+                        </select>
+                    </div>
+                    <div class="col-md-3 col-xs-6">
+                        <label>Corregimiento</label>
+                        <select name="id_corregimiento" id="id_corregimientos" class="form form-control">
+                            <?php echo datos::Postcorregimientos(); ?>
+                        </select>
+                    </div>
+                    <div class="col-md-3 col-xs-6">
+                        <label>Veredas</label>
+                        <select name="id_vereda" id="id_veredas" class="form form-control">
+                            <?php echo datos::Postveredas(); ?>
+                        </select>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="panel-footer">
-        <button id="save">Buscar</button>
-    </div>
+        <div class="panel-footer">
+            <button type="submit" id="save">Buscar</button>
+        </div>
+    </form>
 </div>
+<div id="log"></div>
 <div class="panel panel-primary">
     <div class="panel-heading">Geo referenciacion</div>
     <div class="panel-body">
         <div class="container-alt">
             <div class="col-md-6">
-                <div id="map" style="width: 500px; height: 400px;"></div>
+                <div id="map"></div>
             </div>
             <div class="col-md-6">
                 <div id="data_table">
@@ -129,6 +131,30 @@ $form->create(__FILE__);
             })(marker, i));
         }
     }
+    function generate_map()
+    {
+        $.ajax({
+            url: '../../../controller/anico_ajax.php?control=georeferenciacion&function=datos',
+            type: 'POST',
+            data: $('#search').serialize(),
+            dataType: 'json',
+            success: function (data)
+            {
+                try
+                {
+                    if (data.success)
+                    {
+                        generate_maps(data.data, data.longitud, data.latitud, data.zoom);
+                        info_people(data.data);
+                    }
+                }
+                catch (Exception)
+                {
+                    alert("No se ha podido establecer conexion con el generador de mapas. Msg: " + Exception);
+                }
+            }
+        });
+    }
     $(function ()
     {
         $('#id_municipio').change(function ()
@@ -140,34 +166,15 @@ $form->create(__FILE__);
         {
             municipios($(this).val());
         });
-        $('#generate').click(function ()
-        {
-            $.ajax({
-                url: 'ajax.php',
-                type: 'POST',
-                data: {data: null},
-                dataType: 'json',
-                success: function (data)
-                {
-                    try
-                    {
-                        if (data.success)
-                        {
-                            generate_maps(data.data, data.longitud, data.latitud, data.zoom);
-                            info_people(data.data);
-                        }
-                    }
-                    catch (Exception)
-                    {
-                        alert("No se ha podido establecer conexion con el generador de mapas. Msg: " + Exception);
-                    }
-                }
-            });
-        });
-        $('#generate').click();
         $('#save').click(function ()
         {
             save('#map', 'map.png');
+        });
+        $('#search').submit(function (e)
+        {
+            e.preventDefault();
+            $('#map').attr('style', 'width: 500px; height: 400px;');
+            generate_map();
         });
     });
     function info_people(data)

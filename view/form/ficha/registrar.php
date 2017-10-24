@@ -296,7 +296,7 @@ $form->create(__FILE__);
                     <input name="proxima_visita" id="proxima_visita" class="form form-control fechaadelante" required="true" />
                 </div>
                 <div class="col-md-4">
-                    <label>Latitud</label>
+                    <label>Longitud</label>
                     <div class="input-group">
                         <span class="input-group-btn">
                             <button style="padding-bottom: 3px;" class="btn btn-warning" type="button" onclick="cargar_mapa()"><i class="glyphicon glyphicon-globe"></i></button>
@@ -305,7 +305,7 @@ $form->create(__FILE__);
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <label>Longitud</label>
+                    <label>Latitud</label>
                     <div class="input-group">
                         <span class="input-group-btn">
                             <button style="padding-bottom: 3px;" class="btn btn-warning" type="button" onclick="cargar_mapa()"><i class="glyphicon glyphicon-globe"></i></button>

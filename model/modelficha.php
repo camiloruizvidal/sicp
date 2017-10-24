@@ -3,6 +3,80 @@
 class modelficha
 {
 
+    public static function geodatos($data)
+    {
+        foreach ($data as $key => $temp)
+        {
+            if ($temp == '-1')
+            {
+                $temp = '';
+            }
+            $temp       = trim($temp);
+            $data[$key] = $temp;
+        }
+        $where      = array();
+        $parametros = array();
+        if (isset($data['id_municipio']))
+        {
+            if ($data['id_municipio'] != '')
+            {
+                $parametros[] = $data['id_municipio'];
+                $where[]      = ' `tbl_tarjeta_familiar`.`id_municipio`=? ';
+            }
+        }
+        if ($data['edadini'] != '')
+        {
+            $parametros[] = $data['edadini'];
+            $where[]      = '   TIMESTAMPDIFF(YEAR, `tbl_persona`.`fecha_nacimiento`, CURDATE())>=? ';
+        }
+
+        if ($data['edadfon'] != '')
+        {
+            $parametros[] = $data['edadfon'];
+            $where[]      = ' TIMESTAMPDIFF(YEAR, `tbl_persona`.`fecha_nacimiento`, CURDATE())<=? ';
+        }
+
+        if ($data['genero'] != '')
+        {
+            $parametros[] = $data['genero'];
+            $where[]      = ' `tbl_persona`.`sexo`=? ';
+        }
+
+        if ($data['id_departamento'] != '')
+        {
+            $parametros[] = $data['id_departamento'];
+            $where[]      = ' `tbl_municipios`.`id_departamento`=? ';
+        }
+
+        if ($data['id_corregimiento'] != '')
+        {
+            $parametros[] = $data['id_corregimiento'];
+            $where[]      = ' `tbl_tarjeta_familiar`.`id_corregimiento`=? ';
+        }
+
+        if ($data['id_vereda'] != '')
+        {
+            $parametros[] = $data['id_vereda'];
+            $where[]      = ' `tbl_tarjeta_familiar`.`id_vereda`=? ';
+        }
+        $where = implode('and', $where);
+        $where = ($where != '') ? ' where ' . $where : '';
+        $sql   = 'SELECT 
+                        `tbl_tarjeta_familiar`.`id_tarjeta_familiar`,
+                        TIMESTAMPDIFF(YEAR, `tbl_persona`.`fecha_nacimiento`, CURDATE()) AS `edad`,
+                        CONCAT_WS(\' \', `tbl_persona`.`nombre1`, `tbl_persona`.`nombre2`, `tbl_persona`.`apellido1`, `tbl_persona`.`apellido2`) AS `persona`,
+                        `tbl_tarjeta_familiar`.`posicion_latitud`,
+                        `tbl_tarjeta_familiar`.`posicion_longitud`,
+                        `tbl_persona`.`sexo`
+                  FROM
+                        `tbl_persona`
+                        INNER JOIN `tbl_tarjeta_familiar` ON (`tbl_persona`.`id_tarjeta_familiar` = `tbl_tarjeta_familiar`.`id_tarjeta_familiar`)
+                        INNER JOIN `tbl_municipios` ON (`tbl_tarjeta_familiar`.`id_municipio` = `tbl_municipios`.`id_municipio`)' .
+                $where;
+        $Data  = model::Records($sql, $parametros);
+        return $Data;
+    }
+
     public static function fallecidos($id_tarjeta_familiar)
     {
         $sql  = 'SELECT 
