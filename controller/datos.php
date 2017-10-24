@@ -20,10 +20,10 @@ class datos
     {
         $data = modeldatos::regimen();
         $html = '';
-        $html .= '<option value="-1" ">Seleccione</option>' . "\n";
+        $html .= '<option value="-1">Seleccione</option>' . "\n";
         foreach ($data as $temp)
         {
-            $html .= '<option value="' . $temp['id_regimen'] . '" ">' . $temp['descripcion'] . '</option>' . "\n";
+            $html .= '<option value="' . $temp['id_regimen'] . '">' . $temp['descripcion'] . '</option>' . "\n";
         }
         echo $html;
     }
@@ -33,10 +33,10 @@ class datos
         $select = new datos();
         $data   = modeldatos::departamento();
         $html   = '';
-        $html .= '<option value="-1" ">Seleccione</option>' . "\n";
+        $html .= '<option value="-1">Seleccione</option>' . "\n";
         foreach ($data as $temp)
         {
-            $html .= '<option value="' . $temp['id_departamentos'] . '" ">' . $temp['descripcion'] . '</option>' . "\n";
+            $html .= '<option value="' . $temp['id_departamentos'] . '">' . $temp['descripcion'] . '</option>' . "\n";
         }
         echo $html;
     }
@@ -72,7 +72,7 @@ class datos
         $html = '<option value="-1">Vacio</option>';
         foreach ($data as $temp)
         {
-            $html .= '<option value="' . $temp['id_corregimiento'] . '" ">' . $temp['descripcion'] . '</option>' . "\n";
+            $html .= '<option value="' . $temp['id_corregimiento'] . '">' . $temp['descripcion'] . '</option>' . "\n";
         }
         echo $html;
     }

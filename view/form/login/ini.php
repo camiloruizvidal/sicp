@@ -7,7 +7,7 @@ $_SESSION = array();
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Snippet - Bootsnipp.com</title>
+        <title>SISTEMA DE INFORMACION Y CARATERIZACION DE LA POBLACION PARA ATENCION EN SALUD</title>
         <link href="../../css/bootstrap/bootstrap.min.css" rel="stylesheet" />
 
         <style>

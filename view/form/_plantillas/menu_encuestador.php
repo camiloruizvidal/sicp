@@ -24,6 +24,7 @@
                     <a  class="active" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Informes <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="../informes/filtrar.php"><i class="fa fa-user" aria-hidden="true"></i> Personas</a></li>
+                        <li><a href="../informes/georferenciacion.php"><i class="fa fa-map-marker" aria-hidden="true"></i> Georeferenciaci&oacute;n</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
