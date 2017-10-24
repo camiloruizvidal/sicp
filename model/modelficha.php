@@ -138,7 +138,6 @@ class modelficha
 
     public function savetarjetafamiliar($data)
     {
-
         $TF = model::Make('tbl_tarjeta_familiar');
         $TF->Load('codigo=?', $data['codigo']);
         if (is_null($TF->id_tarjeta_familiar))

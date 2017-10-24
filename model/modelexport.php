@@ -149,11 +149,11 @@ class modelexport
                         COALESCE(`tbl_veredas`.`descripcion`, \'NN\') AS `vereda`,
                         COALESCE(`tbl_corregimientos`.`descripcion`, \'NN\') AS `corregimiento`
                       FROM
-                        `tbl_tarjeta_familiar`
-                        INNER JOIN `tbl_municipios` ON (`tbl_tarjeta_familiar`.`id_municipio` = `tbl_municipios`.`id_municipio`)
-                        INNER JOIN `tbl_departamentos` ON (`tbl_municipios`.`id_departamento` = `tbl_departamentos`.`id_departamentos`)
-                        INNER JOIN `tbl_corregimientos` ON (`tbl_municipios`.`id_municipio` = `tbl_corregimientos`.`id_municipio`)
-                        INNER JOIN `tbl_veredas` ON (`tbl_municipios`.`id_municipio` = `tbl_veredas`.`id_municipio`)
+                            `tbl_tarjeta_familiar`
+                            LEFT OUTER JOIN `tbl_municipios` ON (`tbl_tarjeta_familiar`.`id_municipio` = `tbl_municipios`.`id_municipio`)
+                            LEFT OUTER JOIN `tbl_departamentos` ON (`tbl_municipios`.`id_departamento` = `tbl_departamentos`.`id_departamentos`)
+                            LEFT OUTER JOIN `tbl_corregimientos` ON (`tbl_municipios`.`id_municipio` = `tbl_corregimientos`.`id_municipio`)
+                            LEFT OUTER JOIN `tbl_veredas` ON (`tbl_municipios`.`id_municipio` = `tbl_veredas`.`id_municipio`)
                       WHERE
                         `tbl_tarjeta_familiar`.`id_tarjeta_familiar` = ?';
         $Resultado = model::Record($sql, array($id_tarjeta_familiar));

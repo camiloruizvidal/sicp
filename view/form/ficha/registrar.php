@@ -119,13 +119,13 @@ $form->create(__FILE__);
             async: false,
             success: function (data, textStatus, jqXHR)
             {
-                $('#id_municipios').html(data);
+                $('#id_municipio').html(data);
             }
         });
     }
     $(function ()
     {
-        $('#id_municipios').change(function ()
+        $('#id_municipio').change(function ()
         {
             veredas($(this).val());
             corregimiento($(this).val());
@@ -140,13 +140,23 @@ $form->create(__FILE__);
         });
         $('#form_ficha_familiar').submit(function (e)
         {
+            var bool_bloquear = false;
             loadingstart();
             e.preventDefault();
+            if ($('#id_municipio').prop('disabled') == true)
+            {
+                bool_bloquear = true;
+                $('#id_departamento').removeAttr("disabled");
+                $('#id_municipio').removeAttr("disabled");
+                $('#id_corregimientos').removeAttr('disabled');
+                $('#id_veredas').removeAttr('disabled');
+            }
+
             $.ajax({
                 url: $(this).attr('action'),
                 type: $(this).attr('method'),
                 dataType: 'json',
-                data: $(this).serialize(),
+                data: $('#form_ficha_familiar').serialize(),
                 success: function (data)
                 {
                     if (data.success)
@@ -161,6 +171,13 @@ $form->create(__FILE__);
                     {
                         $.notify({message: 'Ha ocurrido un error. '}, {type: 'danger'});
                     }
+                    if (bool_bloquear)
+                    {
+                        $('#id_departamento').attr('disabled', true);
+                        $('#id_municipio').attr('disabled', true);
+                        $('#id_corregimientos').attr('disabled', true);
+                        $('#id_veredas').attr('disabled', true);
+                    }
                 }
             });
             loadingstop();
@@ -170,13 +187,13 @@ $form->create(__FILE__);
     {
         $('#id_departamento').val(departamento);
         municipios(departamento);
-        $('#id_municipios').val(municipio);
+        $('#id_municipio').val(municipio);
         veredas(municipio);
         $('#id_veredas').val(vereda);
         corregimiento(municipio);
         $('#id_corregimientos').val(id_corregimiento);
         $('#id_departamento').attr('disabled', true);
-        $('#id_municipios').attr('disabled', true);
+        $('#id_municipio').attr('disabled', true);
         $('#id_corregimientos').attr('disabled', true);
         $('#id_veredas').attr('disabled', true);
     }
@@ -250,7 +267,7 @@ $form->create(__FILE__);
                 </div>
                 <div class="col-md-4">
                     <label>Municipio</label>
-                    <select name="id_municipio" id="id_municipios" class="form form-control">
+                    <select name="id_municipio" id="id_municipio" class="form form-control">
                         <?php echo datos::Postmunicipios(); ?>
                     </select>
                 </div>

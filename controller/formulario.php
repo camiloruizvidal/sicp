@@ -121,11 +121,10 @@ class formulario
                     {
                         if (isset($temp['list']) && is_array($temp['list']))
                         {
-
                             foreach ($temp['list'] as $temp2)
                             {
                                 $inputname2 = $name1 . '[data_' . $temp['id'] . '][option_' . $temp1['id'] . ']';
-                                $html.='<label><input type="checkbox" data-id = "' . $temp['id'] . '" data-option = "' . $temp1['id'] . '"  id="data' . $temp['id'] . '_option' . $temp1['id'] . '" name="input[' . $data['id_car_variables']  . '][list]['.$temp['id'].']" value="' . $temp2 . '">' . $temp2 . '</label><br/>' . "\n";
+                                $html.='<label><input type="checkbox" data-id = "' . $temp['id'] . '" data-option = "' . $temp1['id'] . '"  id="data' . $temp['id'] . '_option' . $temp1['id'] . '" name="'.$inputname2.'[list][]" value="' . $temp2 . '">' . $temp2 . '</label><br/>' . "\n";
                             }
                         }
                     }

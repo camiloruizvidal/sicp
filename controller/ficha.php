@@ -221,9 +221,25 @@ class ficha
         }
     }
 
+    private function input91($data)
+    {
+        foreach ($data as $key => $temp)
+        {
+            foreach ($temp as $key1 => $temp1)
+            {
+                if (isset($data[$key][$key1]['option_3']['list']))
+                {
+                    $data[$key][$key1]['option_3'] = implode(',', $data[$key][$key1]['option_3']['list']);
+                }
+            }
+        }
+        return $data;
+    }
+
     public function Postsavetarjetafamiliar()
     {
-        $Res = array();
+        $_POST['input_91'] = $this->input91($_POST['input_91']);
+        $Res               = array();
         try
         {
             @session_start();

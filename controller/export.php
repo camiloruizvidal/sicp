@@ -199,16 +199,20 @@ class export
             $Dato[key($temp)] = $temp[key($temp)];
             unset($Dato[$key]);
         }
+        echo '<pre>';
         foreach ($list_values['data'] as $key1 => $temp1)
         {
             $Res_temp = array();
             foreach ($list_values['option'] as $key2 => $temp2)
             {
-                $name_data               = 'data ' . $temp1['id'];
-                $name_opti               = 'option ' . $temp2['id'];
-                $Res_temp['descripcion'] = $temp1['name'] . ', ' . $temp2['name'];
-                $Res_temp['valor']       = $Dato[$name_data][$name_opti];
-                $Resultado_List[]        = $Res_temp;
+                $name_data = 'data ' . $temp1['id'];
+                $name_opti = 'option ' . $temp2['id'];
+                if (isset($Dato[$name_data][$name_opti]))
+                {
+                    $Res_temp['descripcion'] = $temp1['name'] . ', ' . $temp2['name'];
+                    $Res_temp['valor']       = $Dato[$name_data][$name_opti];
+                    $Resultado_List[]        = $Res_temp;
+                }
             }
         }
         return $Resultado_List;
@@ -305,8 +309,8 @@ class export
             $pdf->render_datos_generales($datos_tarjeta_familiar);
             $pdf->render_datos_variables($datos_variables_tarjeta_familiar);
             $pdf->render_miembros_asociados($datos_persona); //ahora se le debe pasar un segundo parametro, el cual es $data_programas
-            //$pdf->Output();
-            $pdf->Output('Ficha Familiar.pdf', 'D');
+            $pdf->Output();
+            //$pdf->Output('Ficha Familiar.pdf', 'D');
         }
     }
 
