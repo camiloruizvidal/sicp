@@ -163,7 +163,6 @@ class export
 
     public function Getxls()
     {
-        echo '<pre>';
         $model           = new modelexport();
         $data            = $model->exportarData($_GET['fecha_ini'], $_GET['fecha_fin'], $_GET['edad_min'], $_GET['edad_max']);
         $cabecera        = array('CODIGO', 'PERSONA', 'DOCUMENTO', 'EDAD', 'GENERO', 'FECHA NACIMIENTO', 'RANGO', 'CABEZA FAMILIA', 'ESTADO CIVIL', 'NIVEL EDUCATIVO', 'FECHA APERTURA', 'SISBEN FICHA', 'SISBEN PUNTAJE', 'SISBEN NIVEL', 'DIRECCION', 'TELEFONO', 'PORTABILIDAD', 'CAMBIO DOMICILIO', 'PROXIMA VISITA', 'DOCUMENTO ENCARGADO', 'ENCARGADO', 'ZONA', 'VEREDA', 'CORREGIMIENTO', 'MUNICIPIO', 'DEPARTAMENTO', 'FAMILIARIDAD', 'ASEGURADOR', 'REGIMEN');
@@ -199,7 +198,6 @@ class export
             $Dato[key($temp)] = $temp[key($temp)];
             unset($Dato[$key]);
         }
-        echo '<pre>';
         foreach ($list_values['data'] as $key1 => $temp1)
         {
             $Res_temp = array();
@@ -301,6 +299,7 @@ class export
         $model                            = new modelexport();
         $datos_tarjeta_familiar           = $model->datos_tarjeta_familiar($id_tarjeta_familiar);
         $datos_variables_tarjeta_familiar = $this->datos_variables_tarjeta_familiar($id_tarjeta_familiar);
+        //var_dump($datos_tarjeta_familiar);exit;
         if (!is_null($datos_variables_tarjeta_familiar))
         {
             $datos_persona   = $this->datos_caracteristicas_persona($id_tarjeta_familiar);
@@ -309,8 +308,8 @@ class export
             $pdf->render_datos_generales($datos_tarjeta_familiar);
             $pdf->render_datos_variables($datos_variables_tarjeta_familiar);
             $pdf->render_miembros_asociados($datos_persona); //ahora se le debe pasar un segundo parametro, el cual es $data_programas
-            $pdf->Output();
-            //$pdf->Output('Ficha Familiar.pdf', 'D');
+            //$pdf->Output();
+            $pdf->Output('Ficha Familiar.pdf', 'D');
         }
     }
 
