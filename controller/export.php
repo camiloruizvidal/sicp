@@ -18,36 +18,33 @@ class export
 
     public function generarexcel($data, $cabecera = '', $nombreArchivo = 'ficha_familiar.xlsx', $img = '')
     {
-// Create new PHPExcel object
         $objPHPExcel = new PHPExcel();
-// Fill worksheet from values in array
         if ($cabecera != '')
         {
             array_unshift($data, $cabecera);
         }
         $objPHPExcel->getActiveSheet()->fromArray($data, null, 'A1');
-// Rename worksheet
-        $objPHPExcel->getActiveSheet()->setTitle('Members');
-// Set AutoSize for name and email fields
+        $objPHPExcel->getActiveSheet()->setTitle('informacion');
         $objPHPExcel->getActiveSheet()->getColumnDimension('A')->setAutoSize(true);
         $objPHPExcel->getActiveSheet()->getColumnDimension('B')->setAutoSize(true);
-// Save Excel 2007 file
         $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
 
         if ($img != '')
         {
-$objDrawing = new PHPExcel_Worksheet_Drawing();
-$objDrawing->setName('test_img');
-$objDrawing->setDescription('test_img');
-$objDrawing->setPath('../images/logo.png');
-$objDrawing->setCoordinates('A1');                      
-//setOffsetX works properly
-$objDrawing->setOffsetX(5); 
-$objDrawing->setOffsetY(5);                
-//set width, height
-$objDrawing->setWidth(100); 
-$objDrawing->setHeight(35); 
-$objDrawing->setWorksheet($objPHPExcel->getActiveSheet());
+            $objPHPExcel->getActiveSheet()->setTitle('imagenes');
+            $img        = imagecreatefrompng($img);
+            imagepng($img, "img.png");
+            $img        = "img.png";
+            $objDrawing = new PHPExcel_Worksheet_Drawing();
+            $objDrawing->setName('test_img');
+            $objDrawing->setDescription('test_img');
+            $objDrawing->setPath($img);
+            $objDrawing->setCoordinates('A1');
+            $objDrawing->setOffsetX(5);
+            $objDrawing->setOffsetY(5);
+            $objDrawing->setWidth(100);
+            $objDrawing->setHeight(35);
+            $objDrawing->setWorksheet($objPHPExcel->getActiveSheet());
         }
 
         $objWriter->save($nombreArchivo);
