@@ -97,7 +97,7 @@ function save()
                         url += 'data[markers]=color:red%7Clabel:o%7C' + parseFloat(value[1]) + ',' + parseFloat(value[2]) + '&';
                     });
                     url += 'data[key]=AIzaSyD1Jc53ZYuZgWMNoYHTBbXVQQdc8V0F6Eo';
-                    window.location = '../../../controller/anico_ajax.php?control=georeferenciacion&function=saveexcel&' + url;
+                    window.location = '../../../controller/anico_ajax.php?control=georeferenciacion&function=saveexcel&' + url + '&' + $('#search').serialize();
                 }
             }
             catch (Exception)

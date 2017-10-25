@@ -187,7 +187,7 @@ class modelficha
                         CONCAT_WS(\'-\',
                         `tbl_departamentos`.`descripcion`,
                         `tbl_municipios`.`descripcion`) as ubicacion,
-                        CONCAT_WS(\'-\',
+                        CONCAT_WS(\' \',
                         `tbl_persona`.`nombre1`,
                         `tbl_persona`.`nombre2`,
                         `tbl_persona`.`apellido1`,

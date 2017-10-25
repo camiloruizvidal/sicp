@@ -58,12 +58,19 @@ class georeferenciacion
 
     public function Getsaveexcel()
     {
-        var_dump($_GET);exit;
+        $Res = array();
+        foreach ($_GET['data'] as $key => $temp)
+        {
+            if ($key != 'url')
+            {
+                $Res[] = ($key . '=' . $temp);
+            }
+        }
+        $img  = $_GET['data']['url'] . '?' . implode('&', $Res);
         include_once Config::$Controller . 'export.php';
         $exl  = new export();
-        $data = modelficha::geodatos($data);
-        $img  = '';
-        $exl->generarexcel($data, '', 'imagen.xlsx', 'https://maps.googleapis.com/maps/api/staticmap?center=2.4590389,-76.6364065&zoom=15&size=500x400&maptype=hybrid&markers=color:red%7Clabel:o%7C2.4590389,-76.63640649999999&key=AIzaSyD1Jc53ZYuZgWMNoYHTBbXVQQdc8V0F6Eo');
+        $data = modelficha::geodatosgeo($_GET);
+        $exl->generarexcel($data, array('Ubicacion', 'Nombre', 'Edad', 'Genero'), 'imagen.xlsx', $img);
     }
 
 }
