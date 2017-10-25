@@ -1,5 +1,7 @@
 <?php
 
+include_once dirname(__FILE__) . '../../base.php';
+
 class georeferenciacion
 {
 
@@ -37,7 +39,24 @@ class georeferenciacion
                     '</ul>';
             $data[] = array($text, $temp['longitud'], $temp['latitud']);
         }
-        echo json_encode(array('success' => true, 'data' => $data, 'longitud' => $promedio_longitud, 'latitud' => $promedio_latitud, 'zoom' => 10));
+        echo json_encode(array('success' => true, 'data' => $data, 'longitud' => $promedio_longitud, 'latitud' => $promedio_latitud, 'zoom' => 15));
+    }
+
+    public function Getsaveexcel()
+    {
+        include_once Config::$Controller . 'export.php';
+        $exl  = new export();
+        $data = array(
+            array(rand(1, 30), rand(1, 30), rand(1, 30), rand(1, 30), rand(1, 30)),
+            array(rand(1, 30), rand(1, 30), rand(1, 30), rand(1, 30), rand(1, 30)),
+            array(rand(1, 30), rand(1, 30), rand(1, 30), rand(1, 30), rand(1, 30)),
+            array(rand(1, 30), rand(1, 30), rand(1, 30), rand(1, 30), rand(1, 30)),
+            array(rand(1, 30), rand(1, 30), rand(1, 30), rand(1, 30), rand(1, 30)),
+            array(rand(1, 30), rand(1, 30), rand(1, 30), rand(1, 30), rand(1, 30)),
+            array(rand(1, 30), rand(1, 30), rand(1, 30), rand(1, 30), rand(1, 30))
+        );
+        $img  = '';
+        $exl->generarexcel($data, '', 'imagen.xlsx', 'https://maps.googleapis.com/maps/api/staticmap?center=2.4590389,-76.6364065&zoom=15&size=500x400&maptype=hybrid&markers=color:red%7Clabel:o%7C2.4590389,-76.63640649999999&key=AIzaSyD1Jc53ZYuZgWMNoYHTBbXVQQdc8V0F6Eo');
     }
 
 }

@@ -16,7 +16,7 @@ class export
     private $cabecera1;
     private $cabecera2;
 
-    public function generarexcel($data, $cabecera = '', $nombreArchivo = 'ficha_familiar.xlsx')
+    public function generarexcel($data, $cabecera = '', $nombreArchivo = 'ficha_familiar.xlsx', $img = '')
     {
 // Create new PHPExcel object
         $objPHPExcel = new PHPExcel();
@@ -33,6 +33,23 @@ class export
         $objPHPExcel->getActiveSheet()->getColumnDimension('B')->setAutoSize(true);
 // Save Excel 2007 file
         $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+
+        if ($img != '')
+        {
+$objDrawing = new PHPExcel_Worksheet_Drawing();
+$objDrawing->setName('test_img');
+$objDrawing->setDescription('test_img');
+$objDrawing->setPath('../images/logo.png');
+$objDrawing->setCoordinates('A1');                      
+//setOffsetX works properly
+$objDrawing->setOffsetX(5); 
+$objDrawing->setOffsetY(5);                
+//set width, height
+$objDrawing->setWidth(100); 
+$objDrawing->setHeight(35); 
+$objDrawing->setWorksheet($objPHPExcel->getActiveSheet());
+        }
+
         $objWriter->save($nombreArchivo);
         header('Content-Description: File Transfer');
         header('Content-Type: application/octet-stream');
