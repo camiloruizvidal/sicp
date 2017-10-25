@@ -3,6 +3,32 @@
 class modelficha
 {
 
+    private function selectjson_novalue($data, $array_value = '')
+    {
+        $array_value = array(55, 22, 59); //55 Embarazo,22 Embarazo producto de abuso, 59 Embarazo producto de abuso sexual
+        $Res         = array();
+        foreach ($data as $key => $temp)
+        {
+            $txt        = '';
+            $txt        = json_decode($temp['value'], true);
+            $SiEncontro = false;
+            foreach ($array_value as $key_temp => $temp2)
+            {
+                $key = array_search($temp2, array_column($txt, 'id'));
+                if ($key !== FALSE)
+                {
+                    $SiEncontro = true;
+                }
+            }
+            if ($SiEncontro)
+            {
+//                unset($temp['value']);
+                $Res[] = $temp;
+            }
+        }
+        return $Res;
+    }
+
     private function selectjson($data, $array_value = '')
     {
         $array_value = array(55, 22, 59); //55 Embarazo,22 Embarazo producto de abuso, 59 Embarazo producto de abuso sexual
@@ -20,9 +46,9 @@ class modelficha
                     $SiEncontro = true;
                 }
             }
-            if($SiEncontro)
+            if ($SiEncontro)
             {
-                $Res=$temp;
+                $Res[] = $temp;
             }
         }
         return $Res;
@@ -90,10 +116,89 @@ class modelficha
                         `tbl_persona`.`sexo`,
                         `tbl_car_registro`.`value`
                   FROM
+                    `tbl_persona`
+                    INNER JOIN `tbl_tarjeta_familiar` ON (`tbl_persona`.`id_tarjeta_familiar` = `tbl_tarjeta_familiar`.`id_tarjeta_familiar`)
+                    INNER JOIN `tbl_municipios` ON (`tbl_tarjeta_familiar`.`id_municipio` = `tbl_municipios`.`id_municipio`)
+                    INNER JOIN `tbl_departamentos` ON (`tbl_municipios`.`id_departamento` = `tbl_departamentos`.`id_departamentos`)
+                    INNER JOIN `tbl_car_registro` ON (`tbl_persona`.`id_persona` = `tbl_car_registro`.`id_persona`)' .
+                $where;
+        $Data  = model::Records($sql, $parametros);
+        if ($data['genero'] != '' && count($Data) > 0)
+        {
+            $Data = self::selectjson($Data);
+        }
+        return $Data;
+    }
+
+    public static function geodatosgeo($data)
+    {
+        $where      = array();
+        $parametros = array();
+        foreach ($data as $key => $temp)
+        {
+            if ($temp == '-1')
+            {
+                $temp = '';
+            }
+            $temp       = trim($temp);
+            $data[$key] = $temp;
+        }
+        if (isset($data['id_municipio']))
+        {
+            if ($data['id_municipio'] != '')
+            {
+                $parametros[] = $data['id_municipio'];
+                $where[]      = ' `tbl_tarjeta_familiar`.`id_municipio`=? ';
+            }
+        }
+        if ($data['edadini'] != '')
+        {
+            $parametros[] = $data['edadini'];
+            $where[]      = '   TIMESTAMPDIFF(YEAR, `tbl_persona`.`fecha_nacimiento`, CURDATE())>=? ';
+        }
+        if ($data['edadfon'] != '')
+        {
+            $parametros[] = $data['edadfon'];
+            $where[]      = ' TIMESTAMPDIFF(YEAR, `tbl_persona`.`fecha_nacimiento`, CURDATE())<=? ';
+        }
+        if ($data['genero'] != '')
+        {
+            $parametros[] = $data['genero'];
+            $where[]      = ' `tbl_persona`.`sexo`=? ';
+        }
+        if ($data['id_departamento'] != '')
+        {
+            $parametros[] = $data['id_departamento'];
+            $where[]      = ' `tbl_municipios`.`id_departamento`=? ';
+        }
+        if ($data['id_corregimiento'] != '')
+        {
+            $parametros[] = $data['id_corregimiento'];
+            $where[]      = ' `tbl_tarjeta_familiar`.`id_corregimiento`=? ';
+        }
+        if ($data['id_vereda'] != '')
+        {
+            $parametros[] = $data['id_vereda'];
+            $where[]      = ' `tbl_tarjeta_familiar`.`id_vereda`=? ';
+        }
+        $where = implode('and', $where);
+        $where = ($where != '') ? ' where ' . $where : '';
+        $sql   = 'SELECT 
+                        CONCAT_WS(\'-\',
+                        `tbl_departamentos`.`descripcion`,
+                        `tbl_municipios`.`descripcion`) as ubicacion,
+                        CONCAT_WS(\'-\',
+                        `tbl_persona`.`nombre1`,
+                        `tbl_persona`.`nombre2`,
+                        `tbl_persona`.`apellido1`,
+                        `tbl_persona`.`apellido2`) as nombre,
+                        TIMESTAMPDIFF(YEAR, `tbl_persona`.`fecha_nacimiento`, CURDATE()) AS `edad`,
+                        `tbl_persona`.`sexo` as genero
+                      FROM
                         `tbl_persona`
                         INNER JOIN `tbl_tarjeta_familiar` ON (`tbl_persona`.`id_tarjeta_familiar` = `tbl_tarjeta_familiar`.`id_tarjeta_familiar`)
                         INNER JOIN `tbl_municipios` ON (`tbl_tarjeta_familiar`.`id_municipio` = `tbl_municipios`.`id_municipio`)
-                        INNER JOIN `tbl_car_registro` ON (`tbl_persona`.`id_persona` = `tbl_car_registro`.`id_persona`) ' .
+                        INNER JOIN `tbl_departamentos` ON (`tbl_municipios`.`id_departamento` = `tbl_departamentos`.`id_departamentos`)' .
                 $where;
         $Data  = model::Records($sql, $parametros);
         if ($data['genero'] != '' && count($Data) > 0)

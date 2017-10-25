@@ -19,8 +19,8 @@ class georeferenciacion
         {
             foreach ($Data as $temp)
             {
-                $promedio_latitud += (double) $temp['posicion_latitud'];
-                $promedio_longitud += (double) $temp['posicion_longitud'];
+                $promedio_latitud += (isset($temp['posicion_latitud'])) ? (double) $temp['posicion_latitud'] : null;
+                $promedio_longitud += (isset($temp['posicion_longitud'])) ? (double) $temp['posicion_longitud'] : null;
                 $Res[] = array(
                     'nombre'    => $temp['persona'],
                     'edad'      => $temp['edad'],
@@ -53,25 +53,15 @@ class georeferenciacion
     public function Postdatos()
     {
         $data = $this->datos_filter($_POST);
-        echo json_encode(array('success' => ($data['data'] === FALSE) ? false : true, 'data' => $data['data'], 'longitud' => $data['longitud'], 'latitud' => $data['latitud'], 'zoom' => 15));
+        echo json_encode(array('success' => ($data['data'] === FALSE) ? false : true, 'data' => $data['data'], 'longitud' => $data['longitud'], 'latitud' => $data['latitud'], 'zoom' => 15), 128);
     }
 
     public function Getsaveexcel()
     {
-        echo '<pre>';
-        var_dump($_GET['data']);
-        exit;
+        var_dump($_GET);exit;
         include_once Config::$Controller . 'export.php';
         $exl  = new export();
-        $data = array(
-            array(rand(1, 30), rand(1, 30), rand(1, 30), rand(1, 30), rand(1, 30)),
-            array(rand(1, 30), rand(1, 30), rand(1, 30), rand(1, 30), rand(1, 30)),
-            array(rand(1, 30), rand(1, 30), rand(1, 30), rand(1, 30), rand(1, 30)),
-            array(rand(1, 30), rand(1, 30), rand(1, 30), rand(1, 30), rand(1, 30)),
-            array(rand(1, 30), rand(1, 30), rand(1, 30), rand(1, 30), rand(1, 30)),
-            array(rand(1, 30), rand(1, 30), rand(1, 30), rand(1, 30), rand(1, 30)),
-            array(rand(1, 30), rand(1, 30), rand(1, 30), rand(1, 30), rand(1, 30))
-        );
+        $data = modelficha::geodatos($data);
         $img  = '';
         $exl->generarexcel($data, '', 'imagen.xlsx', 'https://maps.googleapis.com/maps/api/staticmap?center=2.4590389,-76.6364065&zoom=15&size=500x400&maptype=hybrid&markers=color:red%7Clabel:o%7C2.4590389,-76.63640649999999&key=AIzaSyD1Jc53ZYuZgWMNoYHTBbXVQQdc8V0F6Eo');
     }
