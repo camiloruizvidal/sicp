@@ -31,7 +31,9 @@ class export
 
         if ($img != '')
         {
-            $objPHPExcel->getActiveSheet()->setTitle('imagenes');
+            $objPHPExcel->createSheet($positionInExcel); //Loque mencionaste
+            $objPHPExcel->setActiveSheetIndex(1); //Seleccionar la pestaña deseada
+            $objPHPExcel->getActiveSheet()->setTitle('Imagenes');
             $img        = imagecreatefrompng($img);
             imagepng($img, "img.png");
             $img        = "img.png";
@@ -42,8 +44,8 @@ class export
             $objDrawing->setCoordinates('A1');
             $objDrawing->setOffsetX(5);
             $objDrawing->setOffsetY(5);
-            $objDrawing->setWidth(100);
-            $objDrawing->setHeight(35);
+            $objDrawing->setWidth(500);
+            $objDrawing->setHeight(400);
             $objDrawing->setWorksheet($objPHPExcel->getActiveSheet());
         }
 
