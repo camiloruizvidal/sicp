@@ -87,17 +87,17 @@ function save()
             {
                 if (data.success)
                 {
-                    var url = 'https://maps.googleapis.com/maps/api/staticmap?' +
-                            'center=' + data.longitud + ',' + data.latitud + '&' +
-                            'zoom=' + data.zoom + '&' +
-                            'size=500x400&' +
-                            'maptype=hybrid&';
+                    var url = 'data[url]=https://maps.googleapis.com/maps/api/staticmap&' +
+                            'data[center]=' + data.longitud + ',' + data.latitud + '&' +
+                            'data[zoom]=' + data.zoom + '&' +
+                            'data[size]=500x400&' +
+                            'data[maptype]=hybrid&';
                     $.each(data.data, function (index, value)
                     {
-                        url += 'markers=color:red%7Clabel:o%7C' + parseFloat(value[1]) + ',' + parseFloat(value[2]) + '&';
+                        url += 'data[markers]=color:red%7Clabel:o%7C' + parseFloat(value[1]) + ',' + parseFloat(value[2]) + '&';
                     });
-                    url += 'key=AIzaSyD1Jc53ZYuZgWMNoYHTBbXVQQdc8V0F6Eo';
-                    window.location = '../../../controller/anico_ajax.php?control=georeferenciacion&function=saveexcel&data=1';
+                    url += 'data[key]=AIzaSyD1Jc53ZYuZgWMNoYHTBbXVQQdc8V0F6Eo';
+                    window.location = '../../../controller/anico_ajax.php?control=georeferenciacion&function=saveexcel&' + url;
                 }
             }
             catch (Exception)
@@ -148,6 +148,7 @@ function municipios(id_departamento)
 }
 $(function ()
 {
+    $('#genero_hiden').hide();
     $('#id_municipio').change(function ()
     {
         veredas($(this).val());
@@ -166,5 +167,17 @@ $(function ()
     $('#save_file').click(function ()
     {
         save();
+    });
+    $('#genero').change(function ()
+    {
+        if ($(this).val() === 'Femenino')
+        {
+            $('#genero_hiden').show();
+        }
+        else
+        {
+            $('#genero_hiden').hide();
+        }
+
     });
 });

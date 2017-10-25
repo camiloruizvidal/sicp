@@ -67,7 +67,7 @@ function cargar_persona()
             {
                 if (Object.keys(data).length > 0)
                 {
-                    $('form').clearForm();
+                    $('#form_persona').clearForm();
                     $.each(data, function (index, value)
                     {
                         $('#' + index).val(value);

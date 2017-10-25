@@ -3,8 +3,35 @@
 class modelficha
 {
 
+    private function selectjson($data, $array_value = '')
+    {
+        $array_value = array(55, 22, 59); //55 Embarazo,22 Embarazo producto de abuso, 59 Embarazo producto de abuso sexual
+        $Res         = array();
+        foreach ($data as $key => $temp)
+        {
+            $txt        = '';
+            $txt        = json_decode($temp['value'], true);
+            $SiEncontro = false;
+            foreach ($array_value as $key_temp => $temp2)
+            {
+                $key = array_search($temp2, array_column($txt, 'id'));
+                if ($key !== FALSE)
+                {
+                    $SiEncontro = true;
+                }
+            }
+            if($SiEncontro)
+            {
+                $Res=$temp;
+            }
+        }
+        return $Res;
+    }
+
     public static function geodatos($data)
     {
+        $where      = array();
+        $parametros = array();
         foreach ($data as $key => $temp)
         {
             if ($temp == '-1')
@@ -14,8 +41,6 @@ class modelficha
             $temp       = trim($temp);
             $data[$key] = $temp;
         }
-        $where      = array();
-        $parametros = array();
         if (isset($data['id_municipio']))
         {
             if ($data['id_municipio'] != '')
@@ -29,31 +54,26 @@ class modelficha
             $parametros[] = $data['edadini'];
             $where[]      = '   TIMESTAMPDIFF(YEAR, `tbl_persona`.`fecha_nacimiento`, CURDATE())>=? ';
         }
-
         if ($data['edadfon'] != '')
         {
             $parametros[] = $data['edadfon'];
             $where[]      = ' TIMESTAMPDIFF(YEAR, `tbl_persona`.`fecha_nacimiento`, CURDATE())<=? ';
         }
-
         if ($data['genero'] != '')
         {
             $parametros[] = $data['genero'];
             $where[]      = ' `tbl_persona`.`sexo`=? ';
         }
-
         if ($data['id_departamento'] != '')
         {
             $parametros[] = $data['id_departamento'];
             $where[]      = ' `tbl_municipios`.`id_departamento`=? ';
         }
-
         if ($data['id_corregimiento'] != '')
         {
             $parametros[] = $data['id_corregimiento'];
             $where[]      = ' `tbl_tarjeta_familiar`.`id_corregimiento`=? ';
         }
-
         if ($data['id_vereda'] != '')
         {
             $parametros[] = $data['id_vereda'];
@@ -67,13 +87,19 @@ class modelficha
                         CONCAT_WS(\' \', `tbl_persona`.`nombre1`, `tbl_persona`.`nombre2`, `tbl_persona`.`apellido1`, `tbl_persona`.`apellido2`) AS `persona`,
                         `tbl_tarjeta_familiar`.`posicion_latitud`,
                         `tbl_tarjeta_familiar`.`posicion_longitud`,
-                        `tbl_persona`.`sexo`
+                        `tbl_persona`.`sexo`,
+                        `tbl_car_registro`.`value`
                   FROM
                         `tbl_persona`
                         INNER JOIN `tbl_tarjeta_familiar` ON (`tbl_persona`.`id_tarjeta_familiar` = `tbl_tarjeta_familiar`.`id_tarjeta_familiar`)
-                        INNER JOIN `tbl_municipios` ON (`tbl_tarjeta_familiar`.`id_municipio` = `tbl_municipios`.`id_municipio`)' .
+                        INNER JOIN `tbl_municipios` ON (`tbl_tarjeta_familiar`.`id_municipio` = `tbl_municipios`.`id_municipio`)
+                        INNER JOIN `tbl_car_registro` ON (`tbl_persona`.`id_persona` = `tbl_car_registro`.`id_persona`) ' .
                 $where;
         $Data  = model::Records($sql, $parametros);
+        if ($data['genero'] != '' && count($Data) > 0)
+        {
+            $Data = self::selectjson($Data);
+        }
         return $Data;
     }
 
@@ -232,8 +258,8 @@ class modelficha
             $TF->proxima_visita        = $data['proxima_visita'];
             $TF->responsable           = $data['responsable'];
             $TF->documento_responsable = $data['documento_responsable'];
-            $TF->posicion_latitud      = $data['latitud'];
-            $TF->posicion_longitud     = $data['longitud'];
+            $TF->posicion_latitud      = $data['longitud'];
+            $TF->posicion_longitud     = $data['latitud'];
             $TF->Save();
         }
         return $TF->id_tarjeta_familiar;

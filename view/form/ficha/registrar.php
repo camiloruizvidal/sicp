@@ -301,7 +301,7 @@ $form->create(__FILE__);
                         <span class="input-group-btn">
                             <button style="padding-bottom: 3px;" class="btn btn-warning" type="button" onclick="cargar_mapa()"><i class="glyphicon glyphicon-globe"></i></button>
                         </span>
-                        <input type="" name="latitud" id="latitud" class="form form-control" required="true" />
+                        <input type="" name="longitud" id="longitud" class="form form-control" required="true" />
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -310,7 +310,7 @@ $form->create(__FILE__);
                         <span class="input-group-btn">
                             <button style="padding-bottom: 3px;" class="btn btn-warning" type="button" onclick="cargar_mapa()"><i class="glyphicon glyphicon-globe"></i></button>
                         </span>
-                        <input type="" name="longitud" id="longitud" class="form form-control" required="true" />
+                        <input type="" name="latitud" id="latitud" class="form form-control" required="true" />
                     </div>
                 </div>
                 <div class="col-md-4">
