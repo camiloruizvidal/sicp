@@ -37,7 +37,7 @@ function generate_map()
                 if (data.success)
                 {
                     generate_maps(data.data, data.longitud, data.latitud, data.zoom);
-                    info_people(data.data);
+                    info_people(data.data,data);
                 }
             }
             catch (Exception)
@@ -47,9 +47,11 @@ function generate_map()
         }
     });
 }
-function info_people(data)
+function info_people(data,total)
 {
-    var html = '<table id="table_sumary" border="1" class="table table-hover">';
+	console.log(total);
+	var html = 'Mostrando '+total.Registros+' registros de un total de '+total.Total;
+    html += '<table id="table_sumary" border="1" class="table table-hover">';
     html += '<thead>';
     html += '<tr>';
     html += '<th><i class="fa fa-users" aria-hidden="true"></i> Persona</th>';
@@ -71,6 +73,7 @@ function info_people(data)
     });
     html += '<tbody>';
     html += '</table>';
+	
     $('#data_table').html(html);
     $('#table_sumary').DataTable();
 }

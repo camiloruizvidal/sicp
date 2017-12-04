@@ -19,20 +19,23 @@ class georeferenciacion
         {
             foreach ($Data as $temp)
             {
-                $promedio_latitud += (isset($temp['posicion_latitud'])) ? (double) $temp['posicion_latitud'] : null;
-                $promedio_longitud += (isset($temp['posicion_longitud'])) ? (double) $temp['posicion_longitud'] : null;
-                $Res[] = array(
-                    'nombre'    => $temp['persona'],
-                    'edad'      => $temp['edad'],
-                    'url_ficha' => $url . $temp['id_tarjeta_familiar'],
-                    'sexo'      => $temp['sexo'],
-                    'longitud'  => $temp['posicion_longitud'],
-                    'latitud'   => $temp['posicion_latitud']
-                );
+				if($temp['posicion_latitud']!=''&&$temp['posicion_longitud'] !='')
+				{
+					$promedio_latitud += (isset($temp['posicion_latitud'])) ? (double) $temp['posicion_latitud'] : 0;
+					$promedio_longitud += (isset($temp['posicion_longitud'])) ? (double) $temp['posicion_longitud'] : 0;
+					$Res[] = array(
+						'nombre'    => $temp['persona'],
+						'edad'      => $temp['edad'],
+						'url_ficha' => $url . $temp['id_tarjeta_familiar'],
+						'sexo'      => $temp['sexo'],
+						'longitud'  => $temp['posicion_longitud'],
+						'latitud'   => $temp['posicion_latitud']
+					);
+				}
             }
 
-            $promedio_latitud  = ($promedio_latitud / count($Data));
-            $promedio_longitud = ($promedio_longitud / count($Data));
+            $promedio_latitud  = ($promedio_latitud / count($Res));
+            $promedio_longitud = ($promedio_longitud / count($Res));
             foreach ($Res as $key => $temp)
             {
                 $text   = '<span class="title">' . $temp['nombre'] . '</span>' .
@@ -43,9 +46,12 @@ class georeferenciacion
                         '</ul>';
                 $data[] = array($text, $temp['longitud'], $temp['latitud']);
             }
-            $Resutado['longitud'] = $promedio_longitud;
-            $Resutado['latitud']  = $promedio_latitud;
-            $Resutado['data']     = $data;
+            $Resutado['longitud'] 	= $promedio_longitud;
+            $Resutado['latitud']  	= $promedio_latitud;
+            $Resutado['data']     	= $data;
+            $Resutado['Registros']  = count($Res);
+            $Resutado['Total']     	= count($Data);
+			
         }
         return $Resutado;
     }
@@ -53,7 +59,7 @@ class georeferenciacion
     public function Postdatos()
     {
         $data = $this->datos_filter($_POST);
-        echo json_encode(array('success' => ($data['data'] === FALSE) ? false : true, 'data' => $data['data'], 'longitud' => $data['longitud'], 'latitud' => $data['latitud'], 'zoom' => 15), 128);
+        echo json_encode(array('Registros'=>$data['Registros'],'Total'=>$data['Total'],'success' => ($data['data'] === FALSE) ? false : true, 'data' => $data['data'], 'longitud' => $data['longitud'], 'latitud' => $data['latitud'], 'zoom' => 15), 128);
     }
 
     public function Getsaveexcel()

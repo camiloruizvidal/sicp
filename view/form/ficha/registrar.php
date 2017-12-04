@@ -198,7 +198,7 @@ $form->create(__FILE__);
         $('#id_veredas').attr('disabled', true);
     }
     $(window).load(function () {
-        start(10, 398, 220, 18);
+        //start(10, 398, 220, 18);
         if (navigator.geolocation)
         {
             navigator.geolocation.getCurrentPosition(mostrarUbicacion);
@@ -301,7 +301,7 @@ $form->create(__FILE__);
                         <span class="input-group-btn">
                             <button style="padding-bottom: 3px;" class="btn btn-warning" type="button" onclick="cargar_mapa()"><i class="glyphicon glyphicon-globe"></i></button>
                         </span>
-                        <input type="" name="longitud" id="longitud" class="form form-control" required="true" />
+                        <input type="" name="longitud" id="longitud" class="form form-control" />
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -310,7 +310,7 @@ $form->create(__FILE__);
                         <span class="input-group-btn">
                             <button style="padding-bottom: 3px;" class="btn btn-warning" type="button" onclick="cargar_mapa()"><i class="glyphicon glyphicon-globe"></i></button>
                         </span>
-                        <input type="" name="latitud" id="latitud" class="form form-control" required="true" />
+                        <input type="" name="latitud" id="latitud" class="form form-control"  />
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -319,7 +319,7 @@ $form->create(__FILE__);
                         <span class="input-group-btn">
                             <button style="padding-bottom: 3px;" class="btn btn-warning" type="button" onclick="cargar_mapa()"><i class="glyphicon glyphicon-globe"></i></button>
                         </span>
-                        <input type="" id="exactitud" class="form form-control" required="true" />
+                        <input type="" id="exactitud" class="form form-control" />
                     </div>
                 </div>
             </div>
