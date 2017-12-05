@@ -3,10 +3,15 @@
 class modelinformes
 {
 
-    public function Registros($fecha_ini = '', $fecha_fin = '', $edad_min = '', $edad_max = '')
+    public function Registros($fecha_ini = '', $fecha_fin = '', $edad_min = '', $edad_max = '', $tarjeta_familiar = '')
     {
         $whereArray = array();
         $where      = array();
+        if ($tarjeta_familiar !== '')
+        {
+            $whereArray[] = $tarjeta_familiar;
+            $where[]      = ' `tbl_tarjeta_familiar`.`codigo`=? ';
+        }
         if ($fecha_ini !== '')
         {
             $whereArray[] = $fecha_ini;

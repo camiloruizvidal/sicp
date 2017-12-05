@@ -8,10 +8,10 @@ include_once Config::$Controller . 'other.php';
 class informes
 {
 
-    public static function registros($fecha_ini = '', $fecha_fin = '', $edad_min = '', $edad_max = '')
+    public static function registros($fecha_ini = '', $fecha_fin = '', $edad_min = '', $edad_max = '', $tarjeta_familiar = '')
     {
         $Reg   = new modelinformes();
-        $Datos = $Reg->Registros($fecha_ini, $fecha_fin, $edad_min, $edad_max);
+        $Datos = $Reg->Registros($fecha_ini, $fecha_fin, $edad_min, $edad_max, $tarjeta_familiar);
         foreach ($Datos as $key => $temp)
         {
             $codigo             = ltrim($temp['codigo'], '0');
@@ -30,7 +30,7 @@ class informes
             <i class="fa fa-cloud-download"></i> Descargar<span class = "caret"></span>
             </button>
             <ul class = "dropdown-menu" role = "menu">
-            <li><a href="../../../controller/anico_ajax.php?control=export&function=pdf&c=' . $id .'">Ficha familiar</a></li>            
+            <li><a href="../../../controller/anico_ajax.php?control=export&function=pdf&c=' . $id . '">Ficha familiar</a></li>            
             </ul>
             </div>';
 
@@ -43,7 +43,11 @@ class informes
 
     public function Postregistros()
     {
-        self::Registros($_POST['fecha_ini'], $_POST['fecha_fin'], $_POST['edad_min'], $_POST['edad_max']);
+        if (!isset($_POST['codigo']))
+        {
+            $_POST['codigo'] = '';
+        }
+        self::Registros($_POST['fecha_ini'], $_POST['fecha_fin'], $_POST['edad_min'], $_POST['edad_max'], $_POST['codigo']);
     }
 
 }

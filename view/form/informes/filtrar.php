@@ -70,6 +70,13 @@ $form->create(__FILE__);
                     </div>
                 </div>
                 <div class="col-md-3">
+                    <label>Tarjeta familiar</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                        <input type="number" class="form-control" name="codigo" id="codigo" />
+                    </div>
+                </div>
+                <div class="col-md-3">
                     <button type="reset" class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i> Borrar filtros</button>
                     <button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> Filtrar</button>
                     <button type="button" id="exportar" class="btn btn-success"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Exportar</button>
