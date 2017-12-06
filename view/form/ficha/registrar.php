@@ -211,10 +211,17 @@ $form->create(__FILE__);
     });
     function bloquear()
     {
+        console.log("-->" + $('#codigo').val() + "<--");
+        if ($('#codigo').val() === '')
+        {
+            $('#codigo').val('No hay mas codigos');
+        }
         if ($('#codigo').val() == 'No hay mas codigos')
         {
+            $('input').val("");
             $('input').attr("readonly", "readonly");
             $('button').attr('disabled', 'disabled');
+            $('select').prop('disabled', 'disabled');
         }
     }
 </script>
