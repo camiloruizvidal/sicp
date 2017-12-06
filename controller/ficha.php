@@ -265,7 +265,8 @@ class ficha
             }
             else
             {
-                $Res = array('success' => false, 'mesage' => 'Error desconocido', 'id' => null, 'next_id' => null);
+                $_SESSION['codigo_next_value'] = 'No hay mas codigos';
+                $Res = array('success' => true, 'mesage' => 'No se puede generar mas codigos', 'id' => null, 'next_id' => null);
             }
         }
         catch (Exception $e)

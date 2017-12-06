@@ -207,7 +207,16 @@ $form->create(__FILE__);
         {
             alert("¡Error! Este navegador no soporta la Geolocalización.");
         }
+        bloquear();
     });
+    function bloquear()
+    {
+        if ($('#codigo').val() == 'No hay mas codigos')
+        {
+            $('input').attr("readonly", "readonly");
+            $('button').attr('disabled', 'disabled');
+        }
+    }
 </script>
 
 <div>
