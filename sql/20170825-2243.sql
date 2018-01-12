@@ -1807,7 +1807,14 @@ INSERT INTO `tbl_persona_familiaridad` (`id_persona_familiaridad`, `descripcion`
   (9,'Abuelo','m'),
   (10,'Abuela','f'),
   (11,'Sobrino','m'),
-  (12,'Sobrina','f');
+  (12,'Sobrina','f'),
+  (13,'Hija','f'),
+  (14,'Esposa','f'),
+  (15,'Esposo','f'),
+  (16,'Nieto','m'),
+  (17,'Nieta','f'),
+  (18,'Bisnieto','m'),
+  (19,'Bisnieta','f');
 COMMIT;
 
 #

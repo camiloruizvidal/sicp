@@ -1,0 +1,21 @@
+TRUNCATE TABLE `tbl_persona_familiaridad`;
+INSERT INTO `tbl_persona_familiaridad` (`id_persona_familiaridad`, `descripcion`, `sexo`) VALUES 
+  (1,' Es cabeza de familia','0'),
+  (2,'Padre','m'),
+  (3,'Madre','f'),
+  (4,'Hijo','m'),
+  (5,'Hermano','m'),
+  (6,'Hermana','f'),
+  (7,'Tio','m'),
+  (8,'Tia','f'),
+  (9,'Abuelo','m'),
+  (10,'Abuela','f'),
+  (11,'Sobrino','m'),
+  (12,'Sobrina','f'),
+  (13,'Hija','f'),
+  (14,'Esposa','f'),
+  (15,'Esposo','f'),
+  (16,'Nieto','m'),
+  (17,'Nieta','f'),
+  (18,'Bisnieto','m'),
+  (19,'Bisnieta','f');
