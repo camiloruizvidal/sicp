@@ -1,6 +1,5 @@
 TRUNCATE TABLE `tbl_persona_familiaridad`;
 INSERT INTO `tbl_persona_familiaridad` (`id_persona_familiaridad`, `descripcion`, `sexo`) VALUES 
-  (1,' Es cabeza de familia','0'),  
   (2,'Padre','m'),
   (5,'Hermano','m'),
   (7,'Tio','m'),
