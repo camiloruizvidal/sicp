@@ -78,7 +78,7 @@ class programacion {
     public function Postverdetalles() {
         $Pro = new modelprogramacion();
         $persona = modelpersona::verpersona_id($_POST['id_persona']);
-        $Edad = $this->Dias($persona['fecha_nacimiento']);
+        @$Edad = $this->Dias($persona['fecha_nacimiento']);
         $Programas = $Pro->VerProgramas();
         $data = array();
         foreach ($Programas as $key => $temp) {
