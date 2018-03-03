@@ -8,7 +8,7 @@ class other
         json_decode($string);
         return (json_last_error() == JSON_ERROR_NONE);
     }
-
+	private function bisiesto($a){return true;}
     public function calcularEdad($fecha, $fecha_actual = '')
     {
         if ($fecha_actual == '')
