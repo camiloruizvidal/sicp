@@ -8,7 +8,6 @@ class other
         json_decode($string);
         return (json_last_error() == JSON_ERROR_NONE);
     }
-	private function bisiesto($a){return true;}
     public function calcularEdad($fecha, $fecha_actual = '')
     {
         if ($fecha_actual == '')
@@ -31,7 +30,7 @@ class other
                 case 2: $dias_mes_anterior = 31;
                     break;
                 case 3:
-                    if (bisiesto($array_actual[0]))
+                    if ($this->bisiesto($array_actual[0]))
                     {
                         $dias_mes_anterior = 29;
                         break;

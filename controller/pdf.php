@@ -14,13 +14,12 @@ class ficha_familiar extends PDFReport
 
     public function render_datos_generales($datos_tarjeta_familiar)
     {
+        $id = str_pad($datos_tarjeta_familiar['codigo'], 7, "0", STR_PAD_LEFT);
         $this->Image("fondoblanco.png", 0, 0, 216);
         $this->SetFont('Arial', '', 6);
-        $this->Cell(8, 5, "Fecha:", 0, 0, 'L');
-        $this->Cell(142, 5, "{$datos_tarjeta_familiar['fecha_apertura']}", 0, 0, 'L');
-        $this->Cell(20, 5, "Tarjeta familiar N", 0, 0, 'L');
-        $this->Cell(20, 5, "{$datos_tarjeta_familiar['id_tarjeta_familiar']}", 0, 0, 'L'); //primer cero indica que no lleve borde*/
-
+        $this->Cell(8, 5, "Fecha:".date('Y-m-d h:i:s A',strtotime($datos_tarjeta_familiar['fecha_apertura'])), 0, 0, 'L');
+        //$this->Cell(142, 5, "{}", 0, 0, 'L');
+        $this->Cell(20, 5, "Tarjeta familiar N {$id}", 0, 0, 'L');
         $this->Ln();
         $this->Ln();
         $this->Ln();
@@ -34,11 +33,7 @@ class ficha_familiar extends PDFReport
         $this->Ln();
         $this->EscC('');
 
-        /// inicio mostrar datos en la tabla//
-        //asi es como se le envie, en donde las datos vienen en la variable $datos_tarjeta_familiar y se obtienen por la clave como aqui:$datos_tarjeta_familiar['id_zona']
-        //$this->Cell(23,5,"",0,0,'L');$this->Cell(26,5,"",0,0,'L');$this->Cell(24,5,"",0,0,'L');$this->Cell(13,5,"{$datos_tarjeta_familiar['id_zona']}",0,0,'L');
-        //suponiendo que ya esten los datos quedaria asi:
-        $this->Cell(23, 5, "{$datos_tarjeta_familiar['fecha_registro']}", 0, 0, 'L');
+        $this->Cell(23, 5, date('Y-m-d', strtotime($datos_tarjeta_familiar['fecha_registro'])), 0, 0, 'L');
         $this->Cell(26, 5, "{$datos_tarjeta_familiar['responsable']}", 0, 0, 'L');
         $this->Cell(24, 5, "{$datos_tarjeta_familiar['fecha_proxima_visita']}", 0, 0, 'L');
         $this->Cell(13, 5, "{$datos_tarjeta_familiar['id_zona']}", 0, 0, 'L');
@@ -53,9 +48,9 @@ class ficha_familiar extends PDFReport
         $this->EscC('');
         $this->EscC('');
 
-        $this->Cell(24, 5, "{$datos_tarjeta_familiar['ficha_sisben']}", 0, 0, 'L');
+        $this->Cell(25, 5, "{$datos_tarjeta_familiar['ficha_sisben']}", 0, 0, 'L');
         $this->Cell(19, 5, "{$datos_tarjeta_familiar['nivel']}", 0, 0, 'L');
-        $this->Cell(23, 5, "{$datos_tarjeta_familiar['puntaje']}", 0, 0, 'L');
+        $this->Cell(23, 5, number_format($datos_tarjeta_familiar['puntaje'],0), 0, 0, 'L');
         $this->Cell(27, 5, "{$datos_tarjeta_familiar['telefono']}", 0, 0, 'L');
         $this->Cell(46, 5, "{$datos_tarjeta_familiar['direccion']}", 0, 0, 'L');
         $this->Cell(30, 5, "{$datos_tarjeta_familiar['potabilidad']}", 0, 0, 'L');
@@ -85,11 +80,8 @@ class ficha_familiar extends PDFReport
         $this->Ln();
         $this->Ln();
         $this->Ln();
-
         $this->Ln();
         $this->Ln();
-
-
         for ($i = 0; $i <= $limiteI; $i++)
         {
             $descripcion = utf8_decode($datos_variables_tarjeta_familiar[$i]['descripcion']);
@@ -97,16 +89,12 @@ class ficha_familiar extends PDFReport
             $this->Cell(10, 4, "{$datos_variables_tarjeta_familiar[$i]['valor']}", 0, 0, 'L');
             $this->Ln();
         } //fin for ParteI
-
-
-
         $this->Ln();
         $this->SetFont('Arial', 'B', '10');
         $this->Cell(53, 5, "Observar si hay:", 0, 0, 'L');
         $this->Ln();
         $this->Ln();
         $this->SetFont('Arial', '', '10');
-
         for ($j = ($limiteI + 1); $j <= $limiteII['valor']; $j++)
         {
             $descripcion = utf8_decode($datos_variables_tarjeta_familiar[$j]['descripcion']);
@@ -134,8 +122,7 @@ class ficha_familiar extends PDFReport
                     $this->CellFitSpace(73, 5, "{$descripcion}", 1, 0, 'L');
                     $this->Cell(10, 5, "{$datos_variables_tarjeta_familiar[$j]['valor']}", 1, 0, 'C');
                     $this->Ln();
-                }
-                else
+                } else
                 {
                     $this->Cell(18, 5, " ", 0, 0, 'L');
                     $this->CellFitSpace(73, 5, "{$descripcion}", 1, 0, 'L');
@@ -218,8 +205,7 @@ class ficha_familiar extends PDFReport
                         if ($temp2['rango_inicio'] == $temp2['rango_fin'])
                         {
                             $rango = $temp2['rango_inicio'] . $rango_tipo;
-                        }
-                        else
+                        } else
                         {
                             $rango = $temp2['rango_inicio'] . ' a ' . $temp2['rango_fin'] . $rango_tipo;
                         }
