@@ -324,8 +324,8 @@ class export
             $pdf->render_datos_generales($datos_tarjeta_familiar);
             $pdf->render_datos_variables($datos_variables_tarjeta_familiar);
             $pdf->render_miembros_asociados($datos_persona); //ahora se le debe pasar un segundo parametro, el cual es $data_programas
-            $pdf->Output();
-            //$pdf->Output('Ficha Familiar.pdf', 'D');
+            //$pdf->Output();
+            $pdf->Output('Ficha Familiar.pdf', 'D');
         }
     }
 

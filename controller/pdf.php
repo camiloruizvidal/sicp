@@ -17,7 +17,7 @@ class ficha_familiar extends PDFReport
         $id = str_pad($datos_tarjeta_familiar['codigo'], 7, "0", STR_PAD_LEFT);
         $this->Image("fondoblanco.png", 0, 0, 216);
         $this->SetFont('Arial', '', 6);
-        $this->Cell(8, 5, "Fecha:".date('Y-m-d h:i:s A',strtotime($datos_tarjeta_familiar['fecha_apertura'])), 0, 0, 'L');
+        $this->Cell(170, 5, "Fecha:".date('Y-m-d h:i:s A',strtotime($datos_tarjeta_familiar['fecha_apertura'])), 0, 0, 'L');
         //$this->Cell(142, 5, "{}", 0, 0, 'L');
         $this->Cell(20, 5, "Tarjeta familiar N {$id}", 0, 0, 'L');
         $this->Ln();
