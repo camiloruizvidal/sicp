@@ -14,9 +14,9 @@ $form->parametros = array('titulo' => 'Ficha familiar', 'css' => '../../css/jque
 $form->create(__FILE__);
 ?>
 <#--content_ini--#>
-<script src="https://code.highcharts.com/highcharts.js"></script>
-<script src="https://code.highcharts.com/modules/exporting.js"></script>
-<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="../../js/charts/highcharts.js"></script>
+<script src="../../js/charts/exporting.js"></script>
+<script src="../../js/charts/export-data.js"></script>
 
 <script>
     function graficar(data)
