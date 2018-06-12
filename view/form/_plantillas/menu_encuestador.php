@@ -26,6 +26,7 @@
                         <li><a href="../informes/filtrar.php"><i class="fa fa-user" aria-hidden="true"></i> Personas</a></li>
                         <li><a href="../informes/georferenciacion.php"><i class="fa fa-map-marker" aria-hidden="true"></i> Georeferenciaci&oacute;n</a></li>
                         <li><a href="../informes/Graficos.php"><i class="fa fa-map-marker" aria-hidden="true"></i> Gr&aacute;ficos</a></li>
+                        <li><a href="../informes/Graficos2.php"><i class="fa fa-map-marker" aria-hidden="true"></i> Gr&aacute;ficos por categorias</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">

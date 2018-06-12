@@ -119,6 +119,7 @@ $form->create(__FILE__);
                 async:false,
                 success: function (data)
                 {
+                	console.log(data);
                     graficar(data);
                     $('#table').html(data);
                 },
@@ -129,31 +130,9 @@ $form->create(__FILE__);
                 }
             });
     }
-    function filtrarCategorias()
-    {
-        $.ajax({
-            url:"../../../controller/anico_ajax.php?control=informes&function=data",
-            data:{categoria:$('#categoria').val()},
-            type:'POST',
-            async:false,
-            success:function(data)
-            {
-                $('#data_campos').html(data);
-            }
-        });
-    }
     function VerCategorias()
     {
-        $.ajax({
-            url:"../../../controller/anico_ajax.php?control=informes&function=vercategorias",
-            type:'POST',
-            async:false,
-            data:{data:1},
-            success:function(data)
-            {
-                $('#categoria').html(data);
-            }
-        })
+    
     }
     function departamento()
     {
@@ -173,7 +152,6 @@ $form->create(__FILE__);
     {
         departamento();
         VerCategorias();
-        filtrarCategorias();
         buscar();
         $('#form').submit(function (e)
         {
@@ -182,7 +160,6 @@ $form->create(__FILE__);
         });
         $('#categoria').change(function()
         {
-            filtrarCategorias();
             buscar();
         });
     });
@@ -192,27 +169,19 @@ $form->create(__FILE__);
         <div class="panel-heading">
             Filtro
         </div>
-        <form id="form" action="../../../controller/anico_ajax.php?control=informes&function=graficos"  method="POST">
+        <form id="form" action="../../../controller/anico_ajax.php?control=informes&function=graficos2"  method="POST">
             <div class="panel-body">
                 <div class="col-lg-12">
                     <label>Categoria</label>
                     <select id="categoria" name="categoria" class="form form-control">
-                        
+                    <option value="1">Clasificación por régimen de afiliación</option>
+                    <option value="2">Clasificación por EPS</option>
+                    <option value="4">Riesgos del ambiente</option>
+					<!--
+					<option value="3">RIESGOS FAMILIARES</option>
+                    <option value="5">RIESGOS INDIVIDUALES</option>     
+                	-->
                     </select>
-                </div>
-                <div class="col-lg-12">
-                    <div class="panel panel-primary" style="color: #fff !important;background-color: #337ab7 !important;border-color: #337ab7 !important;">
-                        <a href="#demo" data-toggle="collapse">
-                            <div class="panel-heading">
-                                Categorias
-                            </div>
-                        </a>
-                        <div id="demo" class="collapse panel-body" style="color: #000 !important;background-color: #FFF !important;border-color: #337ab7 !important;">
-                            <div class="container-fluid" id="data_campos">
-        
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 <div class="col-lg-12">
                     <label>Edad minima</label>

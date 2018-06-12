@@ -106,6 +106,7 @@ class modelpersona
         $person->apellido2               = $data['apellido2'];
         $person->documento               = $data['documento'];
         $person->sexo                    = $data['sexo'];
+        $person->id_regimen              = $data['id_regimen'];
         $person->id_rango                = $data['id_rango'];
         $person->fecha_nacimiento        = $data['fecha_nacimiento'];
         $person->es_cabeza_familia       = $data['es_cabeza_familia'];

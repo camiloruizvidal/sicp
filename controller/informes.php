@@ -163,5 +163,322 @@ class informes
             echo '<option value="'.$temp['id_car_categoria'].'">'.$temp['categoria'].'</option>'."\n";
         }
     }
+    private function regimen_afiliacion($edad_minima='',$edad_maxima='',$sexo='',$departamento='',$municipio='')
+    {
+        $wheres=[];
+        $parameters=[];
+        if($edad_minima!='')
+        {  
+            $wheres[]=' TIMESTAMPDIFF(YEAR,`tbl_persona`.`fecha_nacimiento`,NOW())>=? ';
+            $parameters[]=$edad_minima;
+        }
+        if($edad_maxima!='')
+        {  
+            $wheres[]=' TIMESTAMPDIFF(YEAR,`tbl_persona`.`fecha_nacimiento`,NOW())<=? ';
+            $parameters[]=$edad_maxima;
+        }
+        if($sexo!='')
+        {
+            $wheres[]=' `tbl_persona`.`sexo` = ?';
+            $parameters[]=$sexo;
+        }
+        if($municipio!='')
+        {
+            $wheres[]=' `tbl_municipios`.`id_municipio` = ?';
+            $parameters[]=$municipio;
+        }
+        if($departamento!='')
+        {
+            $wheres[]=' `tbl_municipios`.`id_departamento` = ?';
+            $parameters[]=$departamento;
+        }
+        $where=(count($wheres)>0)?implode(' AND ', $wheres):'';
+        $sql = 'SELECT 
+              count(*) as y,
+              COALESCE(`tbl_regimen`.`descripcion`,"-") as name
+            FROM
+              `tbl_persona`
+              LEFT OUTER JOIN `tbl_regimen` ON (`tbl_persona`.`id_regimen` = `tbl_regimen`.`id_regimen`)
+              INNER JOIN `tbl_tarjeta_familiar` ON (`tbl_persona`.`id_tarjeta_familiar` = `tbl_tarjeta_familiar`.`id_tarjeta_familiar`)
+              INNER JOIN `tbl_municipios` ON (`tbl_tarjeta_familiar`.`id_municipio` = `tbl_municipios`.`id_municipio`)
+              '.$where.'
+              GROUP BY
+              `tbl_regimen`.`id_regimen`
+
+            ORDER BY
+              `tbl_regimen`.`descripcion`';
+        $Res = model::Records($sql, $parameters);
+        return $Res;
+    }
+    private function EPS($edad_minima='',$edad_maxima='',$sexo='',$departamento='',$municipio='')
+    {
+                $wheres=[];
+        $parameters=[];
+        if($edad_minima!='')
+        {  
+            $wheres[]=' TIMESTAMPDIFF(YEAR,`tbl_persona`.`fecha_nacimiento`,NOW())>=? ';
+            $parameters[]=$edad_minima;
+        }
+        if($edad_maxima!='')
+        {  
+            $wheres[]=' TIMESTAMPDIFF(YEAR,`tbl_persona`.`fecha_nacimiento`,NOW())<=? ';
+            $parameters[]=$edad_maxima;
+        }
+        if($sexo!='')
+        {
+            $wheres[]=' `tbl_persona`.`sexo` = ?';
+            $parameters[]=$sexo;
+        }
+        if($municipio!='')
+        {
+            $wheres[]=' `tbl_municipios`.`id_municipio` = ?';
+            $parameters[]=$municipio;
+        }
+        if($departamento!='')
+        {
+            $wheres[]=' `tbl_municipios`.`id_departamento` = ?';
+            $parameters[]=$departamento;
+        }
+        $where=(count($wheres)>0)?implode(' AND ', $wheres):'';
+        $sql = 'SELECT 
+              count(*) AS `y`,
+              `tbl_asegurador`.`descripcion` as name
+            FROM
+              `tbl_persona`
+              INNER JOIN `tbl_tarjeta_familiar` ON (`tbl_persona`.`id_tarjeta_familiar` = `tbl_tarjeta_familiar`.`id_tarjeta_familiar`)
+              INNER JOIN `tbl_municipios` ON (`tbl_tarjeta_familiar`.`id_municipio` = `tbl_municipios`.`id_municipio`)
+              INNER JOIN `tbl_asegurador` ON (`tbl_persona`.`id_asegurador` = `tbl_asegurador`.`id_asegurador`)
+            '.$where.'
+            GROUP BY
+              `tbl_asegurador`.`id_asegurador`
+            ORDER BY
+              `tbl_asegurador`.`id_asegurador`';
+        $Res = model::Records($sql, $parameters);
+        return $Res;
+    }
+    private function RIESGOS_FAMILIARES($edad_minima='',$edad_maxima='',$sexo='',$departamento='',$municipio='')
+    {
+        $wheres=[];
+        $parameters=[];
+        if($edad_minima!='')
+        {  
+            $wheres[]=' TIMESTAMPDIFF(YEAR,`tbl_persona`.`fecha_nacimiento`,NOW())>=? ';
+            $parameters[]=$edad_minima;
+        }
+        if($edad_maxima!='')
+        {  
+            $wheres[]=' TIMESTAMPDIFF(YEAR,`tbl_persona`.`fecha_nacimiento`,NOW())<=? ';
+            $parameters[]=$edad_maxima;
+        }
+        if($sexo!='')
+        {
+            $wheres[]=' `tbl_persona`.`sexo` = ?';
+            $parameters[]=$sexo;
+        }
+        if($municipio!='')
+        {
+            $wheres[]=' `tbl_municipios`.`id_municipio` = ?';
+            $parameters[]=$municipio;
+        }
+        if($departamento!='')
+        {
+            $wheres[]=' `tbl_municipios`.`id_departamento` = ?';
+            $parameters[]=$departamento;
+        }
+        $where=(count($wheres)>0)?implode(' AND ', $wheres):'';
+        $sql = 'SELECT 
+              count(*) as y,
+              COALESCE(`tbl_regimen`.`descripcion`,"-") as name
+            FROM
+              `tbl_persona`
+              LEFT OUTER JOIN `tbl_regimen` ON (`tbl_persona`.`id_regimen` = `tbl_regimen`.`id_regimen`)
+              INNER JOIN `tbl_tarjeta_familiar` ON (`tbl_persona`.`id_tarjeta_familiar` = `tbl_tarjeta_familiar`.`id_tarjeta_familiar`)
+              INNER JOIN `tbl_municipios` ON (`tbl_tarjeta_familiar`.`id_municipio` = `tbl_municipios`.`id_municipio`)
+              '.$where.'
+              GROUP BY
+              `tbl_regimen`.`id_regimen`
+
+            ORDER BY
+              `tbl_regimen`.`descripcion`';
+        $Res = model::Records($sql, $parameters);
+        return $Res;
+    }
+    private function RIESGOS_AMBIENTALES($edad_minima='',$edad_maxima='',$sexo='',$departamento='',$municipio='')
+    {
+                $wheres=[];
+        $parameters=[];
+        if($edad_minima!='')
+        {  
+            $wheres[]=' TIMESTAMPDIFF(YEAR,`tbl_persona`.`fecha_nacimiento`,NOW())>=? ';
+            $parameters[]=$edad_minima;
+        }
+        if($edad_maxima!='')
+        {  
+            $wheres[]=' TIMESTAMPDIFF(YEAR,`tbl_persona`.`fecha_nacimiento`,NOW())<=? ';
+            $parameters[]=$edad_maxima;
+        }
+        if($sexo!='')
+        {
+            $wheres[]=' `tbl_persona`.`sexo` = ?';
+            $parameters[]=$sexo;
+        }
+        if($municipio!='')
+        {
+            $wheres[]=' `tbl_municipios`.`id_municipio` = ?';
+            $parameters[]=$municipio;
+        }
+        if($departamento!='')
+        {
+            $wheres[]=' `tbl_municipios`.`id_departamento` = ?';
+            $parameters[]=$departamento;
+        }
+        $where=(count($wheres)>0)?implode(' AND ', $wheres):'';
+        $sql = 'SELECT 
+                  trim(`tbl_car_registro`.`value`) as value
+                FROM
+                  `tbl_tarjeta_familiar`
+                INNER JOIN `tbl_car_registro` ON (`tbl_tarjeta_familiar`.`id_tarjeta_familiar` = `tbl_car_registro`.`id_tarjeta_familiar`)
+                INNER JOIN `tbl_municipios` ON (`tbl_tarjeta_familiar`.`id_municipio` = `tbl_municipios`.`id_municipio`)
+  ';
+        $Res = model::Records($sql, $parameters);
+        $Res = $this->format_data($Res);
+        return $Res;
+    }
+    private function format_data($data_value)
+    {
+        $Res=[];
+        foreach($data_value as $data)
+        {
+            $data=$data["value"];
+            foreach(json_decode($data,true) as $temp)
+            {
+                switch ($temp['id_tipo_data'])
+                {
+                    case '4':
+                    $Res[$temp['id']]
+                            =
+                            (isset($Res[$temp['id']]))
+                                ?
+                            $Res[$temp['id']]+$temp['value']
+                                :
+                            $temp['value'];
+                        break;
+                    case '1':
+                    $Res[$temp['id']]
+                            =
+                            ($temp['value']!='no')
+                                ?
+                            (
+                                isset($Res[$temp['id']])
+                                    ?
+                                $Res[$temp['id']]+1
+                                    :
+                                1
+                            )
+                                :
+                            0;
+                        break;
+                }
+            }
+        }
+        $Res=$this->orderData($Res);
+        return $Res;
+    }
+    private function name($key)
+    {
+        $sql = 'SELECT 
+              UPPER(`tbl_car_variables`.`descripcion`) as name
+            FROM
+              `tbl_car_variables`
+              WHERE
+                `tbl_car_variables`.`id_car_variables`=?';
+        $Res = model::Record($sql, $key);
+        return $Res['name'];
+    }
+    private function orderData($data)
+    {
+        $Res=[];
+        foreach($data as $key=>$temp)
+        {
+            if($temp!='0')
+            {
+                $temp2['y']=(int)$temp;
+                $temp2['name']=$this->name($key);
+                $Res[]=$temp2;
+            }
+        }
+        return $Res;
+    }
+    private function RIESGOS_INDIVIDUALES($edad_minima='',$edad_maxima='',$sexo='',$departamento='',$municipio='')
+    {
+             $wheres=[];
+        $parameters=[];
+        if($edad_minima!='')
+        {  
+            $wheres[]=' TIMESTAMPDIFF(YEAR,`tbl_persona`.`fecha_nacimiento`,NOW())>=? ';
+            $parameters[]=$edad_minima;
+        }
+        if($edad_maxima!='')
+        {  
+            $wheres[]=' TIMESTAMPDIFF(YEAR,`tbl_persona`.`fecha_nacimiento`,NOW())<=? ';
+            $parameters[]=$edad_maxima;
+        }
+        if($sexo!='')
+        {
+            $wheres[]=' `tbl_persona`.`sexo` = ?';
+            $parameters[]=$sexo;
+        }
+        if($municipio!='')
+        {
+            $wheres[]=' `tbl_municipios`.`id_municipio` = ?';
+            $parameters[]=$municipio;
+        }
+        if($departamento!='')
+        {
+            $wheres[]=' `tbl_municipios`.`id_departamento` = ?';
+            $parameters[]=$departamento;
+        }
+        $where=(count($wheres)>0)?implode(' AND ', $wheres):'';
+        $sql = 'SELECT 
+              count(*) as y,
+              COALESCE(`tbl_regimen`.`descripcion`,"-") as name
+            FROM
+              `tbl_persona`
+              LEFT OUTER JOIN `tbl_regimen` ON (`tbl_persona`.`id_regimen` = `tbl_regimen`.`id_regimen`)
+              INNER JOIN `tbl_tarjeta_familiar` ON (`tbl_persona`.`id_tarjeta_familiar` = `tbl_tarjeta_familiar`.`id_tarjeta_familiar`)
+              INNER JOIN `tbl_municipios` ON (`tbl_tarjeta_familiar`.`id_municipio` = `tbl_municipios`.`id_municipio`)
+              '.$where.'
+              GROUP BY
+              `tbl_regimen`.`id_regimen`
+
+            ORDER BY
+              `tbl_regimen`.`descripcion`';
+        $Res = model::Records($sql, $parameters);
+        return $Res;   
+    }
+
+    public function Postgraficos2()
+    {
+        $data=NULL;
+        switch($_POST["categoria"])
+        {
+            case '1' : $data = $this->regimen_afiliacion($_POST['edad_minima'],$_POST['edad_maxima'],$_POST['sexo'],$_POST['departamento'],$_POST['municipio']); break;
+            case '2' : $data = $this->EPS($_POST['edad_minima'],$_POST['edad_maxima'],$_POST['sexo'],$_POST['departamento'],$_POST['municipio']); break;
+            case '3' : $data = $this->RIESGOS_FAMILIARES($_POST['edad_minima'],$_POST['edad_maxima'],$_POST['sexo'],$_POST['departamento'],$_POST['municipio']); break;
+            case '4' : $data = $this->RIESGOS_AMBIENTALES($_POST['edad_minima'],$_POST['edad_maxima'],$_POST['sexo'],$_POST['departamento'],$_POST['municipio']); break;
+            case '5' : $data = $this->RIESGOS_INDIVIDUALES($_POST['edad_minima'],$_POST['edad_maxima'],$_POST['sexo'],$_POST['departamento'],$_POST['municipio']); break;     
+        }
+        $Res=[];
+        if(!is_null($data))
+        {
+            foreach($data as $temp)
+            {
+                $temp2['y']     = (int)$temp['y'];
+                $temp2['name']  = $temp['name'];
+                $Res[]          = $temp2;
+            }
+        }
+        echo json_encode(['registros'=>$Res],128);
+    }
 
 }
