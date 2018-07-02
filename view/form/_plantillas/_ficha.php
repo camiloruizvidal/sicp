@@ -27,7 +27,7 @@
         <script src="../../js/bootstrap/bootstrap-notify.js"></script>
         <script src="../../js/jquery/jquery-ui.min.js"></script>
         <script src="../../js/source/Function.js?v=<?php echo date('YmdHis'); ?>"></script>
-        <script src="../../js/source/loading.js" type="text/javascript"></script>
+        <script src="../../js/source/loading.js?v=<?php echo date('YmdHis'); ?>" type="text/javascript"></script>
 
         <#--js--#>
     </head>
