@@ -21,6 +21,11 @@ $form->create(__FILE__);
 <script>
     function graficar(data)
     {
+        var dataSum =0;
+        $.each(data.registros, function(index,value)
+        {
+            dataSum=dataSum+parseInt(value.y);
+        });
         var format_data=($('#tipo_grafico').val()=='pie')?'<b>{point.name}</b>: {point.percentage:.1f}':'{point.y:.1f}';
         Highcharts.setOptions({
             lang: {
@@ -99,7 +104,10 @@ $form->create(__FILE__);
                     //rotation: -90,
                     color: '#FFFFFF',
                     align: 'right',
-                    format: format_data,
+                    formatter:function()
+                    {
+                        return Highcharts.numberFormat((this.y / dataSum) * 100) + '%';
+                    }, 
                     y: 10,
                     style: {
                         fontSize: '13px',
@@ -119,13 +127,11 @@ $form->create(__FILE__);
                 async:false,
                 success: function (data)
                 {
-                	console.log(data);
                     graficar(data);
                     $('#table').html(data);
                 },
                 error:function(data)
                 {
-                    console.log(data.responseText);
                     $('#table').html(data);  
                 }
             });

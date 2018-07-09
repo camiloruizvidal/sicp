@@ -192,7 +192,7 @@ class informes
             $wheres[]=' `tbl_municipios`.`id_departamento` = ?';
             $parameters[]=$departamento;
         }
-        $where=(count($wheres)>0)?implode(' AND ', $wheres):'';
+        $where=(count($wheres)>0)?' WHERE '.implode(' AND ', $wheres):'';
         $sql = 'SELECT 
               count(*) as y,
               COALESCE(`tbl_regimen`.`descripcion`,"-") as name
@@ -212,7 +212,7 @@ class informes
     }
     private function EPS($edad_minima='',$edad_maxima='',$sexo='',$departamento='',$municipio='')
     {
-                $wheres=[];
+        $wheres=[];
         $parameters=[];
         if($edad_minima!='')
         {  
@@ -239,7 +239,7 @@ class informes
             $wheres[]=' `tbl_municipios`.`id_departamento` = ?';
             $parameters[]=$departamento;
         }
-        $where=(count($wheres)>0)?implode(' AND ', $wheres):'';
+        $where=(count($wheres)>0)?' WHERE '.implode(' AND ', $wheres):'';
         $sql = 'SELECT 
               count(*) AS `y`,
               `tbl_asegurador`.`descripcion` as name
@@ -285,7 +285,7 @@ class informes
             $wheres[]=' `tbl_municipios`.`id_departamento` = ?';
             $parameters[]=$departamento;
         }
-        $where=(count($wheres)>0)?implode(' AND ', $wheres):'';
+        $where=(count($wheres)>0)?' WHERE '.implode(' AND ', $wheres):'';
         $sql = 'SELECT 
               count(*) as y,
               COALESCE(`tbl_regimen`.`descripcion`,"-") as name
@@ -332,7 +332,7 @@ class informes
             $wheres[]=' `tbl_municipios`.`id_departamento` = ?';
             $parameters[]=$departamento;
         }
-        $where=(count($wheres)>0)?implode(' AND ', $wheres):'';
+        $where=(count($wheres)>0)?' WHERE '.implode(' AND ', $wheres):'';
         $sql = 'SELECT 
                   trim(`tbl_car_registro`.`value`) as value
                 FROM
