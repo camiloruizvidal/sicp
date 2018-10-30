@@ -23,6 +23,27 @@ class modellogin
             return false;
         }
     }
+    public static function CreateUser($login, $pass, $nombre, $apellido, $documento)
+    {
+        $user = model::Make('tbl_usuario');
+        $user->Load('login=?', array($login));
+        if (is_null($user->id_usuario))
+        {
+            $user->login     = $login;
+            $user->pass      = md5($pass);
+            $user->nombre    = $nombre;
+            $user->apellido  = $apellido;
+            $user->documento = $documento;
+            $user->id_perfil_tercero = 1;
+            $user->id_perfil_tipo=1;
+            $user->Save();
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 
     public static function detalle_usuario($id_usuario)
     {
@@ -39,7 +60,16 @@ class modellogin
                   `tbl_usuario`.`id_usuario`=?';
         return model::Record($sql, array($id_usuario));
     }
-
+    public static function VerUsuarios()
+    {
+        $sql = 'SELECT 
+                `tbl_usuario`.`nombre`,
+                `tbl_usuario`.`apellido`,
+                `tbl_usuario`.`documento`
+              FROM
+                `tbl_usuario`';
+        return model::Records($sql);
+    } 
     public static function Guardarcodigo($data)
     {
         $cod                    = model::Make('tbl_codigos');

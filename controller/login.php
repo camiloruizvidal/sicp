@@ -164,7 +164,38 @@ class login
         }
         return $url;
     }
+    public function Postguardarusuarios()
+    {
+        $data =  modellogin::CreateUser($_POST['documento'], $_POST['documento'], $_POST['nombre'], $_POST['apellido'], $_POST['documento']);
+        echo json_encode(['validate'=>$data]);
+    }
+    public function veruser()
+    {
+        $Res=modellogin::VerUsuarios();
+        $html= '<table class="table table-hover">';
+        $html.='<tr>
+                <td>Documento</td>
+                <td>Nombre</td>
+                <td>Apellido</td>
+              </tr>';
+        foreach($Res as $temp)
+        {
+            $html.='<tr>';
+            $html.='<td>';
+            $html.=$temp['documento'];   
+            $html.='</td>';
+            $html.='<td>';   
+            $html.=$temp['nombre'];   
+            $html.='</td>';
+            $html.='<td>';   
+            $html.=$temp['apellido'];   
+            $html.='</td>';
 
+            $html.='</tr>';
+        }      
+        $html.='</table>';
+        echo $html;
+    }
     public function Postvalidate()
     {
         $Model = new modellogin();

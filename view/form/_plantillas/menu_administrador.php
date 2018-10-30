@@ -30,6 +30,7 @@
                     <ul class="dropdown-menu">
                         <li>
                             <a href="../login/pass.php"><i class="fa fa-user" aria-hidden="true"></i> Usuario <span class="sr-only">(current)</span></a>
+                            <a href="../login/users.php"><i class="fa fa-user" aria-hidden="true"></i> Usuarios <span class="sr-only">(current)</span></a>
                             <a href="../login/ini.php"><i class="fa fa-power-off" aria-hidden="true"></i> Cerrar sesion <span class="sr-only">(current)</span></a>
                         </li>
                     </ul>
