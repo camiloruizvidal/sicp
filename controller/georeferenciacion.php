@@ -33,9 +33,9 @@ class georeferenciacion
 					);
 				}
             }
-
-            $promedio_latitud  = ($promedio_latitud / count($Res));
-            $promedio_longitud = ($promedio_longitud / count($Res));
+			$data=[];
+            $promedio_latitud  = (count($Res)===0)?1: ($promedio_latitud / count($Res));
+            $promedio_longitud = (count($Res)===0)?1:($promedio_longitud / count($Res));
             foreach ($Res as $key => $temp)
             {
                 $text   = '<span class="title">' . $temp['nombre'] . '</span>' .
@@ -59,7 +59,7 @@ class georeferenciacion
     public function Postdatos()
     {
         $data = $this->datos_filter($_POST);
-        echo json_encode(array('Registros'=>$data['Registros'],'Total'=>$data['Total'],'success' => ($data['data'] === FALSE) ? false : true, 'data' => $data['data'], 'longitud' => $data['longitud'], 'latitud' => $data['latitud'], 'zoom' => 15), 128);
+        echo json_encode(array('Registros'=>(isset($data['Registros']))?$data['Registros']:[],'Total'=>(isset($data['Total']))?$data['Total']:0,'success' => ($data['data'] === FALSE) ? false : true, 'data' => $data['data'], 'longitud' => $data['longitud'], 'latitud' => $data['latitud'], 'zoom' => 15), 128);
     }
 
     public function Getsaveexcel()

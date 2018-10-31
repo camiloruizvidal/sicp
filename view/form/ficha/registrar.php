@@ -228,7 +228,6 @@ $form->create(__FILE__);
 
 <div>
     <form id="form_new_persona" target="_blank" method="post" action="../persona/ingresar.php">
-        <input type="hidden" name="form_new_persona_codigo" id="id_tarjeta_familiar" value="<?php echo ficha::codigotarjetaFamiliar(); ?>"/>
     </form>
     <form id="form_ficha_familiar" method="post" action="../../../controller/anico_ajax.php?control=ficha&function=savetarjetafamiliar">
         <div class="panel panel-other">
@@ -242,6 +241,7 @@ $form->create(__FILE__);
                 </div>
                 <div class="col-md-6">
                     <label>Tarjeta Familiar</label>
+                    <input type="hidden" name="form_new_persona_codigo" id="id_tarjeta_familiar" value="<?php echo ficha::codigotarjetaFamiliar(); ?>"/>
                     <input required="true" name="codigo" id="codigo" value="<?php echo ficha::codigotarjetaFamiliar(); ?>" readonly="true" class="form form-control"/>
                 </div>
                 <div class="col-md-2">
