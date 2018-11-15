@@ -289,12 +289,15 @@ class export
         $value = array();
         $valor = $model->caracteristica_persona($id_persona);
         $valor = json_decode($valor, true);
-        foreach ($valor as $temp)
-        {
-            $descripcion = $model->variable($temp['id']);
-            $descripcion = $descripcion['descripcion'];
-            $value[]     = array('id' => $temp['id'], 'descripcion' => $descripcion, 'valor' => $temp['value']);
-        }
+		if(is_array ($valor))
+		{
+			foreach ($valor as $temp)
+			{
+				$descripcion = $model->variable($temp['id']);
+				$descripcion = $descripcion['descripcion'];
+				$value[]     = array('id' => $temp['id'], 'descripcion' => $descripcion, 'valor' => $temp['value']);
+			}
+		}
         return $value;
     }
 

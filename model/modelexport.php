@@ -92,7 +92,8 @@ class modelexport
 		WHERE
 		  `tbl_car_registro`.`id_persona` = ?';
         $Resultado = model::Record($sql, array($id_persona));
-        return $Resultado['value'];
+		if(!isset($Resultado['value']))
+        return !isset($Resultado['value'])?'[]':$Resultado['value'];
     }
 
     public function variable($id_variable)

@@ -14,8 +14,20 @@ $form->create(__FILE__);
 ?>
 <#--content_ini--#>
 <script>
+    function verusers()
+    {
+        $.ajax({
+            url: '../../../controller/anico_ajax.php?control=login&function=veruser', 
+            async: false, 
+            success: function (data) 
+            {
+                $('#datos').html(data);
+            }
+        });
+    }
     $(function ()
     {
+        verusers();
         $('form').submit(function (e)
         {
             e.preventDefault();
@@ -26,14 +38,7 @@ $form->create(__FILE__);
                 data: $(this).serialize(),
                 success: function (data)
                 {
-                    $.ajax({
-                        url: '../../../controller/anico_ajax.php?control=login&function=veruser', 
-                        async: false, 
-                        success: function (data) 
-                        {
-                            $('#datos').html(data);
-                        }
-                    });
+                    verusers();
                     loadingstop();
                 }
             });
