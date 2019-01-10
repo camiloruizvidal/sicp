@@ -43,7 +43,15 @@ class modelcategorias
         $Reg->Save();
         return $Reg->id_car_registro;
     }
-
+    public static function verVariables()
+    {
+        $sql='SELECT 
+            tbl_car_variables.`id_car_variables`,
+            `tbl_car_variables`.`descripcion`
+            FROM
+            tbl_car_variables';
+        return model::Records($sql, array());
+    }
     public static function VerVariable($id_car_variables)
     {
         $Reg = model::Make('tbl_car_variables');

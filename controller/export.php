@@ -15,6 +15,7 @@ class export
 
     private $cabecera1;
     private $cabecera2;
+    private $variables;
 
     public function generarexcel($data, $cabecera = '', $nombreArchivo = 'ficha_familiar.xlsx', $img = '')
     {
@@ -62,7 +63,11 @@ class export
         flush();
         readfile($nombreArchivo);
     }
-
+    private function VerVariable($id)
+    {
+        $res = array_search($id, array_column($this->variables, 'id_car_variables'));
+        return $res['descripcion'];
+    }
     private function showregistroxpersona($id_tarjeta)
     {
         $cat  = new modelcategorias();
@@ -71,7 +76,7 @@ class export
         $Res  = array();
         foreach ($data as $key => $temp)
         {
-            $temp2 = array('value' => $temp['value'], 'name' => modelcategorias::VerVariable($temp['id']));
+            $temp2 = array('value' => $temp['value'], 'name' => $this->VerVariable($temp['id']));
             $Res[] = $temp2;
         }
     }
@@ -81,9 +86,8 @@ class export
         $primeravez = TRUE;
         foreach ($data as $key => $tempdata)
         {
-            $id_tarjeta_familiar              = modelexport::id_tarjeta_familiar_codigo($tempdata[0]);
-            $datos_variables_tarjeta_familiar = $this->datos_variables_tarjeta_familiar($id_tarjeta_familiar);
-            $datos_persona                    = $this->datos_caracteristicas_persona($id_tarjeta_familiar);
+            $datos_variables_tarjeta_familiar = $this->datos_variables_tarjeta_familiar($tempdata[0]);
+            $datos_persona                    = $this->datos_caracteristicas_persona($tempdata[0]);
             $id                               = array_search($tempdata[2], array_column($datos_persona, 'documento'));
             $Res                              = array();
             foreach ($datos_persona[$id]["caracteristicas_ficha"] as $temp)
@@ -116,8 +120,7 @@ class export
         $primeravez = TRUE;
         foreach ($data as $key => $tempdata)
         {
-            $id_tarjeta_familiar              = modelexport::id_tarjeta_familiar_codigo($tempdata[0]);
-            $datos_variables_tarjeta_familiar = $this->datos_variables_tarjeta_familiar($id_tarjeta_familiar);
+            $datos_variables_tarjeta_familiar = $this->datos_variables_tarjeta_familiar($tempdata[0]);
             $Res                              = array();
             foreach ($datos_variables_tarjeta_familiar as $temp)
             {
@@ -160,13 +163,16 @@ class export
         }
         foreach ($cab2 as $temp)
         {
-            if (is_null($temp))
+            if(!is_array($temp))
             {
-                $temp = '?';
-            }
-            else if (trim($temp) == '')
-            {
-                $temp = '?';
+                if (is_null($temp))
+                {
+                    $temp = '?';
+                }
+                else if (trim($temp) == '')
+                {
+                    $temp = '?';
+                }
             }
             $res[] = $temp;
         }
@@ -179,6 +185,7 @@ class export
 
     public function Getxls()
     {
+        $inicio=date('H:i:s');
         $model           = new modelexport();
         $data            = $model->exportarData($_GET['fecha_ini'], $_GET['fecha_fin'], $_GET['edad_min'], $_GET['edad_max']);
         $cabecera        = array('CODIGO', 'PERSONA', 'DOCUMENTO', 'EDAD', 'GENERO', 'FECHA NACIMIENTO', 'RANGO', 'CABEZA FAMILIA', 'ESTADO CIVIL', 'NIVEL EDUCATIVO', 'FECHA APERTURA', 'SISBEN FICHA', 'SISBEN PUNTAJE', 'SISBEN NIVEL', 'DIRECCION', 'TELEFONO', 'PORTABILIDAD', 'CAMBIO DOMICILIO', 'PROXIMA VISITA', 'DOCUMENTO ENCARGADO', 'ENCARGADO', 'ZONA', 'VEREDA', 'CORREGIMIENTO', 'MUNICIPIO', 'DEPARTAMENTO', 'FAMILIARIDAD', 'ASEGURADOR', 'REGIMEN');
@@ -189,6 +196,164 @@ class export
         $cabecera        = $this->cabecera($cabecera, $this->cabecera1, $this->cabecera2);
         $this->generarexcel($data, $cabecera);
     }
+    //===================================================DEBUG===================================================
+    private $variable;
+    private function OrganizarDatoDebug($Dato, $variable)
+    {
+        $value = null;
+        switch ($Dato['id_tipo_data'])
+        {
+            case '1':$value = array('descripcion' => $variable, 'valor' => $Dato["value"]);
+                break;
+            case '4':$value = array(
+                'descripcion' => $variable, 
+                'valor' => $this->tipe_4(
+                    $Dato, 
+                    $variable["list_values"]
+                ));
+                break;
+            case '9':
+                $Res   = $this->tipe_9($Dato, $variable["list_values"]);
+                foreach ($Res as $temp)
+                {
+                    if (trim($temp["valor"]) !== '')
+                        $value[] = $temp;
+                }
+                break;
+            default : $value = array('descripcion' => $variable, 'valor' => $Dato);
+                break;
+        }
+        return $value;
+    }
+    private function variable($id)
+    {
+        return $this->variable[$id];
+    }
+    private function variables()
+    {
+        $sql       = 'SELECT 
+		  `tbl_car_variables`.`id_car_variables`,
+		  `tbl_car_variables`.`descripcion`,
+		  `tbl_car_variables`.`id_car_tipo_dato`,
+		  `tbl_car_variables`.`list_values`
+		FROM
+          `tbl_car_variables`';
+        //Only return multiple files
+        if ($sql === '' || is_null($sql))
+        {
+            throw new Exception('La sentencia esta vacia');
+        }
+        $rs   = Config::$con->Execute($sql, []);
+        $data = array();
+        
+        while (!$rs->EOF)
+        {
+            $data_reg = $rs->fields;
+            $data[$data_reg['id_car_variables']] = [
+                'id_car_variables'=>$data_reg['id_car_variables'],
+                'descripcion'=>$data_reg['descripcion'],
+                'id_car_tipo_dato'=>$data_reg['id_car_tipo_dato'],
+                'list_values'=>$data_reg['list_values']
+                ];
+            $rs->MoveNext();
+        }
+        $this->variable = $data;
+
+    }
+    private function agregardatosfichadebug(&$data)
+    {
+        $primeravez = TRUE;
+        foreach ($data as $key => $tempdata)
+        {
+            $datos_variables_tarjeta_familiar = $this->datos_variables_tarjeta_familiar($tempdata[0]);
+            $Res                              = array();
+            foreach ($datos_variables_tarjeta_familiar as $temp)
+            {
+                if (is_null($temp["valor"]))
+                {
+                    $temp["valor"] = 'NN';
+                }
+                else if ($temp['valor'] == '')
+                {
+                    $temp["valor"] = 'NN';
+                }
+                $Res[] = $temp["valor"];
+                if ($primeravez)
+                {
+                    if (isset($temp['descripcion']))
+                    {
+                        $this->cabecera1[] = $temp['descripcion'];
+                    }
+                    else
+                    {
+                        $this->cabecera1[] = 'NN';
+                    }
+                }
+            }
+            foreach ($Res as $tempres)
+            {
+                $data[$key][] = $tempres;
+            }
+            $primeravez = FALSE;
+        }
+        return ($data);
+    }
+    private function agregardatosvariableDebug(&$data)
+    {
+        $primeravez = TRUE;
+        foreach ($data as $key => $tempdata)
+        {
+            $datos_variables_tarjeta_familiar = $this->datos_variables_tarjeta_familiar($tempdata[0]);
+            $datos_persona                    = $this->datos_caracteristicas_persona($tempdata[0]);
+            $id                               = array_search($tempdata[2], array_column($datos_persona, 'documento'));
+            $Res                              = array();
+            foreach ($datos_persona[$id]["caracteristicas_ficha"] as $temp)
+            {
+                if (is_null($temp["valor"]))
+                {
+                    $temp["valor"] = 'NN';
+                }
+                else if ($temp['valor'] == '')
+                {
+                    $temp["valor"] = 'NN';
+                }
+                $Res[] = $temp["valor"];
+                if ($primeravez)
+                {
+                    $this->cabecera2[] = $temp['descripcion'];
+                }
+            }
+            foreach ($Res as $tempres)
+            {
+                $data[$key][] = $tempres;
+            }
+            $primeravez = FALSE;
+        }
+        return ($data);
+    }
+    public function Getxlsdebug()
+    {
+        $this->variables();
+        $inicio=date('H:i:s');
+        $model           = new modelexport();
+        $data            = $model->exportarDataBug($_GET['fecha_ini'], $_GET['fecha_fin'], $_GET['edad_min'], $_GET['edad_max']);
+        $cabecera        = array('CODIGO', 'PERSONA', 'DOCUMENTO', 'EDAD', 'GENERO', 'FECHA NACIMIENTO', 'RANGO', 'CABEZA FAMILIA', 'ESTADO CIVIL', 'NIVEL EDUCATIVO', 'FECHA APERTURA', 'SISBEN FICHA', 'SISBEN PUNTAJE', 'SISBEN NIVEL', 'DIRECCION', 'TELEFONO', 'PORTABILIDAD', 'CAMBIO DOMICILIO', 'PROXIMA VISITA', 'DOCUMENTO ENCARGADO', 'ENCARGADO', 'ZONA', 'VEREDA', 'CORREGIMIENTO', 'MUNICIPIO', 'DEPARTAMENTO', 'FAMILIARIDAD', 'ASEGURADOR', 'REGIMEN');
+        $this->cabecera1 = array();
+        $this->cabecera2 = array();
+        $this->agregardatosfichadebug($data);
+        //$this->agregardatosvariableDebug($data);
+            //echo json_encode(
+            //[
+            //'tiempo'=>['inicio'=>$inicio,'fin'=> date('H:i:s')],
+            //'registros'=>count($data),
+            //'data'=>
+            //$data
+            //]
+            //);
+        $cabecera        = $this->cabecera($cabecera, $this->cabecera1, $this->cabecera2);
+        $this->generarexcel($data);
+    }
+    //===================================================DEBUG===================================================
 
     public function Getpdf()
     {
@@ -199,9 +364,16 @@ class export
 
     private function tipe_4($Dato, $list_values)
     {
-        $list_values = json_decode($list_values, true);
-        $found_key   = array_search($Dato['value'], array_column($list_values, 'id'));
-        return $list_values[$found_key]['value'];
+        if(!is_null($list_values))
+        {
+            $list_values = json_decode($list_values, true);
+            $found_key   = array_search
+            (
+                $Dato['value'], 
+                array_column($list_values, 'id')
+            );
+            return $list_values[$found_key]['value'];
+        }
     }
 
     private function tipe_9($Dato, $list_values)
@@ -214,18 +386,21 @@ class export
             $Dato[key($temp)] = $temp[key($temp)];
             unset($Dato[$key]);
         }
-        foreach ($list_values['data'] as $key1 => $temp1)
+        if(!is_null($list_values['data']))
         {
-            $Res_temp = array();
-            foreach ($list_values['option'] as $key2 => $temp2)
+            foreach ($list_values['data'] as $key1 => $temp1)
             {
-                $name_data = 'data ' . $temp1['id'];
-                $name_opti = 'option ' . $temp2['id'];
-                if (isset($Dato[$name_data][$name_opti]))
+                $Res_temp = array();
+                foreach ($list_values['option'] as $key2 => $temp2)
                 {
-                    $Res_temp['descripcion'] = $temp1['name'] . ', ' . $temp2['name'];
-                    $Res_temp['valor']       = $Dato[$name_data][$name_opti];
-                    $Resultado_List[]        = $Res_temp;
+                    $name_data = 'data ' . $temp1['id'];
+                    $name_opti = 'option ' . $temp2['id'];
+                    if (isset($Dato[$name_data][$name_opti]))
+                    {
+                        $Res_temp['descripcion'] = $temp1['name'] . ', ' . $temp2['name'];
+                        $Res_temp['valor']       = $Dato[$name_data][$name_opti];
+                        $Resultado_List[]        = $Res_temp;
+                    }
                 }
             }
         }
@@ -265,8 +440,8 @@ class export
             $Resultado = json_decode($Resultado['value'], true);
             foreach ($Resultado as $temp)
             {
-                $temp1   = $model->variable($temp['id']);
-                $tempres = $this->OrganizarDato($temp, $temp1);
+                $temp1   = $this->variable($temp['id']);
+                $tempres = $this->OrganizarDatoDebug($temp, $temp1);
                 if (isset($tempres[0]))
                 {
                     foreach ($tempres as $temp2)
@@ -293,7 +468,7 @@ class export
 		{
 			foreach ($valor as $temp)
 			{
-				$descripcion = $model->variable($temp['id']);
+				$descripcion = $this->variable($temp['id']);
 				$descripcion = $descripcion['descripcion'];
 				$value[]     = array('id' => $temp['id'], 'descripcion' => $descripcion, 'valor' => $temp['value']);
 			}
@@ -315,10 +490,10 @@ class export
 
     private function Iniciar($id_tarjeta_familiar)//Id tarjeta familiar no es Codigo
     {
+        $this->variables                  = modelcategorias::verVariables();
         $model                            = new modelexport();
         $datos_tarjeta_familiar           = $model->datos_tarjeta_familiar($id_tarjeta_familiar);
         $datos_variables_tarjeta_familiar = $this->datos_variables_tarjeta_familiar($id_tarjeta_familiar);
-        //var_dump($datos_tarjeta_familiar);exit;
         if (!is_null($datos_variables_tarjeta_familiar))
         {
             $datos_persona   = $this->datos_caracteristicas_persona($id_tarjeta_familiar);
