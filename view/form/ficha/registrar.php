@@ -228,6 +228,7 @@ $form->create(__FILE__);
 
 <div>
     <form id="form_new_persona" target="_blank" method="post" action="../persona/ingresar.php">
+    <input type="hidden" name="form_new_persona_codigo" id="id_tarjeta_familiar" value="<?= ficha::codigotarjetaFamiliar(); ?>"/>
     </form>
     <form id="form_ficha_familiar" method="post" action="../../../controller/anico_ajax.php?control=ficha&function=savetarjetafamiliar">
         <div class="panel panel-other">
