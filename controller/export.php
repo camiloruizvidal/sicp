@@ -194,7 +194,28 @@ class export
         $this->agregardatosficha($data);
         $this->agregardatosvariable($data);
         $cabecera        = $this->cabecera($cabecera, $this->cabecera1, $this->cabecera2);
-        $this->generarexcel($data, $cabecera);
+        $res = $this->GeneraCSV($data, $cabecera);
+        echo json_encode(['validate'=>true,'url'=>$res]);
+        //$this->generarexcel($data, $cabecera);
+    }
+    private function GeneraCSV($data, $cabecera)
+    {
+        $nombre_archivo = "informe.csv"; 
+        if(file_exists($nombre_archivo))
+        {$mensaje = "El Archivo $nombre_archivo se ha modificado";}  
+        else
+        {$mensaje = "El Archivo $nombre_archivo se ha creado";}
+        if($archivo = fopen($nombre_archivo, "w+"))
+        {
+            fwrite($archivo,implode(';',$cabecera). "\n");
+            foreach($data as $temp)
+            {
+                fwrite($archivo,implode(';',$temp).  "\n");
+            }
+            fclose($archivo);
+        }
+        $ds=DIRECTORY_SEPARATOR;
+        return '..'.$ds.'..'.$ds.'..'.$ds.'controller'.$ds.$nombre_archivo;
     }
     //===================================================DEBUG===================================================
     private $variable;
@@ -342,16 +363,16 @@ class export
         $this->cabecera2 = array();
         $this->agregardatosfichadebug($data);
         //$this->agregardatosvariableDebug($data);
-            //echo json_encode(
+            echo json_encode(
             //[
             //'tiempo'=>['inicio'=>$inicio,'fin'=> date('H:i:s')],
             //'registros'=>count($data),
             //'data'=>
-            //$data
+            $data
             //]
-            //);
-        $cabecera        = $this->cabecera($cabecera, $this->cabecera1, $this->cabecera2);
-        $this->generarexcel($data);
+            );
+        //$cabecera        = $this->cabecera($cabecera, $this->cabecera1, $this->cabecera2);
+        //$this->generarexcel($data);
     }
     //===================================================DEBUG===================================================
 

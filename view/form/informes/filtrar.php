@@ -91,7 +91,14 @@ $form->create(__FILE__);
         $('#exportar').click(function ()
         {
             var url = '../../../controller/anico_ajax.php?control=export&function=xls&' + $('#form_fichas').serialize();
-            location.href = url;
+            $.ajax({
+                url:url,
+                dataType:'json',
+                success:function(data)
+                {
+                    window.open(data.url, "Diseño Web", "width=300, height=200")
+                }
+            })
         });
     });
 </script>
