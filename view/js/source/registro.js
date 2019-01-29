@@ -2,6 +2,7 @@ function tipe_data(id_tipo_data, value)
 {
     if (id_tipo_data == '1')
     {
+
         if (value.value == 'si')
         {
             $('#input_' + value.id).prop('checked', 'checked');
@@ -80,7 +81,8 @@ function cargar_persona()
                 {
                     var documento = $('#documento').val();
                     var codigo = $('#codigo').val();
-                    $('input').val('');
+                    $('input[type="text"]').val('');
+                    $('input[type="checkbox"]').prop('checked', false);
                     $('#documento').val(documento);
                     $('#codigo').val(codigo);
 
