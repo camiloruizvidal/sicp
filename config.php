@@ -7,7 +7,7 @@ class Config
     public static $url        = '';
     public static $con        = null;
     public static $host       = '127.0.0.1';
-    public static $base       = 'sicp_new';
+    public static $base       = 'sicp';
     public static $user       = 'root';
     public static $pass       = '';
     public static $home       = '';
