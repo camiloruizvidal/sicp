@@ -81,7 +81,7 @@ class modelexport
         (`tbl_tarjeta_familiar`.`id_tarjeta_familiar` 
         =
          `tbl_car_registro`.`id_tarjeta_familiar`) ' . 
-        $where.' limit 10';
+        $where.' limit 1';
         $data = model::Records($sql, $whereArray, true);
         return $data;
     }
@@ -177,7 +177,6 @@ class modelexport
 		WHERE
 		  `tbl_car_registro`.`id_persona` = ?';
         $Resultado = model::Record($sql, array($id_persona));
-		if(!isset($Resultado['value']))
         return !isset($Resultado['value'])?'[]':$Resultado['value'];
     }
 
@@ -193,6 +192,18 @@ class modelexport
 		  WHERE
 		  `tbl_car_variables`.`id_car_variables`=?';
         $Resultado = model::Record($sql, array($id_variable));
+        return $Resultado;
+    }
+    public function variableAll()
+    {
+        $sql       = 'SELECT 
+		  `tbl_car_variables`.`id_car_variables`,
+		  `tbl_car_variables`.`descripcion`,
+		  `tbl_car_variables`.`id_car_tipo_dato`,
+		  `tbl_car_variables`.`list_values`
+		FROM
+		  `tbl_car_variables`';
+        $Resultado = model::Records($sql, []);
         return $Resultado;
     }
 

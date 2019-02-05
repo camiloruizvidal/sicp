@@ -84,25 +84,39 @@ class export
         }
     }
 
+    private function variablesAll()
+    {
+        $model = new modelexport();
+        $data = $model->variableAll();
+        $res=[];
+        foreach($data as $key=>$temp)
+        {
+            $res[$temp['id_car_variables']]=$temp['descripcion'];
+        }
+        return $res;
+    }
     private function agregardatosvariable(&$data)
     {
+        $variables = $this->variablesAll();
         $primeravez = TRUE;
         foreach ($data as $key => $tempdata)
         {
             $datos_variables_tarjeta_familiar = $this->datos_variables_tarjeta_familiar($tempdata[30]);
             $datos_persona                    = $this->datos_caracteristicas_persona($tempdata[0]);
-            $id                               = array_search($tempdata[2], array_column($datos_persona, 'documento'));
+            $id                               = array_search($tempdata[3], array_column($datos_persona, 'documento'));
             $Res                              = array();
             foreach ($datos_persona[$id]["caracteristicas_ficha"] as $temp)
             {
                 $valuedata = (is_null($temp["valor"]) || trim($temp['valor']) == '')? 'NN':$temp['valor'];
                 if ($primeravez)
                 {
-                    $this->cabecera2[] = $temp['descripcion'];
+                    $this->cabecera2[] = $variables[$temp['id']];
                 }
                 $Res[] =$valuedata;
                 $data[$key][] = $valuedata;
             }
+            unset($data[$key][30]);
+            unset($data[$key][1]);
             $primeravez = FALSE;
         }
         return ($data);
@@ -122,7 +136,6 @@ class export
                 {
                     $this->cabecera1[] =(isset($temp['descripcion']))? $temp['descripcion']:'NN';
                 }
-                
             }
             $primeravez = FALSE;
         }
@@ -173,7 +186,6 @@ class export
         $this->agregardatosvariable($data);
         $this->newestado('Exportando data data');
         $cabecera        = $this->cabecera($cabecera, $this->cabecera1, $this->cabecera2);
-        
         $res = $this->GeneraCSV($data, $cabecera);
         echo json_encode(['validate'=>true,'url'=>$res]);
         //$this->generarexcel($data, $cabecera);

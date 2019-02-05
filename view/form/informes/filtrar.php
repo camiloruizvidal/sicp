@@ -84,7 +84,9 @@ $form->create(__FILE__);
             </form>
             <div class="container-fluid">
                 <div class="col-md-12">
+                    <div id="load_tada_res"></div>
                     <div id="load_tada"></div>
+
                 </div>
             </div>
         </div>
@@ -128,7 +130,10 @@ $form->create(__FILE__);
                 dataType:'json',
                 success:function(data)
                 {
-                    window.open(data.url, "Diseño Web", "width=300, height=200")
+                    $('#load_tada').hide();
+                    $('#load_tada_res').html('<a class="btn btn-success" href="'+data.url+'">Click aqui si no le descarga el documento</a>')
+                    window.open(data.url, "Diseño Web", "width=300, height=200");
+                    $('#exportar').removeAttr("disabled");
                 },
                 error:function(data)
                 {
