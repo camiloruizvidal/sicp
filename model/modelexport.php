@@ -80,8 +80,7 @@ class modelexport
         ON 
         (`tbl_tarjeta_familiar`.`id_tarjeta_familiar` 
         =
-         `tbl_car_registro`.`id_tarjeta_familiar`) ' . 
-        $where.' limit 1';
+         `tbl_car_registro`.`id_tarjeta_familiar`) ' . $where;
         $data = model::Records($sql, $whereArray, true);
         return $data;
     }

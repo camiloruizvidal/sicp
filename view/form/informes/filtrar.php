@@ -117,8 +117,10 @@ $form->create(__FILE__);
         }
         $('#exportar').click(function ()
         {
+            $('#load_tada_res').hide();
+            $('#load_tada').html('');
+            $('#load_tada').show();
             $('#exportar').attr("disabled", true);
-            load_data();
             setInterval(function()
             {
                 load_data();
