@@ -97,11 +97,14 @@ class export
     }
     private function agregardatosvariable(&$data)
     {
+        
         $variables = $this->variablesAll();
         $primeravez = TRUE;
         foreach ($data as $key => $tempdata)
         {
+            $this->newestado('Order format data: '.number_format(($key+1),0,'.',',').' de '.number_format((count($data)),0,'.',','));
             $datos_variables_tarjeta_familiar = $this->datos_variables_tarjeta_familiar($tempdata[30]);
+            var_dump($datos_variables_tarjeta_familiar);exit;
             $datos_persona                    = $this->datos_caracteristicas_persona($tempdata[0]);
             $id                               = array_search($tempdata[3], array_column($datos_persona, 'documento'));
             $Res                              = array();
@@ -127,7 +130,7 @@ class export
         $primeravez = TRUE;
         foreach ($data as $key => $tempdata)
         {
-            $this->newestado('format data: '.($key+1).' datos de '.count($data).' datos');
+            $this->newestado('format data: '.(number_format(($key+1),0,'.',',')).' datos de '.(number_format(count($data),0,'.',',')).' datos');
             $datos_variables_tarjeta_familiar = $this->datos_variables_tarjeta_familiar($tempdata[30]);
             foreach ($datos_variables_tarjeta_familiar as $temp)
             {
@@ -216,7 +219,7 @@ class export
             $total=count($data);
             foreach($data as $key => $temp)
             {
-                $this->newestado("Registro ".($key+1)." de {$total} CSV");
+                $this->newestado("Registro ".number_format(($key+1),0,'.',',')." de ".number_format(($total),0,'.',',')." CSV");
                 fwrite($archivo,implode(';',$temp).  "\n");
             }
             fclose($archivo);
