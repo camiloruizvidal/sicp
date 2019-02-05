@@ -117,21 +117,21 @@ $form->create(__FILE__);
         }
         $('#exportar').click(function ()
         {
+            $('#load_tada').html('<span class="label label-danger">Comenzo el proceso de exportacion</span>');
             $('#load_tada_res').hide();
-            $('#load_tada').html('');
             $('#load_tada').show();
             $('#exportar').attr("disabled", true);
             setInterval(function()
             {
                 load_data();
             },5000);
-            alert('Esto puede demorar un par de minutos.')
             var url = '../../../controller/anico_ajax.php?control=export&function=xls&' + $('#form_fichas').serialize();
             $.ajax({
                 url:url,
                 dataType:'json',
                 success:function(data)
                 {
+                    $('#load_tada_res').show();
                     $('#load_tada').hide();
                     $('#load_tada_res').html('<a class="btn btn-success" href="'+data.url+'">Click aqui si no le descarga el documento</a>')
                     window.open(data.url, "Diseño Web", "width=300, height=200");

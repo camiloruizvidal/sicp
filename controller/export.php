@@ -100,14 +100,13 @@ class export
         
         $variables = $this->variablesAll();
         $primeravez = TRUE;
+        $data_final=array();
         foreach ($data as $key => $tempdata)
         {
             $this->newestado('Order format data: '.number_format(($key+1),0,'.',',').' de '.number_format((count($data)),0,'.',','));
             $datos_variables_tarjeta_familiar = $this->datos_variables_tarjeta_familiar($tempdata[30]);
-            var_dump($datos_variables_tarjeta_familiar);exit;
             $datos_persona                    = $this->datos_caracteristicas_persona($tempdata[0]);
             $id                               = array_search($tempdata[3], array_column($datos_persona, 'documento'));
-            $Res                              = array();
             foreach ($datos_persona[$id]["caracteristicas_ficha"] as $temp)
             {
                 $valuedata = (is_null($temp["valor"]) || trim($temp['valor']) == '')? 'NN':$temp['valor'];
@@ -115,11 +114,11 @@ class export
                 {
                     $this->cabecera2[] = $variables[$temp['id']];
                 }
-                $Res[] =$valuedata;
-                $data[$key][] = $valuedata;
+                $data_final[$key]=$data[$key];
+                $data_final[$key][]=$valuedata;
             }
-            unset($data[$key][30]);
-            unset($data[$key][1]);
+            unset($data_final[$key][30]);
+            unset($data_final[$key][1]);
             $primeravez = FALSE;
         }
         return ($data);
@@ -178,6 +177,7 @@ class export
     {
         $inicio=date('H:i:s');
         $model           = new modelexport();
+        $this->newestado('Inicio:['.$inicio.']');
         $this->newestado('Exportando data');
         $data            = $model->exportarData($_GET['fecha_ini'], $_GET['fecha_fin'], $_GET['edad_min'], $_GET['edad_max']);
         $cabecera        = array('CODIGO', 'PERSONA', 'DOCUMENTO', 'EDAD', 'GENERO', 'FECHA NACIMIENTO', 'RANGO', 'CABEZA FAMILIA', 'ESTADO CIVIL', 'NIVEL EDUCATIVO', 'FECHA APERTURA', 'SISBEN FICHA', 'SISBEN PUNTAJE', 'SISBEN NIVEL', 'DIRECCION', 'TELEFONO', 'PORTABILIDAD', 'CAMBIO DOMICILIO', 'PROXIMA VISITA', 'DOCUMENTO ENCARGADO', 'ENCARGADO', 'ZONA', 'VEREDA', 'CORREGIMIENTO', 'MUNICIPIO', 'DEPARTAMENTO', 'FAMILIARIDAD', 'ASEGURADOR', 'REGIMEN');
@@ -188,8 +188,10 @@ class export
         $this->newestado('Creando variables data');
         $this->agregardatosvariable($data);
         $this->newestado('Exportando data data');
+        $this->newestado('Exportando data inicio:['.$inicio.']');
         $cabecera        = $this->cabecera($cabecera, $this->cabecera1, $this->cabecera2);
         $res = $this->GeneraCSV($data, $cabecera);
+        $this->newestado('fin:['.date('H:i:s').']');
         echo json_encode(['validate'=>true,'url'=>$res]);
         //$this->generarexcel($data, $cabecera);
     }
