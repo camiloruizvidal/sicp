@@ -15,7 +15,7 @@ $form->create(__FILE__);
 
 <script>
     $(document).ready(function () {
-        $('#myTable').DataTable();
+        //$('#myTable').DataTable();
     });
 
     $(function ()
@@ -82,14 +82,46 @@ $form->create(__FILE__);
                     <button type="button" id="exportar" class="btn btn-success"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Exportar</button>
                 </div>
             </form>
+            <div class="container-fluid">
+                <div class="col-md-12">
+                    <div id="load_tada"></div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 <script>
     $(function ()
     {
+        function load_data()
+        {
+            var url = '../../../controller/estado.json';
+            $.ajax({
+                url:url,
+                dataType:'json',
+                success:function(data)
+                {
+                    var html='<ul><li>Proceso de la generacion del archivo excel</li>';
+                    $.each(data,function(index,value)
+                    {
+                        html+='<li>';
+                        html+=value;
+                        html+='</li>';
+                    });
+                    html+='</ul>';
+                    $('#load_tada').html(html);
+                }
+            })
+        }
         $('#exportar').click(function ()
         {
+            $('#exportar').attr("disabled", true);
+            load_data();
+            setInterval(function()
+            {
+                load_data();
+            },5000);
+            alert('Esto puede demorar un par de minutos.')
             var url = '../../../controller/anico_ajax.php?control=export&function=xls&' + $('#form_fichas').serialize();
             $.ajax({
                 url:url,
@@ -97,6 +129,10 @@ $form->create(__FILE__);
                 success:function(data)
                 {
                     window.open(data.url, "Diseño Web", "width=300, height=200")
+                },
+                error:function(data)
+                {
+                    $('#exportar').removeAttr("disabled");                    
                 }
             })
         });
@@ -107,7 +143,7 @@ $form->create(__FILE__);
     </div>
     <div class="panel-body">
         <div id="table">
-            <?php echo informes::registros(); ?>
+            <?php //echo informes::registros(); ?>
         </div>
     </div>
 </div>
