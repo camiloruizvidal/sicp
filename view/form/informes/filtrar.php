@@ -137,15 +137,25 @@ $form->create(__FILE__);
                 dataType:'json',
                 success:function(data)
                 {
-                    $('#load_tada_res').show();
-                    $('#load_tada').hide();
-                    $('#load_tada_res').html('<a class="btn btn-success" href="'+data.url+'">Click aqui si no le descarga el documento</a>')
-                    window.open(data.url, "Diseño Web", "width=300, height=200");
-                    $('#exportar').removeAttr("disabled");
+                    if(data.validate)
+                    {
+                        $('#load_tada_res').show();
+                        $('#load_tada').hide();
+                        $('#load_tada_res').html('<a class="btn btn-success" href="'+data.url+'">Click aqui si no le descarga el documento</a>')
+                        window.open(data.url, "Diseño Web", "width=300, height=200");
+                        $('#exportar').removeAttr("disabled");
+                    }
+                    else
+                    {
+                        alert(data.msj);
+                    }
                 },
                 error:function(data)
                 {
-                    $('#exportar').removeAttr("disabled");                    
+                    $('#load_tada_res').show();
+                    $('#load_tada').hide();
+                    $('#load_tada_res').html('<a class="btn btn-success" href="../../../controller/informe.csv">Se presento un error, pero genero este documento</a>')
+                    $('#exportar').removeAttr("disabled");
                 }
             })
         });

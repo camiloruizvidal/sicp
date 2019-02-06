@@ -65,6 +65,7 @@ class export
         ob_clean();
         flush();
         readfile($nombreArchivo);
+        return '..'.$ds.'..'.$ds.'..'.$ds.'controller'.$ds.$nombreArchivo;
     }
     private function VerVariable($id)
     {
@@ -195,42 +196,50 @@ class export
     }
     private function NewData($GET)
     {
-        $variables=$this->variablesAll();
-        $model           = new modelexport();
-        $data            = $model->exportarDataBug($_GET['fecha_ini'], $_GET['fecha_fin'], $_GET['edad_min'], $_GET['edad_max']);
-        $cabecera        = false;
-        if(isset($data[0]))
+        try
         {
-            $cabecera = $this->generarCabecera($data[0]);
-        }
-        $res=[];
-        $this->newestado('Formateando data. '. number_format((count($data)),0,'.',',') .' registros en total');
-        foreach($data as $key=>$temp)
-        {
-            $this->newestado('Formateando '.($key+1).' de '. number_format((count($data)),0,'.',',').' registros');
-            $restemp=$temp;
-            unset($restemp['data_persona']);
-            unset($restemp['data_tarjeta_familiar']);
-            $data2=json_decode($temp['data_persona']);
-            foreach($data2 as $temp2)
+            $variables=$this->variablesAll();
+            $model           = new modelexport();
+            $data            = $model->exportarDataBug($_GET['fecha_ini'], $_GET['fecha_fin'], $_GET['edad_min'], $_GET['edad_max']);
+            $cabecera        = false;
+            $res=[];
+            if(isset($data[0]))
             {
-                $restemp[]=($temp2->value=='')?'-':$temp2->value;
+                $cabecera = $this->generarCabecera($data[0]);
             }
-            $data2=json_decode($temp['data_tarjeta_familiar']);
-            foreach($data2 as $temp2)
+            $this->newestado('Formateando data. '. number_format((count($data)),0,'.',',') .' registros en total');
+            foreach($data as $key=>$temp)
             {
-                $valueres=$this->validateDatas($temp2->value,$variables,$temp2);
-                //var_dump($valueres->validate,$temp2->value,$variables,$temp2);
-                if($valueres->validate)
+                $restemp=$temp;
+                unset($restemp['data_persona']);
+                unset($restemp['data_tarjeta_familiar']);
+                $data2=json_decode($temp['data_persona']);
+                foreach($data2 as $temp2)
                 {
-                    $restemp[]=$valueres->data;
+                    $restemp[]=($temp2->value=='')?'-':$temp2->value;
                 }
+                $data2=json_decode($temp['data_tarjeta_familiar']);
+                foreach($data2 as $temp2)
+                {
+                    $valueres=$this->validateDatas($temp2->value,$variables,$temp2);
+                    //var_dump($valueres->validate,$temp2->value,$variables,$temp2);
+                    if($valueres->validate)
+                    {
+                        $restemp[]=$valueres->data;
+                    }
+                }
+                $res[]=$restemp;
+                unset($restemp);
             }
-            $res[]=$restemp;
+            unset($data);
+            $this->newestado('Generando excel');
+            $url = $this->GeneraCSV($res,$cabecera);
+            echo json_encode(['validate'=>true,'url'=>$url,'msj'=>null]);
         }
-        $this->newestado('Generando excel');
-        $url = $this->GeneraCSV($res,$cabecera);
-        echo json_encode(['validate'=>true,'url'=>$url]);
+        catch(Exception $e)
+        {
+            echo json_encode(['validate'=>false,'url'=>null,'msj'=>$e->getMessage()]);
+        }
     }
     private function generarCabecera($reg)
     {
@@ -295,12 +304,10 @@ class export
             $total=count($data);
             foreach($data as $key => $temp)
             {
-                $this->newestado("Registro ".number_format(($key+1),0,'.',',')." de ".number_format(($total),0,'.',',')." CSV");
                 fwrite($archivo,implode(';',$temp).  "\n");
             }
             fclose($archivo);
         }
-        $this->newestado('Finalizando');
         $this->newestado('Creando exportacion');
         $ds=DIRECTORY_SEPARATOR;
         return '..'.$ds.'..'.$ds.'..'.$ds.'controller'.$ds.$nombre_archivo;
