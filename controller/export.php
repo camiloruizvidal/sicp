@@ -216,7 +216,7 @@ class export
             $this->newestado('Formateando data. '. number_format((count($data)),0,'.',',') .' registros en total');
             foreach($data as $key=>$temp)
             {
-                $this->newestado('Formateando '.($key+1).' de '. number_format((count($data)),0,'.',',').' registros');
+                $this->newestado('Formateando '.number_format(($key+1),0,'.',',').' de '. number_format((count($data)),0,'.',',').' registros');
                 $restemp=$temp;
                 unset($restemp['data_persona']);
                 unset($restemp['data_tarjeta_familiar']);
