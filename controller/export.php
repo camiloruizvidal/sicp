@@ -1,5 +1,5 @@
 <?php
-
+ini_set('memory_limit', '-1');
 include_once dirname(__FILE__) . '/../base.php';
 include_once Config::$model . 'modelcategorias.php';
 include_once Config::$model . 'modelexport.php';
@@ -210,6 +210,7 @@ class export
             $this->newestado('Formateando data. '. number_format((count($data)),0,'.',',') .' registros en total');
             foreach($data as $key=>$temp)
             {
+                $this->newestado('Formateando '.($key+1).' de '. number_format((count($data)),0,'.',',').' registros');
                 $restemp=$temp;
                 unset($restemp['data_persona']);
                 unset($restemp['data_tarjeta_familiar']);
