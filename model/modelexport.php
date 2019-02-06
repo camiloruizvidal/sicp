@@ -162,7 +162,7 @@ class modelexport
                     LEFT OUTER JOIN `tbl_regimen` ON (`tbl_persona`.`id_regimen` = `tbl_regimen`.`id_regimen`)
                     INNER JOIN `tbl_car_registro` `tbl_car_registro_persona` ON (`tbl_persona`.`id_persona` = `tbl_car_registro_persona`.`id_persona`)
                     INNER JOIN `tbl_car_registro` `tbl_car_registro_tarjeta_familiar` ON (`tbl_tarjeta_familiar`.`id_tarjeta_familiar` = `tbl_car_registro_tarjeta_familiar`.`id_tarjeta_familiar`)'
-                . $where.' LIMIT 10';
+                . $where;
         $data = model::Records($sql, $whereArray, false);
         return $data;
     }  
