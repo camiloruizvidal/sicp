@@ -152,6 +152,7 @@ $form->create(__FILE__);
                 },
                 error:function(data)
                 {
+                    console.log(data);
                     $('#load_tada_res').show();
                     $('#load_tada').hide();
                     $('#load_tada_res').html('<a class="btn btn-success" href="../../../controller/informe.csv">Se presento un error, pero genero este documento</a>')

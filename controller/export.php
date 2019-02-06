@@ -1,5 +1,4 @@
 <?php
-ini_set('memory_limit', '-1');
 include_once dirname(__FILE__) . '/../base.php';
 include_once Config::$model . 'modelcategorias.php';
 include_once Config::$model . 'modelexport.php';
@@ -198,6 +197,12 @@ class export
     {
         try
         {
+            $nombre_archivo = "informe.csv"; 
+            $archivo = fopen($nombre_archivo, "w+");
+            
+            
+            
+            
             $variables=$this->variablesAll();
             $model           = new modelexport();
             $data            = $model->exportarDataBug($_GET['fecha_ini'], $_GET['fecha_fin'], $_GET['edad_min'], $_GET['edad_max']);
@@ -206,6 +211,7 @@ class export
             if(isset($data[0]))
             {
                 $cabecera = $this->generarCabecera($data[0]);
+                fwrite($archivo,implode(';',$cabecera). "\n");
             }
             $this->newestado('Formateando data. '. number_format((count($data)),0,'.',',') .' registros en total');
             foreach($data as $key=>$temp)
@@ -223,19 +229,18 @@ class export
                 foreach($data2 as $temp2)
                 {
                     $valueres=$this->validateDatas($temp2->value,$variables,$temp2);
-                    //var_dump($valueres->validate,$temp2->value,$variables,$temp2);
                     if($valueres->validate)
                     {
                         $restemp[]=$valueres->data;
                     }
                 }
-                $res[]=$restemp;
-                unset($restemp);
+                fwrite($archivo,implode(';',$restemp).  "\n");
             }
-            unset($data);
-            $this->newestado('Generando excel');
-            $url = $this->GeneraCSV($res,$cabecera);
-            echo json_encode(['validate'=>true,'url'=>$url,'msj'=>null]);
+            fclose($archivo);
+            $this->newestado('Creando CSV');
+            $this->newestado('Creando exportacion');
+            $ds=DIRECTORY_SEPARATOR;
+            echo json_encode(['validate'=>true,'url'=> '..'.$ds.'..'.$ds.'..'.$ds.'controller'.$ds.$nombre_archivo,'msj'=>null]);
         }
         catch(Exception $e)
         {
