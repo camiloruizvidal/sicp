@@ -1,3 +1,4 @@
 /nbproject/private/
 config.php
 controller/informe.csv
+controller/estado.json
