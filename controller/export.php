@@ -91,7 +91,7 @@ class export
         $res=[];
         foreach($data as $key=>$temp)
         {
-            $res[$temp['id_car_variables']]=$temp['descripcion'];
+            $res[$temp['id_car_variables']]=$temp;
         }
         return $res;
     }
@@ -123,7 +123,7 @@ class export
         }
         return ($data);
     }
-
+    
     private function agregardatosficha(&$data)
     {
         $primeravez = TRUE;
@@ -172,28 +172,101 @@ class export
         }
         return $res;
     }
-
+    private function validateDatas($data,$variables,$dataall)
+    {
+        $res='';
+        $validate=(!($dataall->id_tipo_data==4 || $dataall->id_tipo_data==9));
+        json_decode($data);
+        if((json_last_error() == JSON_ERROR_NONE))
+        {
+            if(is_numeric($data))
+            {
+                $res=$data;
+            }
+            else{
+                $validate=false;
+                //$list=json_decode($variables[$dataall->id]['list_values']);
+            }
+        }
+        else{
+            $res=$data;
+        }
+        return (object)['validate'=>$validate,'data'=>$res];
+    }
+    private function NewData($GET)
+    {
+        $variables=$this->variablesAll();
+        $model           = new modelexport();
+        $data            = $model->exportarDataBug($_GET['fecha_ini'], $_GET['fecha_fin'], $_GET['edad_min'], $_GET['edad_max']);
+        $cabecera        = false;
+        if(isset($data[0]))
+        {
+            $cabecera = $this->generarCabecera($data[0]);
+        }
+        $res=[];
+        $this->newestado('Formateando data. '. number_format((count($data)),0,'.',',') .' registros en total');
+        foreach($data as $key=>$temp)
+        {
+            $this->newestado('Formateando '.($key+1).' de '. number_format((count($data)),0,'.',',').' registros');
+            $restemp=$temp;
+            unset($restemp['data_persona']);
+            unset($restemp['data_tarjeta_familiar']);
+            $data2=json_decode($temp['data_persona']);
+            foreach($data2 as $temp2)
+            {
+                $restemp[]=($temp2->value=='')?'-':$temp2->value;
+            }
+            $data2=json_decode($temp['data_tarjeta_familiar']);
+            foreach($data2 as $temp2)
+            {
+                $valueres=$this->validateDatas($temp2->value,$variables,$temp2);
+                //var_dump($valueres->validate,$temp2->value,$variables,$temp2);
+                if($valueres->validate)
+                {
+                    $restemp[]=$valueres->data;
+                }
+            }
+            $res[]=$restemp;
+        }
+        $this->newestado('Generando excel');
+        $url = $this->GeneraCSV($res,$cabecera);
+        echo json_encode(['validate'=>true,'url'=>$url]);
+    }
+    private function generarCabecera($reg)
+    {
+        $this->newestado('Generando encabezado');
+        $variables=$this->variablesAll();
+        $cabecera = array('CODIGO', 'PERSONA', 'DOCUMENTO', 'EDAD', 'GENERO', 'FECHA NACIMIENTO', 'RANGO', 'CABEZA FAMILIA', 'ESTADO CIVIL', 'NIVEL EDUCATIVO', 'FECHA APERTURA', 'SISBEN FICHA', 'SISBEN PUNTAJE', 'SISBEN NIVEL', 'DIRECCION', 'TELEFONO', 'PORTABILIDAD', 'CAMBIO DOMICILIO', 'PROXIMA VISITA', 'DOCUMENTO ENCARGADO', 'ENCARGADO', 'ZONA', 'VEREDA', 'CORREGIMIENTO', 'MUNICIPIO', 'DEPARTAMENTO', 'FAMILIARIDAD', 'ASEGURADOR', 'REGIMEN');
+        $data=json_decode($reg['data_persona']);
+        foreach($data as $temp)
+        {
+            if($variables[$temp->id]['id_car_tipo_dato']!='4' && $variables[$temp->id]['id_car_tipo_dato']!='9')
+            {
+                if($variables[$temp->id]['descripcion']=='Tiene animales')
+                {
+                    var_dump($variables[$temp->id]);
+                }
+                $cabecera[]= $variables[$temp->id]['descripcion'];
+            }
+        }
+        $data=json_decode($reg['data_tarjeta_familiar']);
+        foreach($data as $temp)
+        {
+            if($variables[$temp->id]['id_car_tipo_dato']!=4 && $variables[$temp->id]['id_car_tipo_dato']!='9')
+            {
+                if($variables[$temp->id]['descripcion']=='Tiene animales')
+                {var_dump($variables[$temp->id]);}
+                $cabecera[]= $variables[$temp->id]['descripcion'];
+            }
+        }
+        return $cabecera;
+    }
     public function Getxls()
     {
         $inicio=date('H:i:s');
-        $model           = new modelexport();
         $this->newestado('Inicio:['.$inicio.']');
         $this->newestado('Exportando data');
-        $data            = $model->exportarData($_GET['fecha_ini'], $_GET['fecha_fin'], $_GET['edad_min'], $_GET['edad_max']);
-        $cabecera        = array('CODIGO', 'PERSONA', 'DOCUMENTO', 'EDAD', 'GENERO', 'FECHA NACIMIENTO', 'RANGO', 'CABEZA FAMILIA', 'ESTADO CIVIL', 'NIVEL EDUCATIVO', 'FECHA APERTURA', 'SISBEN FICHA', 'SISBEN PUNTAJE', 'SISBEN NIVEL', 'DIRECCION', 'TELEFONO', 'PORTABILIDAD', 'CAMBIO DOMICILIO', 'PROXIMA VISITA', 'DOCUMENTO ENCARGADO', 'ENCARGADO', 'ZONA', 'VEREDA', 'CORREGIMIENTO', 'MUNICIPIO', 'DEPARTAMENTO', 'FAMILIARIDAD', 'ASEGURADOR', 'REGIMEN');
-        $this->cabecera1 = array();
-        $this->cabecera2 = array();
-        $this->newestado('Organizando data.'.(count($data)).' datos registrados');
-        $this->agregardatosficha($data);
-        $this->newestado('Creando variables data');
-        $this->agregardatosvariable($data);
-        $this->newestado('Exportando data data');
-        $this->newestado('Exportando data inicio:['.$inicio.']');
-        $cabecera        = $this->cabecera($cabecera, $this->cabecera1, $this->cabecera2);
-        $res = $this->GeneraCSV($data, $cabecera);
-        $this->newestado('fin:['.date('H:i:s').']');
-        echo json_encode(['validate'=>true,'url'=>$res]);
-        //$this->generarexcel($data, $cabecera);
+        $this->NewData($_GET);
     }
     private function newestado($value,$name='')
     {
@@ -210,13 +283,14 @@ class export
         $this->edit='a';
         return '..'.$ds.'..'.$ds.'..'.$ds.'controller'.$ds.$nombre_archivo;        
     }
-    private function GeneraCSV($data, $cabecera)
+    private function GeneraCSV($data, $cabecera=false)
     {
         $this->newestado('inicio csv');
         $nombre_archivo = "informe.csv"; 
         if($archivo = fopen($nombre_archivo, "w+"))
         {
-            fwrite($archivo,implode(';',$cabecera). "\n");
+            if($cabecera)
+            {fwrite($archivo,implode(';',$cabecera). "\n");}
             $this->newestado('Creando CSV');
             $total=count($data);
             foreach($data as $key => $temp)
