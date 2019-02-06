@@ -97,7 +97,13 @@ $form->create(__FILE__);
     {
         function load_data()
         {
-            var url = '../../../controller/estado.json';
+            var d = new Date();
+            var month = d.getMonth()+1;
+            var day = d.getDate();
+            var dt = new Date();
+            var time = dt.getHours() +''+ dt.getMinutes() +''+ dt.getSeconds();
+            var output = d.getFullYear()+(month<10 ? '0' : '') + month + (day<10 ? '0' : '') + day+time;
+            var url = '../../../controller/estado.json?V='+ output;
             $.ajax({
                 url:url,
                 dataType:'json',
