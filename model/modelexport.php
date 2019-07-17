@@ -110,7 +110,6 @@ class modelexport
         }
         $where = implode(' AND ', $where);
         $where = ($where == '') ? '' : ' WHERE ' . "\n" . $where;
-
         $sql  = 'SELECT 
                     `tbl_tarjeta_familiar`.`codigo`,
                     CONCAT_WS(\' \',
@@ -148,7 +147,7 @@ class modelexport
                     `tbl_car_registro_persona`.`value` as data_persona,
                     `tbl_car_registro_tarjeta_familiar`.`value` as data_tarjeta_familiar
                 FROM
-                    `tbl_persona`
+                `tbl_persona`
                     LEFT OUTER JOIN `tbl_tarjeta_familiar` ON (`tbl_persona`.`id_tarjeta_familiar` = `tbl_tarjeta_familiar`.`id_tarjeta_familiar`)
                     LEFT OUTER JOIN `tbl_estado_civil` ON (`tbl_persona`.`id_estado_civil` = `tbl_estado_civil`.`id_estado_civil`)
                     LEFT OUTER JOIN `tbl_nivel_educativo` ON (`tbl_persona`.`id_nivel_educativo` = `tbl_nivel_educativo`.`id_nivel_educativo`)
@@ -160,10 +159,18 @@ class modelexport
                     LEFT OUTER JOIN `tbl_persona_familiaridad` ON (`tbl_persona`.`id_persona_familiaridad` = `tbl_persona_familiaridad`.`id_persona_familiaridad`)
                     LEFT OUTER JOIN `tbl_asegurador` ON (`tbl_persona`.`id_asegurador` = `tbl_asegurador`.`id_asegurador`)
                     LEFT OUTER JOIN `tbl_regimen` ON (`tbl_persona`.`id_regimen` = `tbl_regimen`.`id_regimen`)
-                    INNER JOIN `tbl_car_registro` `tbl_car_registro_persona` ON (`tbl_persona`.`id_persona` = `tbl_car_registro_persona`.`id_persona`)
-                    INNER JOIN `tbl_car_registro` `tbl_car_registro_tarjeta_familiar` ON (`tbl_tarjeta_familiar`.`id_tarjeta_familiar` = `tbl_car_registro_tarjeta_familiar`.`id_tarjeta_familiar`)'
-                . $where;
+                    LEFT OUTER JOIN `tbl_car_registro` `tbl_car_registro_persona` ON (`tbl_persona`.`id_persona` = `tbl_car_registro_persona`.`id_persona`)
+                    LEFT OUTER JOIN `tbl_car_registro` `tbl_car_registro_tarjeta_familiar` ON (`tbl_tarjeta_familiar`.`id_tarjeta_familiar` = `tbl_car_registro_tarjeta_familiar`.`id_tarjeta_familiar`)'
+                . $where.
+                '
+                 GROUP BY 
+                 `tbl_persona`.`id_persona`,
+                 `tbl_car_registro_tarjeta_familiar`.`id_car_registro`
+                 LIMIT 10
+                 ';
+        
         $data = model::Records($sql, $whereArray, false);
+        echo '---------------------------------';exit();
         return $data;
     }  
     public function TiposDatos()
