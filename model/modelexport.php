@@ -163,14 +163,10 @@ class modelexport
                     LEFT OUTER JOIN `tbl_car_registro` `tbl_car_registro_tarjeta_familiar` ON (`tbl_tarjeta_familiar`.`id_tarjeta_familiar` = `tbl_car_registro_tarjeta_familiar`.`id_tarjeta_familiar`)'
                 . $where.
                 '
-                 GROUP BY 
-                 `tbl_persona`.`id_persona`,
-                 `tbl_car_registro_tarjeta_familiar`.`id_car_registro`
                  LIMIT 10
                  ';
         
         $data = model::Records($sql, $whereArray, false);
-        echo '---------------------------------';exit();
         return $data;
     }  
     public function TiposDatos()

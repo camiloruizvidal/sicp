@@ -211,6 +211,10 @@ class export
             if(isset($data[0]))
             {
                 $cabecera = $this->generarCabecera($data[0]);
+                foreach($cabecera as $key=>$temp1)
+                {
+                    $cabecera[$key] = mb_convert_encoding($temp1, "Windows-1252", "UTF-8" );
+                }
                 fwrite($archivo,implode(';',$cabecera). "\n");
             }
             $this->newestado('Formateando data. '. number_format((count($data)),0,'.',',') .' registros en total');
@@ -233,6 +237,10 @@ class export
                     {
                         $restemp[]=$valueres->data;
                     }
+                }
+                foreach($restemp as $key=>$temp1)
+                {
+                    $restemp[$key] = mb_convert_encoding($temp1, "Windows-1252", "UTF-8" );
                 }
                 fwrite($archivo,implode(';',$restemp).  "\n");
             }
