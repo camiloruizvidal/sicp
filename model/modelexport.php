@@ -137,7 +137,7 @@ class modelexport
                     COALESCE(`tbl_tarjeta_familiar`.`documento_responsable`,\'-\') as documento_responsable,
                     COALESCE(`tbl_tarjeta_familiar`.`responsable`,\'-\') as responsable,
                     COALESCE(`tbl_zona`.`descripcion`,\'-\') as zona,
-                    \'-\' as vereda,
+                    COALESCE(`tbl_veredas`.`descripcion`,\'NN\') AS vereda,
                     COALESCE(`tbl_corregimientos`.`descripcion`,\'-\') as corregimiento,
                     COALESCE(`tbl_municipios`.`descripcion`,\'-\') as municipio,
                     COALESCE(`tbl_departamentos`.`descripcion`,\'-\') as departamento,
@@ -163,6 +163,7 @@ class modelexport
                     LEFT OUTER JOIN `tbl_car_registro` `tbl_car_registro_tarjeta_familiar` ON (`tbl_tarjeta_familiar`.`id_tarjeta_familiar` = `tbl_car_registro_tarjeta_familiar`.`id_tarjeta_familiar`)'
                 . $where.
                 '
+                ORDER BY `tbl_persona`.`documento`
                  LIMIT 10
                  ';
         
