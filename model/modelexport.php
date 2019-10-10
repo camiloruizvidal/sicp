@@ -163,9 +163,7 @@ class modelexport
                     LEFT OUTER JOIN `tbl_car_registro` `tbl_car_registro_tarjeta_familiar` ON (`tbl_tarjeta_familiar`.`id_tarjeta_familiar` = `tbl_car_registro_tarjeta_familiar`.`id_tarjeta_familiar`)'
                 . $where.
                 '
-                ORDER BY `tbl_persona`.`documento`
-                 LIMIT 10
-                 ';
+                ORDER BY `tbl_persona`.`documento`';
         
         $data = model::Records($sql, $whereArray, false);
         return $data;
